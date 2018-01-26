@@ -33,7 +33,7 @@ android {
 
     productFlavors {
         aosp {
-            applicationId 'com.google.android.apps.nexuslauncher'
+            applicationId 'com.hdeva.launcher'
             testApplicationId 'com.android.launcher3.tests'
         }
 
