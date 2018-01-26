@@ -4,4 +4,7 @@
 
     <string name="enable_at_a_glance_title">At A Glance</string>
     <string name="enable_at_a_glance_summary">Show at the top of your Home screen</string>
+
+    <string name="lock_desktop_title">Lock desktop</string>
+    <string name="lock_desktop_summary">To disable icon dragging</string>
 </resources>

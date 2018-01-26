@@ -73,6 +73,14 @@
         android:persistent="true"
         />
 
+    <SwitchPreference
+        android:key="pref_lock_desktop"
+        android:title="@string/lock_desktop_title"
+        android:summary="@string/lock_desktop_summary"
+        android:defaultValue="false"
+        android:persistent="true"
+        />
+
     <ListPreference
         android:key="pref_override_icon_shape"
         android:title="@string/icon_shape_override_label"
