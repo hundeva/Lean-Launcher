@@ -34,6 +34,7 @@ import com.android.launcher3.util.ConfigMonitor;
 import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.SettingsObserver;
 import com.android.launcher3.util.TestingUtils;
+import com.hdeva.launcher.LeanAppFilter;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -98,7 +99,7 @@ public class LauncherAppState {
         mInvariantDeviceProfile = new InvariantDeviceProfile(mContext);
         mIconCache = new IconCache(mContext, mInvariantDeviceProfile);
         mWidgetCache = new WidgetPreviewLoader(mContext, mIconCache);
-        mModel = new LauncherModel(this, mIconCache, AppFilter.newInstance(mContext));
+        mModel = new LauncherModel(this, mIconCache, new LeanAppFilter());
 
         LauncherAppsCompat.getInstance(mContext).addOnAppsChangedCallback(mModel);
 
