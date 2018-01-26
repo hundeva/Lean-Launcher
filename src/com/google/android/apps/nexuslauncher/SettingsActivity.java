@@ -28,6 +28,8 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.util.LooperExecutor;
 import com.google.android.apps.nexuslauncher.smartspace.SmartspaceController;
+import com.hdeva.launcher.LeanSettings;
+import com.hdeva.launcher.LeanUtils;
 
 public class SettingsActivity extends com.android.launcher3.SettingsActivity implements PreferenceFragment.OnPreferenceStartFragmentCallback {
     public final static String ICON_PACK_PREF = "pref_icon_pack";
@@ -82,6 +84,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 Log.e("SettingsActivity", "Unable to load my own package info", ex);
             }
 
+            findPreference(LeanSettings.QSB_KEY).setOnPreferenceChangeListener(this);
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
             mIconPackPref.setOnPreferenceChangeListener(this);
 
@@ -96,8 +99,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 if (identifier != 0) {
                     charSequence = resourcesForApplication.getString(identifier);
                 }
-            }
-            catch (PackageManager.NameNotFoundException ex) {
+            } catch (PackageManager.NameNotFoundException ex) {
             }
             if (TextUtils.isEmpty(charSequence)) {
                 charSequence = mContext.getString(R.string.title_google_app);
@@ -114,6 +116,12 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
         @Override
         public boolean onPreferenceChange(Preference preference, final Object newValue) {
             switch (preference.getKey()) {
+                case LeanSettings.QSB_KEY:
+                    if (preference instanceof TwoStatePreference) {
+                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
+                    }
+                    LeanUtils.reload(mContext);
+                    break;
                 case ICON_PACK_PREF:
                     ProgressDialog.show(mContext,
                             null /* title */,

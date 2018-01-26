@@ -66,6 +66,7 @@ import com.android.launcher3.util.ManagedProfileHeuristic;
 import com.android.launcher3.util.NoLocaleSqliteContext;
 import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Thunk;
+import com.hdeva.launcher.LeanSettings;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -822,6 +823,7 @@ public class LauncherProvider extends ContentProvider {
                 case 26:
                     // QSB was moved to the grid. Clear the first row on screen 0.
                     if (FeatureFlags.QSB_ON_FIRST_SCREEN &&
+                            LeanSettings.isQsbEnabled(mContext) &&
                             !LauncherDbUtils.prepareScreenZeroToHostQsb(mContext, db)) {
                         break;
                     }

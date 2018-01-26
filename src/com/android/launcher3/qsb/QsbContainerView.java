@@ -41,6 +41,7 @@ import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.config.FeatureFlags;
+import com.hdeva.launcher.LeanSettings;
 
 /**
  * A frame layout which contains a QSB. This internally uses fragment to bind the view, which
@@ -100,7 +101,7 @@ public class QsbContainerView extends FrameLayout {
             mWrapper = new FrameLayout(getActivity());
 
             // Only add the view when enabled
-            if (FeatureFlags.QSB_ON_FIRST_SCREEN) {
+            if (FeatureFlags.QSB_ON_FIRST_SCREEN && LeanSettings.isQsbEnabled(getContext())) {
                 mWrapper.addView(createQsb(mWrapper));
             }
             return mWrapper;
@@ -212,7 +213,7 @@ public class QsbContainerView extends FrameLayout {
 
         private void rebindFragment() {
             // Exit if the embedded qsb is disabled
-            if (!FeatureFlags.QSB_ON_FIRST_SCREEN) {
+            if (!(FeatureFlags.QSB_ON_FIRST_SCREEN && LeanSettings.isQsbEnabled(getContext()))) {
                 return;
             }
 

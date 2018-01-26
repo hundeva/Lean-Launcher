@@ -28,6 +28,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.Workspace;
 import com.android.launcher3.config.FeatureFlags;
+import com.hdeva.launcher.LeanSettings;
 
 public class OverviewScreenAccessibilityDelegate extends AccessibilityDelegate {
 
@@ -88,7 +89,7 @@ public class OverviewScreenAccessibilityDelegate extends AccessibilityDelegate {
             info.addAction(mActions.get(MOVE_FORWARD));
         }
 
-        int startIndex = mWorkspace.numCustomPages() + (FeatureFlags.QSB_ON_FIRST_SCREEN ? 1 : 0);
+        int startIndex = mWorkspace.numCustomPages() + (FeatureFlags.QSB_ON_FIRST_SCREEN && LeanSettings.isQsbEnabled(mWorkspace.getContext()) ? 1 : 0);
         if (index > startIndex) {
             info.addAction(mActions.get(MOVE_BACKWARD));
         }

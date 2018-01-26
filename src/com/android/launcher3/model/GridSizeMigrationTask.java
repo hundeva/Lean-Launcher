@@ -28,6 +28,8 @@ import com.android.launcher3.compat.PackageInstallerCompat;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.util.GridOccupancy;
 import com.android.launcher3.util.LongArrayMap;
+import com.hdeva.launcher.LeanSettings;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -257,7 +259,7 @@ public class GridSizeMigrationTask {
      */
     protected void migrateScreen(long screenId) {
         // If we are migrating the first screen, do not touch the first row.
-        int startY = (FeatureFlags.QSB_ON_FIRST_SCREEN && screenId == Workspace.FIRST_SCREEN_ID)
+        int startY = (FeatureFlags.QSB_ON_FIRST_SCREEN && LeanSettings.isQsbEnabled(mContext) && screenId == Workspace.FIRST_SCREEN_ID)
                 ? 1 : 0;
 
         ArrayList<DbEntry> items = loadWorkspaceEntries(screenId);

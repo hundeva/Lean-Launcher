@@ -51,6 +51,8 @@ import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.logging.FileLog;
 import com.android.launcher3.model.GridSizeMigrationTask;
 import com.android.launcher3.util.LongArrayMap;
+import com.hdeva.launcher.LeanSettings;
+
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -132,8 +134,8 @@ public class ImportDataTask {
         String profileId = Long.toString(UserManagerCompat.getInstance(mContext)
                 .getSerialNumberForUser(Process.myUserHandle()));
 
-        boolean createEmptyRowOnFirstScreen;
-        if (FeatureFlags.QSB_ON_FIRST_SCREEN) {
+        boolean createEmptyRowOnFirstScreen = false;
+        if (FeatureFlags.QSB_ON_FIRST_SCREEN && LeanSettings.isQsbEnabled(mContext)) {
             try (Cursor c = mContext.getContentResolver().query(mOtherFavoritesUri, null,
                     // get items on the first row of the first screen
                     "profileId = ? AND container = -100 AND screen = ? AND cellY = 0",
