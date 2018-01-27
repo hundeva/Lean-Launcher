@@ -6,7 +6,7 @@
     <string name="enable_at_a_glance_summary">Show at the top of your Home screen</string>
 
     <string name="lock_desktop_title">Lock desktop</string>
-    <string name="lock_desktop_summary">To disable icon dragging</string>
+    <string name="lock_desktop_summary">To prevent the change of icons and widgets</string>
 
     <string name="theme_title">Theme</string>
     <string name="theme_wallpaper">From wallpaper</string>
