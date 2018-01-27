@@ -214,6 +214,10 @@ public class DragController implements DragDriver.EventListener, TouchController
     }
 
     private void callOnDragStart() {
+        if (LeanSettings.isDesktopLocked(mLauncher.getApplicationContext())) {
+            return;
+        }
+
         if (mOptions.preDragCondition != null) {
             mOptions.preDragCondition.onPreDragEnd(mDragObject, true /* dragStarted*/);
         }
