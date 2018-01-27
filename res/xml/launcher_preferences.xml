@@ -60,6 +60,22 @@
         />
 
     <SwitchPreference
+        android:key="pref_bottom_search_bar"
+        android:title="@string/bottom_search_bar_title"
+        android:summary="@string/bottom_search_bar_summary"
+        android:defaultValue="true"
+        android:persistent="true"
+        />
+
+    <SwitchPreference
+        android:key="pref_top_search_bar"
+        android:title="@string/top_search_bar_title"
+        android:summary="@string/top_search_bar_summary"
+        android:defaultValue="true"
+        android:persistent="true"
+        />
+
+    <SwitchPreference
         android:key="pref_show_predictions"
         android:title="@string/title_app_suggestions"
         android:summary="@string/summary_app_suggestions"

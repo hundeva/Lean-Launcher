@@ -25,4 +25,10 @@
         <item>dark</item>
     </string-array>
 
+    <string name="bottom_search_bar_title">Google search bar</string>
+    <string name="bottom_search_bar_summary">At the bottom of your screen</string>
+
+    <string name="top_search_bar_title">App search bar</string>
+    <string name="top_search_bar_summary">At the top of your app drawer</string>
+
 </resources>

@@ -33,6 +33,7 @@ import android.widget.FrameLayout;
 
 import com.android.launcher3.CellLayout.ContainerType;
 import com.android.launcher3.badge.BadgeRenderer;
+import com.hdeva.launcher.LeanSettings;
 
 import java.util.ArrayList;
 
@@ -216,10 +217,12 @@ public class DeviceProfile {
 
         workspaceCellPaddingXPx = res.getDimensionPixelSize(R.dimen.dynamic_grid_cell_padding_x);
 
-        hotseatBarTopPaddingPx =
-                res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_top_padding);
-        hotseatBarBottomPaddingPx =
-                res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding);
+        hotseatBarTopPaddingPx = LeanSettings.isBottomSearchBarVisible(context)
+                ? res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_top_padding)
+                : res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_top_padding_hidden_bottom_qsb);
+        hotseatBarBottomPaddingPx = LeanSettings.isBottomSearchBarVisible(context)
+                ? res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding)
+                : res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding_hidden_bottom_qsb);
         hotseatBarLeftNavBarRightPaddingPx = res.getDimensionPixelSize(
                 R.dimen.dynamic_grid_hotseat_land_left_nav_bar_right_padding);
         hotseatBarRightNavBarRightPaddingPx = res.getDimensionPixelSize(

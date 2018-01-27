@@ -22,6 +22,7 @@ import com.android.launcher3.allapps.AlphabeticalAppsList;
 import com.android.launcher3.allapps.SearchUiManager;
 import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.Themes;
+import com.hdeva.launcher.LeanSettings;
 
 public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManager, WallpaperColorInfo.OnChangeListener {
     private AllAppsRecyclerView mRecyclerView;
@@ -57,6 +58,8 @@ public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManag
                 allAppsQsbLayout.setTranslationY(mStartY + v);
             }
         }, 0f);
+
+        setVisibility(LeanSettings.isTopSearchBarVisible(context) ? VISIBLE : GONE);
     }
 
     private void searchFallback() {

@@ -25,6 +25,7 @@ import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.dragndrop.DragLayer;
+import com.hdeva.launcher.LeanSettings;
 
 public class HotseatQsbWidget extends AbstractQsbLayout {
     private boolean mIsDefaultLiveWallpaper;
@@ -52,6 +53,8 @@ public class HotseatQsbWidget extends AbstractQsbLayout {
         mIsDefaultLiveWallpaper = isDefaultLiveWallpaper();
         setColors();
         setOnClickListener(this);
+
+        setVisibility(LeanSettings.isBottomSearchBarVisible(context) ? VISIBLE : GONE);
     }
 
     static int getBottomMargin(Launcher launcher) {
