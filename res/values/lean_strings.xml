@@ -7,6 +7,7 @@
 
     <string name="lock_desktop_title">Lock desktop</string>
     <string name="lock_desktop_summary">To prevent the change of icons and widgets</string>
+    <string name="desktop_is_locked">Desktop is locked</string>
 
     <string name="theme_title">Theme</string>
     <string name="theme_wallpaper">From wallpaper</string>

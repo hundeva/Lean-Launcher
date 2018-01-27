@@ -2486,6 +2486,8 @@ public class Launcher extends BaseActivity
         if (LOGD) Log.d(TAG, "onClickAddWidgetButton");
         if (mIsSafeModeEnabled) {
             Toast.makeText(this, R.string.safemode_widget_error, Toast.LENGTH_SHORT).show();
+        } else if (LeanSettings.isDesktopLocked(this)) {
+            Toast.makeText(this, R.string.desktop_is_locked, Toast.LENGTH_SHORT).show();
         } else {
             showWidgetsView(true /* animated */, true /* resetPageToZero */);
         }
