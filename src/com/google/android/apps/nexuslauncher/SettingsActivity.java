@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.TwoStatePreference;
@@ -85,6 +86,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             }
 
             findPreference(LeanSettings.QSB_KEY).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.THEME_KEY).setOnPreferenceChangeListener(this);
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
             mIconPackPref.setOnPreferenceChangeListener(this);
 
@@ -121,6 +123,12 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }
                     LeanUtils.reload(mContext);
+                    break;
+                case LeanSettings.THEME_KEY:
+                    if (preference instanceof ListPreference) {
+                        ((ListPreference) preference).setValue((String) newValue);
+                    }
+                    LeanUtils.reloadTheme(mContext);
                     break;
                 case ICON_PACK_PREF:
                     ProgressDialog.show(mContext,

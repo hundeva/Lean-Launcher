@@ -7,4 +7,22 @@
 
     <string name="lock_desktop_title">Lock desktop</string>
     <string name="lock_desktop_summary">To disable icon dragging</string>
+
+    <string name="theme_title">Theme</string>
+    <string name="theme_wallpaper">From wallpaper</string>
+    <string name="theme_always_light">Light</string>
+    <string name="theme_always_dark">Dark</string>
+
+    <string-array name="theme_names">
+        <item>@string/theme_wallpaper</item>
+        <item>@string/theme_always_light</item>
+        <item>@string/theme_always_dark</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>wallpaper</item>
+        <item>light</item>
+        <item>dark</item>
+    </string-array>
+
 </resources>
