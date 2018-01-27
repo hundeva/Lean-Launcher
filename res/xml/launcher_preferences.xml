@@ -90,6 +90,14 @@
         />
 
     <SwitchPreference
+        android:key="pref_physical_animation"
+        android:title="@string/physical_animation_title"
+        android:summary="@string/physical_animation_summary"
+        android:defaultValue="true"
+        android:persistent="true"
+        />
+
+    <SwitchPreference
         android:key="pref_lock_desktop"
         android:title="@string/lock_desktop_title"
         android:summary="@string/lock_desktop_summary"

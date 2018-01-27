@@ -33,6 +33,7 @@ import com.android.launcher3.userevent.nano.LauncherLogProto.ContainerType;
 import com.android.launcher3.util.SystemUiController;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.TouchController;
+import com.hdeva.launcher.LeanSettings;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -616,7 +617,7 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
     }
 
     private boolean hasSpringAnimationHandler() {
-        return FeatureFlags.LAUNCHER3_PHYSICS && mSpringAnimationHandler != null;
+        return FeatureFlags.LAUNCHER3_PHYSICS && mSpringAnimationHandler != null && LeanSettings.isPhysicalAnimationEnabled(mLauncher.getApplicationContext());
     }
 
     @Override

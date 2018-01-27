@@ -49,9 +49,9 @@ import com.android.launcher3.dragndrop.DragOptions;
 import com.android.launcher3.folder.Folder;
 import com.android.launcher3.keyboard.FocusedItemDecorator;
 import com.android.launcher3.userevent.nano.LauncherLogProto.Target;
-import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.ComponentKeyMapper;
 import com.android.launcher3.util.PackageUserKey;
+import com.hdeva.launcher.LeanSettings;
 
 import java.util.List;
 import java.util.Set;
@@ -215,7 +215,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mAppsRecyclerView.setHasFixedSize(true);
         // No animations will occur when changes occur to the items in this RecyclerView.
         mAppsRecyclerView.setItemAnimator(null);
-        if (FeatureFlags.LAUNCHER3_PHYSICS) {
+        if (FeatureFlags.LAUNCHER3_PHYSICS && LeanSettings.isPhysicalAnimationEnabled(getContext())) {
             mAppsRecyclerView.setSpringAnimationHandler(mSpringAnimationHandler);
         }
 

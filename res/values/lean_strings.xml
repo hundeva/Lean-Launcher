@@ -31,4 +31,7 @@
     <string name="top_search_bar_title">App search bar</string>
     <string name="top_search_bar_summary">At the top of your app drawer</string>
 
+    <string name="physical_animation_title">Physical animation</string>
+    <string name="physical_animation_summary">Use spring effect</string>
+
 </resources>

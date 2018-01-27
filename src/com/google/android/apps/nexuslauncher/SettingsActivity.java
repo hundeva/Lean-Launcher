@@ -89,6 +89,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.THEME_KEY).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.BOTTOM_SEARCH_BAR_KEY).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.TOP_SEARCH_BAR_KEY).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.PHYSICAL_ANIMATION_KEY).setOnPreferenceChangeListener(this);
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
             mIconPackPref.setOnPreferenceChangeListener(this);
 
@@ -140,6 +141,12 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     break;
 
                 case LeanSettings.TOP_SEARCH_BAR_KEY:
+                    if (preference instanceof TwoStatePreference) {
+                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
+                    }
+                    LeanUtils.reloadTheme(mContext);
+                    break;
+                case LeanSettings.PHYSICAL_ANIMATION_KEY:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }
