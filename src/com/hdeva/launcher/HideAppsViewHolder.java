@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.launcher3.AppInfo;
+import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.R;
 
 public class HideAppsViewHolder extends RecyclerView.ViewHolder {
@@ -39,6 +40,9 @@ public class HideAppsViewHolder extends RecyclerView.ViewHolder {
     public void setAppInfo(AppInfo appInfo) {
         this.appInfo = appInfo;
 
+        if(appInfo.usingLowResIcon) {
+            LauncherAppState.getInstance(itemView.getContext()).getIconCache().getTitleAndIcon(appInfo, false);
+        }
         launcherIcon.setImageBitmap(appInfo.iconBitmap);
         appName.setText(appInfo.title);
         className.setText(appInfo.componentName.getClassName());
