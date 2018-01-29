@@ -655,6 +655,18 @@ public class DeviceProfile {
         float workspaceCellWidth = (float) getCurrentWidth() / inv.numColumns;
         float hotseatCellWidth = (float) getCurrentWidth() / inv.numHotseatIcons;
         int hotseatAdjustment = Math.round((workspaceCellWidth - hotseatCellWidth) / 2);
+
+        hotseatBarTopPaddingPx = LeanSettings.isBottomSearchBarVisible(launcher)
+                ? launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_top_padding)
+                : launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_top_padding_hidden_bottom_qsb);
+        hotseatBarBottomPaddingPx = LeanSettings.isBottomSearchBarVisible(launcher)
+                ? launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding)
+                : launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding_hidden_bottom_qsb);
+        hotseatBarSizePx = isVerticalBarLayout()
+                ? Utilities.pxFromDp(inv.iconSize, launcher.getResources().getDisplayMetrics())
+                : launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_size)
+                + hotseatBarTopPaddingPx + hotseatBarBottomPaddingPx;
+
         if (hasVerticalBarLayout) {
             // Vertical hotseat -- The hotseat is fixed in the layout to be on the right of the
             //                     screen regardless of RTL

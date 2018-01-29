@@ -137,7 +137,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }
-                    LeanUtils.restart(mContext);
+                    LeanUtils.reloadTheme(mContext);
                     break;
 
                 case LeanSettings.TOP_SEARCH_BAR_KEY:
