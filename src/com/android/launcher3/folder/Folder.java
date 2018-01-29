@@ -78,6 +78,7 @@ import com.android.launcher3.userevent.nano.LauncherLogProto.ContainerType;
 import com.android.launcher3.userevent.nano.LauncherLogProto.Target;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
+import com.hdeva.launcher.LeanSettings;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1544,7 +1545,11 @@ public class Folder extends AbstractFloatingView implements DragSource, View.OnC
     public void onFocusChange(View v, boolean hasFocus) {
         if (v == mFolderName) {
             if (hasFocus) {
-                startEditingFolderName();
+                if (LeanSettings.isDesktopLocked(v.getContext())) {
+                    v.clearFocus();
+                } else {
+                    startEditingFolderName();
+                }
             } else {
                 mFolderName.dispatchBackKey();
             }
