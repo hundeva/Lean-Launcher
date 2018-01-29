@@ -22,10 +22,9 @@
     android:layout_height="@dimen/qsb_widget_height"
     android:layout_centerHorizontal="true"
     android:layout_gravity="center|top"
-    android:layout_marginTop="4dp"
     android:background="@drawable/bg_qsb_click_feedback"
     android:contentDescription="@string/label_search"
-    android:translationY="30dp">
+    android:translationY="@dimen/all_apps_qsb_top_translation_y">
 
     <ImageView
         android:id="@+id/g_icon"

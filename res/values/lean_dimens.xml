@@ -4,4 +4,6 @@
     <dimen name="dynamic_grid_hotseat_bottom_padding_hidden_bottom_qsb">0dp</dimen>
     <dimen name="hide_apps_icon_size">40dp</dimen>
     <dimen name="hide_apps_icon_margin">16dp</dimen>
+    <dimen name="all_apps_qsb_top_offset">4dp</dimen>
+    <dimen name="all_apps_qsb_top_translation_y">30dp</dimen>
 </resources>

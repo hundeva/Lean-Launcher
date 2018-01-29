@@ -5,11 +5,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.SystemClock;
 import android.util.Log;
 
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherModel;
+import com.android.launcher3.R;
 import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.LooperExecutor;
 
@@ -48,6 +50,30 @@ public class LeanUtils {
                 android.os.Process.killProcess(android.os.Process.myPid());
             }
         });
+    }
+
+    public static int getAllAppsQsbTopOffset(Context context) {
+        int statusBar = getStatusBarHeight(context);
+        int topTranslationY = context.getResources().getDimensionPixelSize(R.dimen.all_apps_qsb_top_translation_y);
+        int topOffset = context.getResources().getDimensionPixelOffset(R.dimen.all_apps_qsb_top_offset);
+        int height;
+        if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            height = statusBar - topTranslationY + topOffset;
+        } else {
+            height = topOffset;
+        }
+        return height;
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        int height;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            height = context.getResources().getDimensionPixelSize(resourceId);
+        } else {
+            height = context.getResources().getDimensionPixelSize(R.dimen.status_bar_height);
+        }
+        return height;
     }
 
     private LeanUtils() {

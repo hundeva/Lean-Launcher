@@ -52,6 +52,7 @@ import com.android.launcher3.userevent.nano.LauncherLogProto.Target;
 import com.android.launcher3.util.ComponentKeyMapper;
 import com.android.launcher3.util.PackageUserKey;
 import com.hdeva.launcher.LeanSettings;
+import com.hdeva.launcher.LeanUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -222,6 +223,12 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mSearchContainer = findViewById(R.id.search_container_all_apps);
         mSearchUiManager = (SearchUiManager) mSearchContainer;
         mSearchUiManager.initialize(mApps, mAppsRecyclerView);
+
+        ViewGroup.LayoutParams layoutParams = mSearchContainer.getLayoutParams();
+        if(layoutParams instanceof MarginLayoutParams) {
+            ((MarginLayoutParams)layoutParams).topMargin = LeanUtils.getAllAppsQsbTopOffset(getContext());
+            mSearchContainer.setLayoutParams(layoutParams);
+        }
 
 
         FocusedItemDecorator focusedItemDecorator = new FocusedItemDecorator(mAppsRecyclerView);
