@@ -17,7 +17,6 @@
 package com.android.launcher3;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -40,9 +39,9 @@ import com.android.launcher3.compat.UserManagerCompat;
 import com.android.launcher3.dynamicui.ExtractionUtils;
 import com.android.launcher3.graphics.LauncherIcons;
 import com.android.launcher3.model.AddWorkspaceItemsTask;
+import com.android.launcher3.model.BaseModelUpdateTask;
 import com.android.launcher3.model.BgDataModel;
 import com.android.launcher3.model.CacheDataUpdatedTask;
-import com.android.launcher3.model.BaseModelUpdateTask;
 import com.android.launcher3.model.LoaderResults;
 import com.android.launcher3.model.LoaderTask;
 import com.android.launcher3.model.ModelWriter;
@@ -68,6 +67,8 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -687,5 +688,25 @@ public class LauncherModel extends BroadcastReceiver
 
     public static void setWorkerPriority(final int priority) {
         Process.setThreadPriority(sWorkerThread.getThreadId(), priority);
+    }
+
+    public List<AppInfo> cloneAllAppInfo() {
+        List<AppInfo> apps;
+        synchronized (mLock) {
+            apps = new ArrayList<>();
+            for (AppInfo appInfo : mBgAllAppsList.unfilteredData) {
+                apps.add(new AppInfo(appInfo));
+            }
+            Collections.sort(apps, new Comparator<AppInfo>() {
+                @Override
+                public int compare(AppInfo o1, AppInfo o2) {
+                    String t1 = o1.title == null ? "" : (String) o1.title;
+                    String t2 = o2.title == null ? "" : (String) o2.title;
+                    return t1.compareTo(t2);
+                }
+            });
+            for (AppInfo appInfo : apps) Log.i(":::", "cloneAllAppInfo: " + appInfo.title);
+        }
+        return apps;
     }
 }

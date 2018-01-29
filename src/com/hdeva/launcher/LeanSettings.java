@@ -1,8 +1,10 @@
 package com.hdeva.launcher;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.android.launcher3.LauncherFiles;
 import com.android.launcher3.Utilities;
 
 public class LeanSettings {
@@ -64,8 +66,20 @@ public class LeanSettings {
         return prefs(context).getBoolean(PHYSICAL_ANIMATION_KEY, PHYSICAL_ANIMATION_DEFAULT);
     }
 
+    public static boolean isComponentHidden(Context context, ComponentName component) {
+        return hiddenAppsPrefs(context).getBoolean(component.getClassName(), false);
+    }
+
+    public static void setComponentHidden(Context context, ComponentName component, boolean hidden) {
+        hiddenAppsPrefs(context).edit().putBoolean(component.getClassName(), hidden).apply();
+    }
+
     private static SharedPreferences prefs(Context context) {
         return Utilities.getPrefs(context);
+    }
+
+    private static SharedPreferences hiddenAppsPrefs(Context context) {
+        return context.getSharedPreferences(LauncherFiles.HIDDEN_APPS_PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
     private LeanSettings() {

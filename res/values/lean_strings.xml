@@ -35,4 +35,7 @@
     <string name="physical_animation_title">Physical animation</string>
     <string name="physical_animation_summary">Use spring effect</string>
 
+    <string name="hide_apps_title">Hide apps</string>
+    <string name="hide_apps_summary">From the app drawer</string>
+
 </resources>

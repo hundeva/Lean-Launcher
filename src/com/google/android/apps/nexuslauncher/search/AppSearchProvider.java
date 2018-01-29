@@ -204,7 +204,7 @@ public class AppSearchProvider extends ContentProvider
                 return Collections.emptyList();
             }
             final ArrayList<AppInfo> list = new ArrayList<>();
-            final ArrayList<AppInfo> data = this.mAllAppsList.data;
+            final ArrayList<AppInfo> data = this.mAllAppsList.unfilteredData;
             final DefaultAppSearchAlgorithm.StringMatcher instance = DefaultAppSearchAlgorithm.StringMatcher.getInstance();
             for (final AppInfo appInfo : data) {
                 if (DefaultAppSearchAlgorithm.matches(appInfo, this.mQuery, instance)) {

@@ -99,7 +99,7 @@ public class LauncherAppState {
         mInvariantDeviceProfile = new InvariantDeviceProfile(mContext);
         mIconCache = new IconCache(mContext, mInvariantDeviceProfile);
         mWidgetCache = new WidgetPreviewLoader(mContext, mIconCache);
-        mModel = new LauncherModel(this, mIconCache, new LeanAppFilter());
+        mModel = new LauncherModel(this, mIconCache, new LeanAppFilter(mContext));
 
         LauncherAppsCompat.getInstance(mContext).addOnAppsChangedCallback(mModel);
 

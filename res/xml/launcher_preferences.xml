@@ -124,6 +124,18 @@
         android:defaultValue=""
         android:persistent="false" />
 
+    <Preference
+        android:key="pref_hide_apps"
+        android:summary="@string/hide_apps_summary"
+        android:title="@string/hide_apps_title">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.hdeva.launcher.HideAppsActivity"
+            android:targetPackage="com.hdeva.launcher" />
+
+    </Preference>
+
     <com.google.android.apps.nexuslauncher.CustomIconPreference
         android:key="pref_icon_pack"
         android:title="@string/pref_icon_pack"

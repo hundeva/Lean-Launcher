@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hide_app_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/hide_app_icon"
+        android:layout_width="@dimen/hide_apps_icon_size"
+        android:layout_height="@dimen/hide_apps_icon_size"
+        android:layout_margin="@dimen/hide_apps_icon_margin"
+        tools:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hide_app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textStyle="bold"
+            tools:text="App name" />
+
+        <TextView
+            android:id="@+id/hide_app_class_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            tools:text="com.launcher.activity.ClassName" />
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/hide_app_checkbox"
+        android:layout_width="@dimen/hide_apps_icon_size"
+        android:layout_height="@dimen/hide_apps_icon_size"
+        android:layout_margin="@dimen/hide_apps_icon_margin"
+        android:clickable="false" />
+
+</LinearLayout>
