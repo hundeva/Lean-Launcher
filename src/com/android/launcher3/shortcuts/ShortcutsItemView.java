@@ -44,6 +44,7 @@ import com.android.launcher3.popup.PopupItemView;
 import com.android.launcher3.popup.PopupPopulator;
 import com.android.launcher3.popup.SystemShortcut;
 import com.android.launcher3.userevent.nano.LauncherLogProto;
+import com.hdeva.launcher.LeanSettings;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -104,6 +105,7 @@ public class ShortcutsItemView extends PopupItemView implements View.OnLongClick
 
     @Override
     public boolean onLongClick(View v) {
+        if(LeanSettings.isDesktopLocked(v.getContext())) return false;
         // Return early if not the correct view
         if (!(v.getParent() instanceof DeepShortcutView)) return false;
         // Return early if global dragging is not enabled
