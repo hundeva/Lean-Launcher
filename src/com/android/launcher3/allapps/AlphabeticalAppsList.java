@@ -166,6 +166,7 @@ public class AlphabeticalAppsList {
     // The set of apps from the system not including predictions
     private final List<AppInfo> mApps = new ArrayList<>();
     private final HashMap<ComponentKey, AppInfo> mComponentToAppMap = new HashMap<>();
+    private final HashMap<ComponentKey, AppInfo> mUnfilteredComponentToAppMap = new HashMap<>();
 
     // The set of filtered apps with the current filter
     private final List<AppInfo> mFilteredApps = new ArrayList<>();
@@ -375,6 +376,7 @@ public class AlphabeticalAppsList {
      */
     public void setApps(List<AppInfo> apps) {
         mComponentToAppMap.clear();
+        mUnfilteredComponentToAppMap.clear();
         addOrUpdateApps(apps);
     }
 
@@ -385,6 +387,10 @@ public class AlphabeticalAppsList {
         for (AppInfo app : apps) {
             mComponentToAppMap.put(app.toComponentKey(), app);
         }
+        List<AppInfo> unfilteredApps = mLauncher.getModel().cloneAllAppInfo();
+        for (AppInfo app : unfilteredApps) {
+            mUnfilteredComponentToAppMap.put(app.toComponentKey(), app);
+        }
         onAppsUpdated();
     }
 
@@ -394,6 +400,7 @@ public class AlphabeticalAppsList {
     public void removeApps(List<AppInfo> apps) {
         for (AppInfo app : apps) {
             mComponentToAppMap.remove(app.toComponentKey());
+            mUnfilteredComponentToAppMap.remove(app.toComponentKey());
         }
         onAppsUpdated();
     }
@@ -628,6 +635,8 @@ public class AlphabeticalAppsList {
         for (ComponentKey key : mSearchResults) {
             AppInfo match = mComponentToAppMap.get(key);
             if (match != null) {
+                result.add(match);
+            } else if ((match = mUnfilteredComponentToAppMap.get(key)) != null) {
                 result.add(match);
             }
         }
