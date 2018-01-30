@@ -132,7 +132,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.hdeva.launcher.HideAppsActivity"
-            android:targetPackage="com.hdeva.launcher" />
+            android:targetPackage="com.google.android.apps.nexuslauncher" />
 
     </Preference>
 
