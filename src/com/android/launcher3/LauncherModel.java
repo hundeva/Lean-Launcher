@@ -705,7 +705,6 @@ public class LauncherModel extends BroadcastReceiver
                     return t1.compareTo(t2);
                 }
             });
-            for (AppInfo appInfo : apps) Log.i(":::", "cloneAllAppInfo: " + appInfo.title);
         }
         return apps;
     }
