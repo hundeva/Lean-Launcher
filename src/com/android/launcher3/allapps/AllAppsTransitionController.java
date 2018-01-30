@@ -109,6 +109,8 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
     private SpringAnimation mSearchSpring;
     private SpringAnimationHandler mSpringAnimationHandler;
 
+    private int pointerCount;
+
     private final static float NOTIFICATION_OPEN_VELOCITY = 2.25f;
     private final static float NOTIFICATION_CLOSE_VELOCITY = -0.35f;
     enum NotificationState {
@@ -132,6 +134,10 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
 
     @Override
     public boolean onControllerInterceptTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_MOVE) {
+            pointerCount = ev.getPointerCount();
+        }
+
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             mNoIntercept = false;
             mTouchEventStartedOnHotseat = mLauncher.getDragLayer().isEventOverHotseat(ev);
@@ -223,9 +229,15 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
                 //Disable code when access to the hidden APIs returns an error
                 if (velocity > NOTIFICATION_OPEN_VELOCITY &&
                         (mNotificationState == NotificationState.Free || mNotificationState == NotificationState.Closed)) {
-                    mNotificationState = openNotifications() ?
-                            NotificationState.Opened :
-                            NotificationState.Locked;
+                    if (pointerCount == 1) {
+                        mNotificationState = openNotifications() ?
+                                NotificationState.Opened :
+                                NotificationState.Locked;
+                    } else if (pointerCount == 2) {
+                        mNotificationState = openSettings() ?
+                                NotificationState.Opened :
+                                NotificationState.Locked;
+                    }
                 } else if (velocity < NOTIFICATION_CLOSE_VELOCITY &&
                         mNotificationState == NotificationState.Opened) {
                     mNotificationState = closeNotifications() ?
@@ -265,6 +277,18 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
         try {
             Class.forName("android.app.StatusBarManager")
                     .getMethod("collapsePanels")
+                    .invoke(mLauncher.getSystemService("statusbar"));
+            return true;
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException ex) {
+            return false;
+        }
+    }
+
+    @SuppressLint({"WrongConstant", "PrivateApi"})
+    private boolean openSettings() {
+        try {
+            Class.forName("android.app.StatusBarManager")
+                    .getMethod("expandSettingsPanel")
                     .invoke(mLauncher.getSystemService("statusbar"));
             return true;
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException ex) {
