@@ -105,7 +105,7 @@ public class AllAppsRecyclerView extends BaseRecyclerView implements LogContaine
     }
 
     public void setSpringAnimationHandler(SpringAnimationHandler springAnimationHandler) {
-        if (FeatureFlags.LAUNCHER3_PHYSICS) {
+        if (FeatureFlags.LAUNCHER3_PHYSICS && LeanSettings.isPhysicalAnimationEnabled(getContext())) {
             mSpringAnimationHandler = springAnimationHandler;
             addOnScrollListener(new SpringMotionOnScrollListener());
         }
@@ -114,7 +114,7 @@ public class AllAppsRecyclerView extends BaseRecyclerView implements LogContaine
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         mPullDetector.onTouchEvent(e);
-        if (FeatureFlags.LAUNCHER3_PHYSICS && mSpringAnimationHandler != null) {
+        if (FeatureFlags.LAUNCHER3_PHYSICS && mSpringAnimationHandler != null && LeanSettings.isPhysicalAnimationEnabled(getContext())) {
             mSpringAnimationHandler.addMovement(e);
         }
         return super.onTouchEvent(e);

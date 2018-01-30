@@ -45,6 +45,7 @@ import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.discovery.AppDiscoveryAppInfo;
 import com.android.launcher3.discovery.AppDiscoveryItemView;
 import com.android.launcher3.util.PackageManagerHelper;
+import com.hdeva.launcher.LeanSettings;
 
 import java.util.List;
 
@@ -220,7 +221,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
         mLayoutInflater = LayoutInflater.from(launcher);
         mIconClickListener = iconClickListener;
         mIconLongClickListener = iconLongClickListener;
-        if (FeatureFlags.LAUNCHER3_PHYSICS) {
+        if (FeatureFlags.LAUNCHER3_PHYSICS && LeanSettings.isPhysicalAnimationEnabled(mLauncher.getApplicationContext())) {
             mSpringAnimationHandler = new SpringAnimationHandler<>(
                     SpringAnimationHandler.Y_DIRECTION, new AllAppsSpringAnimationFactory());
         }
@@ -376,7 +377,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
     @Override
     public void onViewAttachedToWindow(ViewHolder holder) {
         int type = holder.getItemViewType();
-        if (FeatureFlags.LAUNCHER3_PHYSICS && isViewType(type, VIEW_TYPE_MASK_HAS_SPRINGS)) {
+        if (FeatureFlags.LAUNCHER3_PHYSICS && isViewType(type, VIEW_TYPE_MASK_HAS_SPRINGS) && LeanSettings.isPhysicalAnimationEnabled(mLauncher.getApplicationContext())) {
             mSpringAnimationHandler.add(holder.itemView, holder);
         }
     }
@@ -384,7 +385,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
     @Override
     public void onViewDetachedFromWindow(ViewHolder holder) {
         int type = holder.getItemViewType();
-        if (FeatureFlags.LAUNCHER3_PHYSICS && isViewType(type, VIEW_TYPE_MASK_HAS_SPRINGS)) {
+        if (FeatureFlags.LAUNCHER3_PHYSICS && isViewType(type, VIEW_TYPE_MASK_HAS_SPRINGS) && LeanSettings.isPhysicalAnimationEnabled(mLauncher.getApplicationContext())) {
             mSpringAnimationHandler.remove(holder.itemView);
         }
     }
