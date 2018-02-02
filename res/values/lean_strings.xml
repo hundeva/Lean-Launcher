@@ -38,4 +38,12 @@
     <string name="hide_apps_title">Hide apps</string>
     <string name="hide_apps_summary">From the app drawer</string>
 
+    <string name="lean_github_url">https://github.com/hundeva/Lean-Launcher</string>
+
+    <string name="about_lean_title">Lean Launcher</string>
+    <string name="about_lean_summary">by hundeva</string>
+
+    <string name="about_based_on_title">Based on Rootless Pixel Launcher</string>
+    <string name="about_based_on_summary">by Amir Zaidi</string>
+
 </resources>

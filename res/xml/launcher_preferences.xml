@@ -149,13 +149,29 @@
         android:persistent="false">
 
         <Preference
-            android:key="about_app_version"
-            android:title="@string/about_app_version"
+            android:key="about_lean"
+            android:title="@string/about_lean_title"
+            android:summary="@string/about_lean_summary"
+            android:persistent="false" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/lean_github_url" />
+        </Preference>
+
+        <Preference
+            android:key="about_based_on"
+            android:title="@string/about_based_on_title"
+            android:summary="@string/about_based_on_summary"
             android:persistent="false">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="@string/app_releases_url" />
         </Preference>
+
+        <Preference
+            android:key="about_app_version"
+            android:title="@string/about_app_version"
+            android:persistent="false"/>
 
         <Preference
             android:key="app_info"
