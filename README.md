@@ -1,5 +1,5 @@
 # Lean Launcher
-by hundeva
+by hundeva (https://github.com/hundeva/Lean-Launcher)
 
 This launcher is based on the o-mr1 version of Amir Zaidi's Rootless Pixel Launcher: https://github.com/amirzaidi/Launcher3/tree/o-mr1?files=1
 
