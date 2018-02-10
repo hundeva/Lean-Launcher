@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherModel;
@@ -19,6 +22,7 @@ import com.android.launcher3.util.LooperExecutor;
 public class LeanUtils {
 
     private static final long WAIT_BEFORE_RESTART = 250;
+    private static final LeanDoubleTapToLockRegistry REGISTRY = new LeanDoubleTapToLockRegistry();
 
     public static void reload(Context context) {
         LauncherAppState.getInstance(context).getModel().forceReload();
@@ -76,6 +80,27 @@ public class LeanUtils {
             height = context.getResources().getDimensionPixelSize(R.dimen.status_bar_height);
         }
         return height;
+    }
+
+    public static void handleWorkspaceTouchEvent(Context context, MotionEvent ev) {
+        REGISTRY.add(ev);
+        if (LeanSettings.isDoubleTapToLockEnabled(context) && REGISTRY.shouldLock()) {
+            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            if (devicePolicyManager != null) {
+                if (devicePolicyManager.isAdminActive(adminComponent(context))) {
+                    devicePolicyManager.lockNow();
+                } else {
+                    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                    intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent(context));
+                    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, context.getString(R.string.double_tap_to_lock_hint));
+                    context.startActivity(intent);
+                }
+            }
+        }
+    }
+
+    private static ComponentName adminComponent(Context context) {
+        return new ComponentName(context, LeanDeviceAdmin.class);
     }
 
     private LeanUtils() {

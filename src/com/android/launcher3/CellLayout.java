@@ -60,6 +60,8 @@ import com.android.launcher3.util.GridOccupancy;
 import com.android.launcher3.util.ParcelableSparseArray;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.Thunk;
+import com.hdeva.launcher.LeanUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -350,6 +352,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
                 && mStylusEventHelper.onMotionEvent(ev)) {
             return true;
         }
+        LeanUtils.handleWorkspaceTouchEvent(getContext(), ev);
         return handled;
     }
 

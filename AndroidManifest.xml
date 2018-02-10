@@ -153,6 +153,17 @@
             android:exported="true"
             android:name="com.google.android.apps.nexuslauncher.search.AppSearchProvider" />
 
+        <receiver
+            android:name="com.hdeva.launcher.LeanDeviceAdmin"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/lean_admin_policy" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
         <!-- ENABLE_FOR_TESTING
 
         <activity

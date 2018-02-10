@@ -21,6 +21,7 @@ public class LeanSettings {
     public static final String GRID_ROWS = "pref_grid_rows";
     public static final String HOTSEAT_ICONS = "pref_hotseat_icons";
     public static final String FORCE_COLORED_G_ICON = "pref_colored_g_icon";
+    public static final String DOUBLE_TAP_TO_LOCK = "pref_double_tap_to_lock";
 
     private static final boolean QSB_DEFAULT = true;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -34,6 +35,7 @@ public class LeanSettings {
     private static final String GRID_ROWS_DEFAULT = "default";
     private static final String HOTSEAT_ICONS_DEFAULTS = "default";
     private static final boolean FORCE_COLORED_G_ICON_DEFAULT = false;
+    private static final boolean DOUBLE_TAP_TO_LOCK_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -96,6 +98,10 @@ public class LeanSettings {
 
     public static boolean isColoredGIconForced(Context context) {
         return prefs(context).getBoolean(FORCE_COLORED_G_ICON, FORCE_COLORED_G_ICON_DEFAULT);
+    }
+
+    public static boolean isDoubleTapToLockEnabled(Context context) {
+        return prefs(context).getBoolean(DOUBLE_TAP_TO_LOCK, DOUBLE_TAP_TO_LOCK_DEFAULT);
     }
 
     public static int getGridColumns(Context context, int fallback) {

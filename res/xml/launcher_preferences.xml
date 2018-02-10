@@ -131,6 +131,14 @@
         android:persistent="true"
         />
 
+    <SwitchPreference
+        android:key="pref_double_tap_to_lock"
+        android:title="@string/double_tap_to_lock_title"
+        android:summary="@string/double_tap_to_lock_summary"
+        android:defaultValue="false"
+        android:persistent="true"
+        />
+
     <ListPreference
         android:key="pref_theme"
         android:title="@string/theme_title"
