@@ -29,6 +29,7 @@ import android.view.WindowManager;
 
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.util.Thunk;
+import com.hdeva.launcher.LeanSettings;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -143,9 +144,9 @@ public class InvariantDeviceProfile {
                 invDistWeightedInterpolate(minWidthDps,  minHeightDps, closestProfiles);
 
         InvariantDeviceProfile closestProfile = closestProfiles.get(0);
-        numRows = closestProfile.numRows;
-        numColumns = closestProfile.numColumns;
-        numHotseatIcons = closestProfile.numHotseatIcons;
+        numRows = LeanSettings.getGridRows(context, closestProfile.numRows);
+        numColumns = LeanSettings.getGridColumns(context, closestProfile.numColumns);
+        numHotseatIcons = LeanSettings.getHotseatIcons(context, closestProfile.numHotseatIcons);
         defaultLayoutId = closestProfile.defaultLayoutId;
         demoModeLayoutId = closestProfile.demoModeLayoutId;
         numFolderRows = closestProfile.numFolderRows;

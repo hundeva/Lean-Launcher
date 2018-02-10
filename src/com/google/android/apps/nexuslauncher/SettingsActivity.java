@@ -92,6 +92,9 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.PHYSICAL_ANIMATION_KEY).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.TRANSPARENT_STATUS_BAR).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.EXTRA_BOTTOM_PADDING).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.GRID_COLUMNS).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.GRID_ROWS).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.HOTSEAT_ICONS).setOnPreferenceChangeListener(this);
 
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
             mIconPackPref.setOnPreferenceChangeListener(this);
@@ -130,42 +133,34 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     }
                     LeanUtils.reload(mContext);
                     break;
+
+                case LeanSettings.GRID_COLUMNS:
+                case LeanSettings.GRID_ROWS:
+                case LeanSettings.HOTSEAT_ICONS:
+                    if (preference instanceof ListPreference) {
+                        ((ListPreference) preference).setValue((String) newValue);
+                    }
+                    LeanUtils.restart(mContext);
+                    break;
+
                 case LeanSettings.THEME_KEY:
                     if (preference instanceof ListPreference) {
                         ((ListPreference) preference).setValue((String) newValue);
                     }
                     LeanUtils.reloadTheme(mContext);
                     break;
+
                 case LeanSettings.BOTTOM_SEARCH_BAR_KEY:
-                    if (preference instanceof TwoStatePreference) {
-                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
-                    }
-                    LeanUtils.reloadTheme(mContext);
-                    break;
                 case LeanSettings.EXTRA_BOTTOM_PADDING:
-                    if (preference instanceof TwoStatePreference) {
-                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
-                    }
-                    LeanUtils.reloadTheme(mContext);
-                    break;
                 case LeanSettings.TOP_SEARCH_BAR_KEY:
-                    if (preference instanceof TwoStatePreference) {
-                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
-                    }
-                    LeanUtils.reloadTheme(mContext);
-                    break;
                 case LeanSettings.PHYSICAL_ANIMATION_KEY:
-                    if (preference instanceof TwoStatePreference) {
-                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
-                    }
-                    LeanUtils.reloadTheme(mContext);
-                    break;
                 case LeanSettings.TRANSPARENT_STATUS_BAR:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }
                     LeanUtils.reloadTheme(mContext);
                     break;
+
                 case ICON_PACK_PREF:
                     ProgressDialog.show(mContext,
                             null /* title */,

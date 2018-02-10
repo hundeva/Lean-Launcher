@@ -52,4 +52,33 @@
     <string name="extra_bottom_padding_title">Extra bottom padding</string>
     <string name="extra_bottom_padding_summary">Enable if icons are too close to bottom search bar</string>
 
+    <string name="num_default">Default</string>
+    <string name="num_three">Three</string>
+    <string name="num_four">Four</string>
+    <string name="num_five">Five</string>
+    <string name="num_six">Six</string>
+    <string name="num_seven">Seven</string>
+
+    <string-array name="grid_names">
+        <item>@string/num_default</item>
+        <item>@string/num_three</item>
+        <item>@string/num_four</item>
+        <item>@string/num_five</item>
+        <item>@string/num_six</item>
+        <item>@string/num_seven</item>
+    </string-array>
+
+    <string-array name="grid_values">
+        <item>default</item>
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+        <item>six</item>
+        <item>seven</item>
+    </string-array>
+
+    <string name="number_of_columns_title">Grid columns</string>
+    <string name="number_of_rows_title">Grid rows</string>
+    <string name="number_of_hotseat_title">Hotseat icons</string>
+
 </resources>

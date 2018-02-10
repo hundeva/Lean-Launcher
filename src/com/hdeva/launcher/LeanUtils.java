@@ -3,6 +3,7 @@ package com.hdeva.launcher;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -28,6 +29,7 @@ public class LeanUtils {
     }
 
     public static void restart(final Context context) {
+        ProgressDialog.show(context, null, context.getString(R.string.state_loading), true, false);
         new LooperExecutor(LauncherModel.getWorkerLooper()).execute(new Runnable() {
             @SuppressLint("ApplySharedPref")
             @Override
@@ -57,7 +59,7 @@ public class LeanUtils {
         int topTranslationY = context.getResources().getDimensionPixelSize(R.dimen.all_apps_qsb_top_translation_y);
         int topOffset = context.getResources().getDimensionPixelOffset(R.dimen.all_apps_qsb_top_offset);
         int height;
-        if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             height = statusBar - topTranslationY + topOffset;
         } else {
             height = topOffset;

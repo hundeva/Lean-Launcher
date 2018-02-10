@@ -17,6 +17,9 @@ public class LeanSettings {
     public static final String PHYSICAL_ANIMATION_KEY = "pref_physical_animation";
     public static final String TRANSPARENT_STATUS_BAR = "pref_transparent_status_bar";
     public static final String EXTRA_BOTTOM_PADDING = "pref_extra_bottom_padding";
+    public static final String GRID_COLUMNS = "pref_grid_columns";
+    public static final String GRID_ROWS = "pref_grid_rows";
+    public static final String HOTSEAT_ICONS = "pref_hotseat_icons";
 
     private static final boolean QSB_DEFAULT = true;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -26,6 +29,9 @@ public class LeanSettings {
     private static final boolean PHYSICAL_ANIMATION_DEFAULT = true;
     private static final boolean TRANSPARENT_STATUS_BAR_DEFAULT = false;
     private static final boolean EXTRA_BOTTOM_PADDING_DEFAULT = false;
+    private static final String GRID_COLUMNS_DEFAULT = "default";
+    private static final String GRID_ROWS_DEFAULT = "default";
+    private static final String HOTSEAT_ICONS_DEFAULTS = "default";
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -84,6 +90,47 @@ public class LeanSettings {
 
     public static boolean shouldExtraBottomPaddingForBottomSearchBar(Context context) {
         return isBottomSearchBarVisible(context) && prefs(context).getBoolean(EXTRA_BOTTOM_PADDING, EXTRA_BOTTOM_PADDING_DEFAULT);
+    }
+
+    public static int getGridColumns(Context context, int fallback) {
+        return getIconCount(context, GRID_COLUMNS, GRID_COLUMNS_DEFAULT, fallback);
+    }
+
+    public static int getGridRows(Context context, int fallback) {
+        return getIconCount(context, GRID_ROWS, GRID_ROWS_DEFAULT, fallback);
+    }
+
+    public static int getHotseatIcons(Context context, int fallback) {
+        return getIconCount(context, HOTSEAT_ICONS, HOTSEAT_ICONS_DEFAULTS, fallback);
+    }
+
+    private static int getIconCount(Context context, String preferenceName, String preferenceFallback, int deviceProfileFallback) {
+        String saved = prefs(context).getString(preferenceName, preferenceFallback);
+        int num;
+        switch (saved) {
+            case "default":
+                num = deviceProfileFallback;
+                break;
+            case "three":
+                num = 3;
+                break;
+            case "four":
+                num = 4;
+                break;
+            case "five":
+                num = 5;
+                break;
+            case "six":
+                num = 6;
+                break;
+            case "seven":
+                num = 7;
+                break;
+            default:
+                num = deviceProfileFallback;
+                break;
+        }
+        return num;
     }
 
     private static SharedPreferences prefs(Context context) {
