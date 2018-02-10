@@ -68,6 +68,14 @@
         />
 
     <SwitchPreference
+        android:key="pref_extra_bottom_padding"
+        android:title="@string/extra_bottom_padding_title"
+        android:summary="@string/extra_bottom_padding_summary"
+        android:defaultValue="false"
+        android:persistent="true"
+        />
+
+    <SwitchPreference
         android:key="pref_top_search_bar"
         android:title="@string/top_search_bar_title"
         android:summary="@string/top_search_bar_summary"

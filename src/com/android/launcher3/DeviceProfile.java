@@ -223,6 +223,10 @@ public class DeviceProfile {
         hotseatBarBottomPaddingPx = LeanSettings.isBottomSearchBarVisible(context)
                 ? res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding)
                 : res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding_hidden_bottom_qsb);
+        if (LeanSettings.shouldExtraBottomPaddingForBottomSearchBar(context)) {
+            hotseatBarBottomPaddingPx += context.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_extra_bottom_padding_for_visible_bottom_qsb);
+        }
+
         hotseatBarLeftNavBarRightPaddingPx = res.getDimensionPixelSize(
                 R.dimen.dynamic_grid_hotseat_land_left_nav_bar_right_padding);
         hotseatBarRightNavBarRightPaddingPx = res.getDimensionPixelSize(
@@ -662,6 +666,10 @@ public class DeviceProfile {
         hotseatBarBottomPaddingPx = LeanSettings.isBottomSearchBarVisible(launcher)
                 ? launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding)
                 : launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_bottom_padding_hidden_bottom_qsb);
+        if (LeanSettings.shouldExtraBottomPaddingForBottomSearchBar(launcher)) {
+            hotseatBarBottomPaddingPx += launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_extra_bottom_padding_for_visible_bottom_qsb);
+        }
+
         hotseatBarSizePx = isVerticalBarLayout()
                 ? Utilities.pxFromDp(inv.iconSize, launcher.getResources().getDisplayMetrics())
                 : launcher.getResources().getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_size)

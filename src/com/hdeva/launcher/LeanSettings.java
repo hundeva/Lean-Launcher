@@ -16,6 +16,7 @@ public class LeanSettings {
     public static final String TOP_SEARCH_BAR_KEY = "pref_top_search_bar";
     public static final String PHYSICAL_ANIMATION_KEY = "pref_physical_animation";
     public static final String TRANSPARENT_STATUS_BAR = "pref_transparent_status_bar";
+    public static final String EXTRA_BOTTOM_PADDING = "pref_extra_bottom_padding";
 
     private static final boolean QSB_DEFAULT = true;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -24,6 +25,7 @@ public class LeanSettings {
     private static final boolean TOP_SEARCH_BAR_DEFAULT = true;
     private static final boolean PHYSICAL_ANIMATION_DEFAULT = true;
     private static final boolean TRANSPARENT_STATUS_BAR_DEFAULT = false;
+    private static final boolean EXTRA_BOTTOM_PADDING_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -78,6 +80,10 @@ public class LeanSettings {
 
     public static boolean isStatusBarTransparent(Context context) {
         return prefs(context).getBoolean(TRANSPARENT_STATUS_BAR, TRANSPARENT_STATUS_BAR_DEFAULT);
+    }
+
+    public static boolean shouldExtraBottomPaddingForBottomSearchBar(Context context) {
+        return isBottomSearchBarVisible(context) && prefs(context).getBoolean(EXTRA_BOTTOM_PADDING, EXTRA_BOTTOM_PADDING_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {
