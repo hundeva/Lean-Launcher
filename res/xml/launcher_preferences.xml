@@ -98,6 +98,14 @@
         />
 
     <SwitchPreference
+        android:key="pref_transparent_status_bar"
+        android:title="@string/transparent_status_bar_title"
+        android:summary="@string/transparent_status_bar_summary"
+        android:defaultValue="false"
+        android:persistent="true"
+        />
+
+    <SwitchPreference
         android:key="pref_lock_desktop"
         android:title="@string/lock_desktop_title"
         android:summary="@string/lock_desktop_summary"

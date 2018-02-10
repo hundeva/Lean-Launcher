@@ -357,6 +357,10 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
             ViewGroup.LayoutParams navBarBgLp = navBarBg.getLayoutParams();
             navBarBgLp.height = insets.bottom;
             navBarBg.setLayoutParams(navBarBgLp);
+
+            if (LeanSettings.isStatusBarTransparent(getContext())) {
+                navBarBg.setBackgroundResource(R.color.transparent);
+            }
         }
     }
 
