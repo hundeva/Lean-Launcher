@@ -99,7 +99,6 @@
         launcher:defaultLayoutId="@xml/default_workspace_6x6"
         />
 
-    <!--
     <profile
         launcher:name="Super Short Stubby"
         launcher:minWidthDps="255"
@@ -264,6 +263,5 @@
         launcher:numHotseatIcons="7"
         launcher:defaultLayoutId="@xml/default_workspace_5x6"
         />
-    -->
 
 </profiles>
