@@ -95,6 +95,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.GRID_COLUMNS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.GRID_ROWS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.HOTSEAT_ICONS).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.FORCE_COLORED_G_ICON).setOnPreferenceChangeListener(this);
 
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
             mIconPackPref.setOnPreferenceChangeListener(this);
@@ -155,6 +156,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case LeanSettings.TOP_SEARCH_BAR_KEY:
                 case LeanSettings.PHYSICAL_ANIMATION_KEY:
                 case LeanSettings.TRANSPARENT_STATUS_BAR:
+                case LeanSettings.FORCE_COLORED_G_ICON:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }
