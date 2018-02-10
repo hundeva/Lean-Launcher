@@ -49,7 +49,7 @@
     <string name="transparent_status_bar_title">Transparent Status Bar</string>
     <string name="transparent_status_bar_summary">On the app drawer</string>
 
-    <string name="extra_bottom_padding_title">Extra bottom padding for search bar</string>
+    <string name="extra_bottom_padding_title">Extra bottom padding</string>
     <string name="extra_bottom_padding_summary">Enable if icons are too close to bottom search bar</string>
 
 </resources>

@@ -73,6 +73,7 @@
         android:summary="@string/extra_bottom_padding_summary"
         android:defaultValue="false"
         android:persistent="true"
+        android:dependency="pref_bottom_search_bar"
         />
 
     <SwitchPreference
