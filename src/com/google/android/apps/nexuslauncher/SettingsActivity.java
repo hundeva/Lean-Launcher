@@ -58,6 +58,15 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
         return true;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isFinishing() && LeanSettings.isLeanSettingsDirty(this)) {
+            LeanSettings.clearLeanSettingsDirty(this);
+            LeanUtils.restart(this);
+        }
+    }
+
     public static class MySettingsFragment extends com.android.launcher3.SettingsActivity.LauncherSettingsFragment
             implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
         private CustomIconPreference mIconPackPref;
@@ -143,7 +152,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     if (preference instanceof ListPreference) {
                         ((ListPreference) preference).setValue((String) newValue);
                     }
-                    LeanUtils.restart(mContext);
+                    LeanSettings.setLeanSettingsDirty(mContext);
                     break;
 
                 case LeanSettings.THEME_KEY:
