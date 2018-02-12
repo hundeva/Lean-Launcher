@@ -22,6 +22,7 @@ public class LeanSettings {
     public static final String HOTSEAT_ICONS = "pref_hotseat_icons";
     public static final String FORCE_COLORED_G_ICON = "pref_colored_g_icon";
     public static final String DOUBLE_TAP_TO_LOCK = "pref_double_tap_to_lock";
+    public static final String ICON_SIZE = "pref_icon_size";
 
     private static final boolean QSB_DEFAULT = true;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -36,6 +37,7 @@ public class LeanSettings {
     private static final String HOTSEAT_ICONS_DEFAULTS = "default";
     private static final boolean FORCE_COLORED_G_ICON_DEFAULT = false;
     private static final boolean DOUBLE_TAP_TO_LOCK_DEFAULT = false;
+    private static final String ICON_SIZE_DEFAULT = "average";
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -143,6 +145,32 @@ public class LeanSettings {
                 break;
         }
         return num;
+    }
+
+    public static float getIconSizeModifier(Context context) {
+        String saved = prefs(context).getString(ICON_SIZE, ICON_SIZE_DEFAULT);
+        float offset;
+        switch (saved) {
+            case "extrasmall":
+                offset = 0.75F;
+                break;
+            case "small":
+                offset = 0.90F;
+                break;
+            case "average":
+                offset = 1.00F;
+                break;
+            case "large":
+                offset = 1.10F;
+                break;
+            case "extralarge":
+                offset = 1.25F;
+                break;
+            default:
+                offset = 1.00F;
+                break;
+        }
+        return offset;
     }
 
     private static SharedPreferences prefs(Context context) {

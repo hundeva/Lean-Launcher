@@ -153,10 +153,11 @@ public class InvariantDeviceProfile {
         numFolderColumns = closestProfile.numFolderColumns;
         minAllAppsPredictionColumns = closestProfile.minAllAppsPredictionColumns;
 
-        iconSize = interpolatedDeviceProfileOut.iconSize;
-        landscapeIconSize = interpolatedDeviceProfileOut.landscapeIconSize;
+        float iconSizeModifier = LeanSettings.getIconSizeModifier(context);
+        iconSize = interpolatedDeviceProfileOut.iconSize * iconSizeModifier;
+        landscapeIconSize = interpolatedDeviceProfileOut.landscapeIconSize * iconSizeModifier;
         iconBitmapSize = Utilities.pxFromDp(iconSize, dm);
-        iconTextSize = interpolatedDeviceProfileOut.iconTextSize;
+        iconTextSize = interpolatedDeviceProfileOut.iconTextSize * iconSizeModifier;
         fillResIconDpi = getLauncherIconDensity(iconBitmapSize);
 
         // If the partner customization apk contains any grid overrides, apply them

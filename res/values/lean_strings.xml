@@ -89,4 +89,28 @@
     <string name="double_tap_to_lock_hint">To be able to use double tap to lock, you have to enable admin access for Lean Launcher. This is a secure lock, meaning you have to enter your PIN on the next unlock, if you have any.</string>
     <string name="double_tap_to_lock_disable_warning">By disabling admin access, you will not be able to use double tap to lock on your home screen.</string>
 
+    <string name="icon_size_title">Icon size</string>
+
+    <string name="icon_size_extra_small">Extra small (-25%)</string>
+    <string name="icon_size_small">Small (-10%)</string>
+    <string name="icon_size_average">Average (default)</string>
+    <string name="icon_size_large">Large (+10%)</string>
+    <string name="icon_size_extra_large">Extra large (+25%)</string>
+
+    <string-array name="icon_size_names">
+        <item>@string/icon_size_extra_small</item>
+        <item>@string/icon_size_small</item>
+        <item>@string/icon_size_average</item>
+        <item>@string/icon_size_large</item>
+        <item>@string/icon_size_extra_large</item>
+    </string-array>
+
+    <string-array name="icon_size_values">
+        <item>extrasmall</item>
+        <item>small</item>
+        <item>average</item>
+        <item>large</item>
+        <item>extralarge</item>
+    </string-array>
+
 </resources>

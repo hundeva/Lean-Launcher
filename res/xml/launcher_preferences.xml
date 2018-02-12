@@ -180,6 +180,16 @@
         />
 
     <ListPreference
+        android:key="pref_icon_size"
+        android:title="@string/icon_size_title"
+        android:summary="%s"
+        android:entries="@array/icon_size_names"
+        android:entryValues="@array/icon_size_values"
+        android:defaultValue="average"
+        android:persistent="true"
+        />
+
+    <ListPreference
         android:key="pref_override_icon_shape"
         android:title="@string/icon_shape_override_label"
         android:summary="%s"

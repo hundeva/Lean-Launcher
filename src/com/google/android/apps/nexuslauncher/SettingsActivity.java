@@ -96,6 +96,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.GRID_ROWS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.HOTSEAT_ICONS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.FORCE_COLORED_G_ICON).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.ICON_SIZE).setOnPreferenceChangeListener(this);
 
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
             mIconPackPref.setOnPreferenceChangeListener(this);
@@ -138,6 +139,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case LeanSettings.GRID_COLUMNS:
                 case LeanSettings.GRID_ROWS:
                 case LeanSettings.HOTSEAT_ICONS:
+                case LeanSettings.ICON_SIZE:
                     if (preference instanceof ListPreference) {
                         ((ListPreference) preference).setValue((String) newValue);
                     }
