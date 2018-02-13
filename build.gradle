@@ -10,6 +10,13 @@ buildscript {
     }
 }
 
+allprojects {
+    ext {
+        version_name = "0.2.0"
+        version_code = 2
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.protobuf'
 
@@ -20,8 +27,9 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 2
-        versionName "0.2.0"
+        versionCode project.version_code
+        versionName project.version_name
+        setProperty("archivesBaseName", "LeanLauncher-$version_name[$version_code]")
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
