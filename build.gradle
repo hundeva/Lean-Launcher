@@ -135,7 +135,7 @@ repositories {
     google()
 }
 
-final String SUPPORT_LIBS_VERSION = '26.0.+'
+final String SUPPORT_LIBS_VERSION = '27.0.+'
 dependencies {
     compile "com.android.support:support-v4:${SUPPORT_LIBS_VERSION}"
     compile "com.android.support:support-dynamic-animation:${SUPPORT_LIBS_VERSION}"
