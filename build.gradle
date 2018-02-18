@@ -51,7 +51,7 @@ android {
         }
 
         release {
-            minfiyEnabled false
+            minifyEnabled false
             signingConfig signingConfigs.lean
         }
     }
