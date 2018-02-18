@@ -13,7 +13,7 @@ buildscript {
 allprojects {
     ext {
         version_name = "0.3.0"
-        version_code = 2
+        version_code = 3
     }
 }
 
