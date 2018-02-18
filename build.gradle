@@ -12,7 +12,7 @@ buildscript {
 
 allprojects {
     ext {
-        version_name = "0.2.0"
+        version_name = "0.3.0"
         version_code = 2
     }
 }
@@ -40,14 +40,25 @@ android {
     }
 
     productFlavors {
+        play {
+            applicationId 'com.hdeva.launcher'
+            testApplicationId 'com.android.launcher3.tests'
+            resValue "string", "xmlApplicationId", applicationId
+            resValue "string", "settingsApplicationId", "package:$applicationId"
+        }
+
         aosp {
             applicationId 'com.google.android.apps.nexuslauncher'
             testApplicationId 'com.android.launcher3.tests'
+            resValue "string", "xmlApplicationId", applicationId
+            resValue "string", "settingsApplicationId", "package:$applicationId"
         }
 
         l3go {
             applicationId 'com.android.launcher3'
             testApplicationId 'com.android.launcher3.tests'
+            resValue "string", "xmlApplicationId", applicationId
+            resValue "string", "settingsApplicationId", "package:$applicationId"
         }
     }
     sourceSets {
@@ -67,6 +78,15 @@ android {
             res.srcDirs = ['tests/res']
             java.srcDirs = ['tests/src']
             manifest.srcFile "tests/AndroidManifest-common.xml"
+        }
+
+        play {
+            java.srcDirs = ['src_flags']
+            manifest.srcFile "AndroidManifest.xml"
+        }
+
+        playAndroidTest {
+            manifest.srcFile "tests/AndroidManifest.xml"
         }
 
         aosp {

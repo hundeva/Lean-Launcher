@@ -206,7 +206,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.hdeva.launcher.HideAppsActivity"
-            android:targetPackage="com.google.android.apps.nexuslauncher" />
+            android:targetPackage="@string/xmlApplicationId" />
 
     </Preference>
 
@@ -253,7 +253,7 @@
             android:persistent="false">
             <intent
                 android:action="android.settings.APPLICATION_DETAILS_SETTINGS"
-                android:data="package:com.google.android.apps.nexuslauncher" />
+                android:data="@string/settingsApplicationId" />
         </Preference>
 
     </PreferenceScreen>
