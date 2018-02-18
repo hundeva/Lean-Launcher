@@ -127,6 +127,10 @@ android {
             manifest.srcFile "tests/AndroidManifest.xml"
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
 }
 
 repositories {
