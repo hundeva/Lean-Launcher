@@ -21,6 +21,7 @@ Everything, that is available in Rootless Pixel Launcher, with some added option
 - double tap to lock on home screen, this is a secure lock, meaning you will need to provide PIN if you have set it up, fingerprint is not enough
 - option to force dark or light theme, not just based on your wallpaper
 - option to change default grid options (rows, column, hotseat icons, from 3 up to 7)
+- option to change icon size (-25%, -10%, 0%, +10%, +25% modifiers)
 - hide apps from your drawer (searching apps works for hidden apps as well)
 
 ## Package name
