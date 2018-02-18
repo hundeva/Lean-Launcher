@@ -46,8 +46,8 @@
     <string name="about_based_on_title">Based on Rootless Pixel Launcher</string>
     <string name="about_based_on_summary">by Amir Zaidi</string>
 
-    <string name="transparent_status_bar_title">Transparent Status Bar</string>
-    <string name="transparent_status_bar_summary">On the app drawer</string>
+    <string name="transparent_navigation_bar_title">Transparent Navigation Bar</string>
+    <string name="transparent_navigation_bar_summary">On the app drawer</string>
 
     <string name="extra_bottom_padding_title">Extra bottom padding</string>
     <string name="extra_bottom_padding_summary">Enable if icons are too close to bottom search bar</string>

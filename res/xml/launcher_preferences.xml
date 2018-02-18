@@ -116,9 +116,9 @@
         />
 
     <SwitchPreference
-        android:key="pref_transparent_status_bar"
-        android:title="@string/transparent_status_bar_title"
-        android:summary="@string/transparent_status_bar_summary"
+        android:key="pref_transparent_navigation_bar"
+        android:title="@string/transparent_navigation_bar_title"
+        android:summary="@string/transparent_navigation_bar_summary"
         android:defaultValue="false"
         android:persistent="true"
         />

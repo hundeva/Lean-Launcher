@@ -99,7 +99,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.BOTTOM_SEARCH_BAR_KEY).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.TOP_SEARCH_BAR_KEY).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.PHYSICAL_ANIMATION_KEY).setOnPreferenceChangeListener(this);
-            findPreference(LeanSettings.TRANSPARENT_STATUS_BAR).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.TRANSPARENT_NAVIGATION_BAR).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.EXTRA_BOTTOM_PADDING).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.GRID_COLUMNS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.GRID_ROWS).setOnPreferenceChangeListener(this);
@@ -166,7 +166,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case LeanSettings.EXTRA_BOTTOM_PADDING:
                 case LeanSettings.TOP_SEARCH_BAR_KEY:
                 case LeanSettings.PHYSICAL_ANIMATION_KEY:
-                case LeanSettings.TRANSPARENT_STATUS_BAR:
+                case LeanSettings.TRANSPARENT_NAVIGATION_BAR:
                 case LeanSettings.FORCE_COLORED_G_ICON:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);

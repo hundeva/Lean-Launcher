@@ -16,7 +16,7 @@ public class LeanSettings {
     public static final String BOTTOM_SEARCH_BAR_KEY = "pref_bottom_search_bar";
     public static final String TOP_SEARCH_BAR_KEY = "pref_top_search_bar";
     public static final String PHYSICAL_ANIMATION_KEY = "pref_physical_animation";
-    public static final String TRANSPARENT_STATUS_BAR = "pref_transparent_status_bar";
+    public static final String TRANSPARENT_NAVIGATION_BAR = "pref_transparent_navigation_bar";
     public static final String EXTRA_BOTTOM_PADDING = "pref_extra_bottom_padding";
     public static final String GRID_COLUMNS = "pref_grid_columns";
     public static final String GRID_ROWS = "pref_grid_rows";
@@ -32,7 +32,7 @@ public class LeanSettings {
     private static final boolean BOTTOM_SEARCH_BAR_DEFAULT = true;
     private static final boolean TOP_SEARCH_BAR_DEFAULT = true;
     private static final boolean PHYSICAL_ANIMATION_DEFAULT = true;
-    private static final boolean TRANSPARENT_STATUS_BAR_DEFAULT = false;
+    private static final boolean TRANSPARENT_NAVIGATION_BAR_DEFAULT = false;
     private static final boolean EXTRA_BOTTOM_PADDING_DEFAULT = false;
     private static final String GRID_COLUMNS_DEFAULT = "default";
     private static final String GRID_ROWS_DEFAULT = "default";
@@ -104,8 +104,8 @@ public class LeanSettings {
         hiddenAppsPrefs(context).edit().putBoolean(component.getClassName(), hidden).apply();
     }
 
-    public static boolean isStatusBarTransparent(Context context) {
-        return prefs(context).getBoolean(TRANSPARENT_STATUS_BAR, TRANSPARENT_STATUS_BAR_DEFAULT);
+    public static boolean isNavigationBarTransparent(Context context) {
+        return prefs(context).getBoolean(TRANSPARENT_NAVIGATION_BAR, TRANSPARENT_NAVIGATION_BAR_DEFAULT);
     }
 
     public static boolean shouldExtraBottomPaddingForBottomSearchBar(Context context) {
