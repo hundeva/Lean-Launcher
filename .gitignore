@@ -14,3 +14,5 @@ local.properties
 gradle/
 build/
 gradlew*
+*.jks
+gradle.properties

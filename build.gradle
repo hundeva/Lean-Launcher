@@ -33,9 +33,26 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+
+        lean {
+            storeFile file(LEAN_RELEASE_KEY_STORE_FILE)
+            storePassword LEAN_RELEASE_KEY_STORE_PASSWORD
+            keyAlias LEAN_RELEASE_KEY_ALIAS
+            keyPassword LEAN_RELEASE_KEY_PASSWORD
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
+            signingConfig signingConfigs.lean
+        }
+
+        release {
+            minfiyEnabled false
+            signingConfig signingConfigs.lean
         }
     }
 
