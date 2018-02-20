@@ -95,6 +95,7 @@ public class SmartspaceController implements Handler.Callback {
         this.mAppContext.sendBroadcast(new Intent("com.google.android.apps.gsa.smartspace.ENABLE_UPDATE")
                 .setPackage("com.google.android.googlequicksearchbox")
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        this.mAppContext.sendBroadcast(new Intent("com.hdeva.launcher.AT_A_GLANCE_FORCE_ENABLE"));
     }
 
     private void df(final NewCardInfo a, final SmartspaceController.Store SmartspaceControllerStore) {

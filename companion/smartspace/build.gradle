@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+
+
+    defaultConfig {
+        applicationId "com.google.android.apps.nexuslauncher"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "0.1.0"
+    }
+
+    signingConfigs {
+
+        lean {
+            storeFile file("../../$LEAN_RELEASE_KEY_STORE_FILE")
+            storePassword LEAN_RELEASE_KEY_STORE_PASSWORD
+            keyAlias LEAN_RELEASE_KEY_ALIAS
+            keyPassword LEAN_RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.lean
+        }
+
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.lean
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

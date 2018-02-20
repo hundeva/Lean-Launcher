@@ -143,6 +143,15 @@
                     android:scheme="content"/>
             </intent-filter>
         </activity>
+        <receiver
+            android:name="com.hdeva.launcher.LeanProxyReceiver"
+            android:permission="com.hdeva.launcher.COMPANION">
+            <intent-filter>
+                <action android:name="com.hdeva.launcher.AT_A_GLANCE" />
+                <action android:name="com.hdeva.launcher.HIDE_AT_A_GLANCE_COMPANION" />
+                <action android:name="com.hdeva.launcher.OPEN_LEAN_SETTINGS" />
+            </intent-filter>
+        </receiver>
         <receiver android:name="com.google.android.apps.nexuslauncher.smartspace.SmartspaceBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.google.android.apps.nexuslauncher.UPDATE_SMARTSPACE" />
@@ -213,4 +222,11 @@
         -->
 
     </application>
+
+    <permission android:name="com.hdeva.launcher.COMPANION"
+        android:protectionLevel="signature"
+        android:label="@string/companion_app_permission_label"
+        android:description="@string/companion_app_permission_description">
+    </permission>
+
 </manifest>

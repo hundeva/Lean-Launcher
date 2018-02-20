@@ -113,4 +113,7 @@
         <item>extralarge</item>
     </string-array>
 
+    <string name="companion_app_permission_label">Lean companion permission</string>
+    <string name="companion_app_permission_description">Permission to enforce signature protection for companion apps.</string>
+
 </resources>
