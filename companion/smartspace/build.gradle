@@ -28,13 +28,14 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.lean
         }
-
-        release {
-            minifyEnabled false
-            signingConfig signingConfigs.lean
-        }
     }
 
+}
+
+android.variantFilter { variant ->
+    if (variant.buildType.name == 'release') {
+        variant.setIgnore(true)
+    }
 }
 
 dependencies {
