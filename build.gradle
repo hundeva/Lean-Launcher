@@ -29,7 +29,7 @@ android {
         targetSdkVersion 27
         versionCode project.version_code
         versionName project.version_name
-        setProperty("archivesBaseName", "LeanLauncher-$version_name[$version_code]")
+        setProperty("archivesBaseName", "LeanLauncher-$version_name-$version_code")
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
