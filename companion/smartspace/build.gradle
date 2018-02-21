@@ -11,6 +11,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "0.1.0"
+        setProperty("archivesBaseName", "LeanGlance-$version_name-$version_code")
     }
 
     signingConfigs {
