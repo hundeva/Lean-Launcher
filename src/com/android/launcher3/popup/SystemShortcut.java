@@ -48,6 +48,14 @@ public abstract class SystemShortcut extends ItemInfo {
             final ItemInfo itemInfo);
 
     public static class Edit extends com.google.android.apps.nexuslauncher.CustomEditShortcut {
+        @Override
+        public View.OnClickListener getOnClickListener(Launcher launcher, ItemInfo itemInfo) {
+            if (LeanSettings.isDesktopLocked(launcher.getApplicationContext())) {
+                return null;
+            } else {
+                return super.getOnClickListener(launcher, itemInfo);
+            }
+        }
     }
 
     public static class Widgets extends SystemShortcut {
