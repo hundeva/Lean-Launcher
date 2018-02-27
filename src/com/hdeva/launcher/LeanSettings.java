@@ -90,14 +90,6 @@ public class LeanSettings {
         return prefs(context).getBoolean(PHYSICAL_ANIMATION_KEY, PHYSICAL_ANIMATION_DEFAULT);
     }
 
-    public static boolean isComponentHidden(Context context, ComponentName component) {
-        return hiddenAppsPrefs(context).getBoolean(component.getClassName(), false);
-    }
-
-    public static void setComponentHidden(Context context, ComponentName component, boolean hidden) {
-        hiddenAppsPrefs(context).edit().putBoolean(component.getClassName(), hidden).apply();
-    }
-
     public static boolean isNavigationBarTransparent(Context context) {
         return prefs(context).getBoolean(TRANSPARENT_NAVIGATION_BAR, TRANSPARENT_NAVIGATION_BAR_DEFAULT);
     }
@@ -183,10 +175,6 @@ public class LeanSettings {
 
     private static SharedPreferences prefs(Context context) {
         return Utilities.getPrefs(context);
-    }
-
-    private static SharedPreferences hiddenAppsPrefs(Context context) {
-        return context.getSharedPreferences(LauncherFiles.HIDDEN_APPS_PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
     private LeanSettings() {

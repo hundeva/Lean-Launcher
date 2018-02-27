@@ -74,7 +74,9 @@ public class AllAppsList {
      */
     public void add(AppInfo info, LauncherActivityInfo activityInfo) {
         mIconCache.getTitleAndIcon(info, activityInfo, true /* useLowResIcon */);
-        unfilteredData.add(info);
+        if (findUnfilteredAppInfo(info.componentName, info.user) == null) {
+            unfilteredData.add(info);
+        }
 
         if (!mAppFilter.shouldShowApp(info.componentName)) {
             return;
@@ -267,6 +269,15 @@ public class AllAppsList {
     private @Nullable AppInfo findAppInfo(@NonNull ComponentName componentName,
                                           @NonNull UserHandle user) {
         for (AppInfo info: data) {
+            if (componentName.equals(info.componentName) && user.equals(info.user)) {
+                return info;
+            }
+        }
+        return null;
+    }
+
+    private @Nullable AppInfo findUnfilteredAppInfo(@NonNull ComponentName componentName, @NonNull UserHandle user) {
+        for (AppInfo info: unfilteredData) {
             if (componentName.equals(info.componentName) && user.equals(info.user)) {
                 return info;
             }

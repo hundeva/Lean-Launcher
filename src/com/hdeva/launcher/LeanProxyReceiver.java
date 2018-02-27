@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.google.android.apps.nexuslauncher.CustomAppFilter;
 import com.google.android.apps.nexuslauncher.smartspace.NewCardInfo;
 import com.google.android.apps.nexuslauncher.smartspace.SmartspaceController;
 import com.google.android.apps.nexuslauncher.smartspace.nano.SmartspaceProto;
@@ -79,7 +80,7 @@ public class LeanProxyReceiver extends BroadcastReceiver {
 
     private void handleHideAction(Context context) {
         ComponentName componentName = new ComponentName("com.google.android.apps.nexuslauncher", "com.google.android.apps.nexuslauncher.SmartSpaceCompanionActivity");
-        LeanSettings.setComponentHidden(context, componentName, true);
+        CustomAppFilter.hideComponent(context, componentName, true);
         LeanUtils.reload(context);
     }
 

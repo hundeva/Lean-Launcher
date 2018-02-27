@@ -9,6 +9,7 @@ import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherModel;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.UserManagerCompat;
+import com.hdeva.launcher.LeanUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,17 +25,17 @@ public class CustomAppFilter extends NexusAppFilter {
 
     @Override
     public boolean shouldShowApp(ComponentName componentName) {
-        if (CustomIconUtils.getCurrentPack(mContext).isEmpty()) {
-            return super.shouldShowApp(componentName);
-        } else {
-            return !isHiddenApp(mContext, componentName.toString(), componentName.getPackageName());
-        }
+        return !isHiddenApp(mContext, componentName.toString(), componentName.getPackageName());
     }
 
     static void resetAppFilter(Context context) {
         SharedPreferences.Editor editor = Utilities.getPrefs(context).edit();
         editor.putStringSet(HIDE_APPS_PREF, new HashSet<String>());
         editor.apply();
+    }
+
+    public static void hideComponent(Context context, ComponentName componentName, boolean hide) {
+        setComponentNameState(context, componentName.toString(), componentName.getPackageName(), hide);
     }
 
     static void setComponentNameState(Context context, String comp, String pkg, boolean hidden) {
@@ -47,10 +48,18 @@ public class CustomAppFilter extends NexusAppFilter {
         }
         setHiddenApps(context, hiddenApps);
 
-        LauncherModel model = Launcher.getLauncher(context).getModel();
-        for (UserHandle user : UserManagerCompat.getInstance(context).getUserProfiles()) {
-            model.onPackagesReload(user);
+        try {
+            LauncherModel model = Launcher.getLauncher(context).getModel();
+            for (UserHandle user : UserManagerCompat.getInstance(context).getUserProfiles()) {
+                model.onPackagesReload(user);
+            }
+        } catch (Throwable t) {
+            LeanUtils.reload(context);
         }
+    }
+
+    public static boolean isHidden(Context context, ComponentName componentName) {
+        return isHiddenApp(context, componentName.toString(), componentName.getPackageName());
     }
 
     static boolean isHiddenApp(Context context, String comp, String pkg) {

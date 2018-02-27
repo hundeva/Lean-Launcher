@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.R;
+import com.google.android.apps.nexuslauncher.CustomAppFilter;
 
 public class HideAppsViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,20 +41,18 @@ public class HideAppsViewHolder extends RecyclerView.ViewHolder {
     public void setAppInfo(AppInfo appInfo) {
         this.appInfo = appInfo;
 
-        if(appInfo.usingLowResIcon) {
+        if (appInfo.usingLowResIcon) {
             LauncherAppState.getInstance(itemView.getContext()).getIconCache().getTitleAndIcon(appInfo, false);
         }
         launcherIcon.setImageBitmap(appInfo.iconBitmap);
         appName.setText(appInfo.title);
         className.setText(appInfo.componentName.getClassName());
-        isHidden.setChecked(LeanSettings.isComponentHidden(itemView.getContext(), appInfo.componentName));
+        isHidden.setChecked(CustomAppFilter.isHidden(itemView.getContext(), appInfo.componentName));
     }
 
     private void toggleAppVisibility() {
         boolean currentState = isHidden.isChecked();
-        LeanSettings.setComponentHidden(itemView.getContext(), appInfo.componentName, !currentState);
+        CustomAppFilter.hideComponent(itemView.getContext(), appInfo.componentName, !currentState);
         isHidden.setChecked(!currentState);
-
-        LeanUtils.reload(itemView.getContext());
     }
 }
