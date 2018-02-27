@@ -30,6 +30,16 @@
 
     <PreferenceCategory android:title="@string/at_a_glance_category">
 
+        <Preference
+            android:key="pref_smartspace_companion"
+            android:title="@string/companion_app_title">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/at_a_glance_companion_url" />
+
+        </Preference>
+
         <SwitchPreference
             android:defaultValue="true"
             android:key="pref_smartspace"

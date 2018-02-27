@@ -5,8 +5,11 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -31,6 +34,10 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
     public final static String SMARTSPACE_PREF = "pref_smartspace";
     public final static String APP_VERSION_PREF = "about_app_version";
     private final static String GOOGLE_APP = "com.google.android.googlequicksearchbox";
+
+    private static final String SMARTSPACE_COMPANION = "pref_smartspace_companion";
+    private static final String SMARTSPACE_PING = "com.hdeva.launcher.AT_A_GLANCE_PING";
+    private static final String SMARTSPACE_PING_RESPONSE = "com.hdeva.launcher.AT_A_GLANCE_PING_RESPONSE";
 
     @Override
     protected void onCreate(final Bundle bundle) {
@@ -64,6 +71,15 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             implements Preference.OnPreferenceChangeListener {
         private CustomIconPreference mIconPackPref;
         private Context mContext;
+
+        BroadcastReceiver smartspaceReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String version = intent.getStringExtra(SMARTSPACE_PING_RESPONSE);
+                findPreference(SMARTSPACE_COMPANION).setSummary(context.getString(R.string.companion_app_version_x, version));
+                findPreference(SMARTSPACE_PREF).setEnabled(true);
+            }
+        };
 
         @Override
         public void onCreate(Bundle bundle) {
@@ -129,6 +145,16 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
         public void onResume() {
             super.onResume();
             mIconPackPref.reloadIconPacks();
+            findPreference(SMARTSPACE_COMPANION).setSummary(getString(R.string.companion_app_not_installed));
+            findPreference(SMARTSPACE_PREF).setEnabled(false);
+            getActivity().registerReceiver(smartspaceReceiver, new IntentFilter(SMARTSPACE_PING_RESPONSE));
+            getActivity().sendBroadcast(new Intent(SMARTSPACE_PING));
+        }
+
+        @Override
+        public void onPause() {
+            getActivity().unregisterReceiver(smartspaceReceiver);
+            super.onPause();
         }
 
         @Override

@@ -24,6 +24,7 @@
             <intent-filter>
                 <action android:name="com.google.android.apps.nexuslauncher.UPDATE_SMARTSPACE" />
                 <action android:name="com.hdeva.launcher.AT_A_GLANCE_FORCE_ENABLE" />
+                <action android:name="com.hdeva.launcher.AT_A_GLANCE_PING" />
             </intent-filter>
         </receiver>
     </application>

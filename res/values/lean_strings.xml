@@ -126,4 +126,10 @@
     <string name="reset_app_visibility_title">Reset app visibility</string>
     <string name="reset_app_visibility_summary">When changing to default icon pack</string>
 
+    <string name="companion_app_title">Companion app</string>
+    <string name="companion_app_not_installed">Not installed</string>
+    <string name="companion_app_version_x">version %s</string>
+
+    <string name="at_a_glance_companion_url">https://github.com/hundeva/Lean-Launcher/releases/tag/lean-0.3.0</string>
+
 </resources>
