@@ -39,13 +39,17 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/google_category">
+    <PreferenceCategory android:title="@string/feed_category">
 
         <SwitchPreference
             android:defaultValue="true"
             android:key="pref_enable_minus_one"
             android:summary="@string/pref_show_google_now_summary"
             android:title="@string/title_show_google_app" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/search_category">
 
         <SwitchPreference
             android:defaultValue="true"
