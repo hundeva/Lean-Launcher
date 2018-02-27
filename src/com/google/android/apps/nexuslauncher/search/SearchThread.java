@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.util.Log;
 
 import com.android.launcher3.allapps.search.AllAppsSearchBarController;
 import com.android.launcher3.allapps.search.SearchAlgorithm;
@@ -15,6 +16,7 @@ public class SearchThread implements SearchAlgorithm, Handler.Callback {
     private final Handler mHandler;
     private final Context mContext;
     private final Handler mUiHandler;
+    private boolean mInterruptActiveRequests;
 
     public SearchThread(Context context) {
         mContext = context;
@@ -40,6 +42,8 @@ public class SearchThread implements SearchAlgorithm, Handler.Callback {
             while (cursor.moveToNext()) {
                 componentList.mApps.add(AppSearchProvider.dl(Uri.parse(cursor.getString(suggestIntentData)), mContext));
             }
+        } catch (Throwable t) {
+            Log.e("SearchThread", "Error searching", t);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -50,6 +54,7 @@ public class SearchThread implements SearchAlgorithm, Handler.Callback {
     }
 
     public void cancel(boolean interruptActiveRequests) {
+        mInterruptActiveRequests = interruptActiveRequests;
         mHandler.removeMessages(100);
         if (interruptActiveRequests) {
             mUiHandler.removeMessages(200);
@@ -71,8 +76,10 @@ public class SearchThread implements SearchAlgorithm, Handler.Callback {
                 break;
             }
             case 200: {
-                SearchResult searchResult = (SearchResult) message.obj;
-                searchResult.mCallbacks.onSearchResult(searchResult.mQuery, searchResult.mApps);
+                if (!mInterruptActiveRequests) {
+                    SearchResult searchResult = (SearchResult) message.obj;
+                    searchResult.mCallbacks.onSearchResult(searchResult.mQuery, searchResult.mApps);
+                }
                 break;
             }
         }
