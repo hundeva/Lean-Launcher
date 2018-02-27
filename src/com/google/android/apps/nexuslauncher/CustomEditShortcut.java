@@ -16,21 +16,17 @@ public class CustomEditShortcut extends SystemShortcut {
 
     @Override
     public View.OnClickListener getOnClickListener(final Launcher launcher, final ItemInfo itemInfo) {
-        if (CustomIconUtils.isPackProvider(launcher, CustomIconUtils.getCurrentPack(launcher))) {
-            CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(launcher);
-            factory.ensureInitialLoadComplete();
+        CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(launcher);
+        factory.ensureInitialLoadComplete();
 
-            return new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AbstractFloatingView.closeAllOpenViews(launcher);
-                    CustomBottomSheet cbs = (CustomBottomSheet) launcher.getLayoutInflater()
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AbstractFloatingView.closeAllOpenViews(launcher);
+                CustomBottomSheet cbs = (CustomBottomSheet) launcher.getLayoutInflater()
                         .inflate(R.layout.app_edit_bottom_sheet, launcher.getDragLayer(), false);
-                    cbs.populateAndShow(itemInfo);
-                }
-            };
-        }
-
-        return null;
+                cbs.populateAndShow(itemInfo);
+            }
+        };
     }
 }
