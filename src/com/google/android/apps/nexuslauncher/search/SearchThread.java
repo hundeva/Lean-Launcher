@@ -31,7 +31,7 @@ public class SearchThread implements SearchAlgorithm, Handler.Callback {
     private void dj(SearchResult componentList) {
         Uri uri = new Uri.Builder()
                 .scheme("content")
-                .authority("com.google.android.apps.nexuslauncher.appssearch")
+                .authority(mContext.getPackageName() + ".appssearch")
                 .appendPath(componentList.mQuery)
                 .build();
 
