@@ -116,4 +116,7 @@
     <string name="companion_app_permission_label">Lean companion permission</string>
     <string name="companion_app_permission_description">Permission to enforce signature protection for companion apps.</string>
 
+    <string name="reset_app_visibility_title">Reset app visibility</string>
+    <string name="reset_app_visibility_summary">When changing to default icon pack</string>
+
 </resources>

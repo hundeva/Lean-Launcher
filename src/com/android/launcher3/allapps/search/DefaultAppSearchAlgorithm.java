@@ -83,9 +83,6 @@ public class DefaultAppSearchAlgorithm implements SearchAlgorithm {
     }
 
     public static List<AppInfo> getApps(Context context, List<AppInfo> defaultApps) {
-        if (!Utilities.getPrefs(context).getBoolean(SEARCH_HIDDEN_APPS, false)) {
-            return defaultApps;
-        }
         final List<AppInfo> apps = new ArrayList<>();
         final List<ComponentName> duplicatePreventionCache = new ArrayList<>();
         final UserHandle user = android.os.Process.myUserHandle();

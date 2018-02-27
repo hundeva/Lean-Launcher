@@ -23,6 +23,7 @@ public class LeanSettings {
     public static final String FORCE_COLORED_G_ICON = "pref_colored_g_icon";
     public static final String DOUBLE_TAP_TO_LOCK = "pref_double_tap_to_lock";
     public static final String ICON_SIZE = "pref_icon_size";
+    public static final String RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK = "pref_reset_app_visibility_on_default_icon_pack";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -38,6 +39,7 @@ public class LeanSettings {
     private static final boolean FORCE_COLORED_G_ICON_DEFAULT = false;
     private static final boolean DOUBLE_TAP_TO_LOCK_DEFAULT = false;
     private static final String ICON_SIZE_DEFAULT = "average";
+    private static final boolean RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK_DEFAULT = true;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -171,6 +173,10 @@ public class LeanSettings {
                 break;
         }
         return offset;
+    }
+
+    public static boolean shouldResetAppVisibility(Context context) {
+        return prefs(context).getBoolean(RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK, RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

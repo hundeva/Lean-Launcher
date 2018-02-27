@@ -44,7 +44,6 @@ public class AllAppsList {
 
     public static final int DEFAULT_APPLICATIONS_NUMBER = 42;
 
-    public final ArrayList<AppInfo> unfilteredData = new ArrayList<>();
     /** The list off all apps. */
     public final ArrayList<AppInfo> data = new ArrayList<>(DEFAULT_APPLICATIONS_NUMBER);
     /** The list of apps that have been added since the last notify() call. */
@@ -74,9 +73,6 @@ public class AllAppsList {
      */
     public void add(AppInfo info, LauncherActivityInfo activityInfo) {
         mIconCache.getTitleAndIcon(info, activityInfo, true /* useLowResIcon */);
-        if (findUnfilteredAppInfo(info.componentName, info.user) == null) {
-            unfilteredData.add(info);
-        }
 
         if (!mAppFilter.shouldShowApp(info.componentName)) {
             return;
@@ -97,7 +93,6 @@ public class AllAppsList {
         if (applicationInfo == null) {
             PromiseAppInfo info = new PromiseAppInfo(installInfo);
             mIconCache.getTitleAndIcon(info, info.usingLowResIcon);
-            unfilteredData.add(info);
             data.add(info);
             added.add(info);
         }
@@ -107,11 +102,9 @@ public class AllAppsList {
         // the <em>removed</em> list is handled by the caller
         // so not adding it here
         data.remove(appInfo);
-        unfilteredData.remove(appInfo);
     }
 
     public void clear() {
-        unfilteredData.clear();
         data.clear();
         // TODO: do we clear these too?
         added.clear();
@@ -150,7 +143,6 @@ public class AllAppsList {
             if (info.user.equals(user) && packageName.equals(info.componentName.getPackageName())) {
                 removed.add(info);
                 data.remove(i);
-                unfilteredData.remove(info);
             }
         }
     }
@@ -197,7 +189,6 @@ public class AllAppsList {
                         Log.w(TAG, "Shortcut will be removed due to app component name change.");
                         removed.add(applicationInfo);
                         data.remove(i);
-                        unfilteredData.remove(applicationInfo);
                     }
                 }
             }
@@ -222,7 +213,6 @@ public class AllAppsList {
                     removed.add(applicationInfo);
                     mIconCache.remove(applicationInfo.componentName, user);
                     data.remove(i);
-                    unfilteredData.remove(applicationInfo);
                 }
             }
         }
@@ -269,15 +259,6 @@ public class AllAppsList {
     private @Nullable AppInfo findAppInfo(@NonNull ComponentName componentName,
                                           @NonNull UserHandle user) {
         for (AppInfo info: data) {
-            if (componentName.equals(info.componentName) && user.equals(info.user)) {
-                return info;
-            }
-        }
-        return null;
-    }
-
-    private @Nullable AppInfo findUnfilteredAppInfo(@NonNull ComponentName componentName, @NonNull UserHandle user) {
-        for (AppInfo info: unfilteredData) {
             if (componentName.equals(info.componentName) && user.equals(info.user)) {
                 return info;
             }

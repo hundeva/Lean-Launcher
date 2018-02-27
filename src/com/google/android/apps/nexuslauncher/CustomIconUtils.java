@@ -22,6 +22,7 @@ import com.android.launcher3.shortcuts.DeepShortcutManager;
 import com.android.launcher3.shortcuts.ShortcutInfoCompat;
 import com.android.launcher3.util.LooperExecutor;
 import com.google.android.apps.nexuslauncher.clock.CustomClock;
+import com.hdeva.launcher.LeanSettings;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -30,7 +31,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 public class CustomIconUtils {
     private final static String[] ICON_INTENTS = new String[] {
@@ -85,7 +85,7 @@ public class CustomIconUtils {
 
                 boolean noPack = CustomIconUtils.getCurrentPack(context).isEmpty();
                 Utilities.getPrefs(context).edit().putBoolean(DefaultAppSearchAlgorithm.SEARCH_HIDDEN_APPS, !noPack).apply();
-                if (noPack) {
+                if (noPack && LeanSettings.shouldResetAppVisibility(context)) {
                     CustomAppFilter.resetAppFilter(context);
                 }
                 for (UserHandle user : userManagerCompat.getUserProfiles()) {
