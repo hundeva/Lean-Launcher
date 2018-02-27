@@ -10,7 +10,6 @@ import com.android.launcher3.Utilities;
 public class LeanSettings {
 
     public static final String SETTINGS_DIRTY = "pref_lean_settings_dirty";
-    public static final String QSB_KEY = "pref_enable_at_a_glance";
     public static final String LOCK_DESKTOP_KEY = "pref_lock_desktop";
     public static final String THEME_KEY = "pref_theme";
     public static final String BOTTOM_SEARCH_BAR_KEY = "pref_bottom_search_bar";
@@ -26,7 +25,6 @@ public class LeanSettings {
     public static final String ICON_SIZE = "pref_icon_size";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
-    private static final boolean QSB_DEFAULT = true;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
     private static final String THEME_DEFAULT = "wallpaper";
     private static final boolean BOTTOM_SEARCH_BAR_DEFAULT = true;
@@ -55,10 +53,6 @@ public class LeanSettings {
 
     public static void clearLeanSettingsDirty(Context context) {
         prefs(context).edit().putBoolean(SETTINGS_DIRTY, false).apply();
-    }
-
-    public static boolean isQsbEnabled(Context context) {
-        return prefs(context).getBoolean(QSB_KEY, QSB_DEFAULT);
     }
 
     public static boolean isDesktopLocked(Context context) {

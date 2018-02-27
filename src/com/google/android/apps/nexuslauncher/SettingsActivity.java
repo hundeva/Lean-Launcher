@@ -82,7 +82,6 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 Log.e("SettingsActivity", "Unable to load my own package info", ex);
             }
 
-            findPreference(LeanSettings.QSB_KEY).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.THEME_KEY).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.BOTTOM_SEARCH_BAR_KEY).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.TOP_SEARCH_BAR_KEY).setOnPreferenceChangeListener(this);
@@ -135,13 +134,6 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
         @Override
         public boolean onPreferenceChange(Preference preference, final Object newValue) {
             switch (preference.getKey()) {
-                case LeanSettings.QSB_KEY:
-                    if (preference instanceof TwoStatePreference) {
-                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
-                    }
-                    LeanUtils.reload(mContext);
-                    break;
-
                 case LeanSettings.GRID_COLUMNS:
                 case LeanSettings.GRID_ROWS:
                 case LeanSettings.HOTSEAT_ICONS:

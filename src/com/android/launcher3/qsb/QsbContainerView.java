@@ -101,7 +101,7 @@ public class QsbContainerView extends FrameLayout {
             mWrapper = new FrameLayout(getActivity());
 
             // Only add the view when enabled
-            if (FeatureFlags.QSB_ON_FIRST_SCREEN && LeanSettings.isQsbEnabled(getContext())) {
+            if (FeatureFlags.QSB_ON_FIRST_SCREEN) {
                 mWrapper.addView(createQsb(mWrapper));
             }
             return mWrapper;
@@ -213,7 +213,7 @@ public class QsbContainerView extends FrameLayout {
 
         private void rebindFragment() {
             // Exit if the embedded qsb is disabled
-            if (!(FeatureFlags.QSB_ON_FIRST_SCREEN && LeanSettings.isQsbEnabled(getContext()))) {
+            if (!FeatureFlags.QSB_ON_FIRST_SCREEN) {
                 return;
             }
 

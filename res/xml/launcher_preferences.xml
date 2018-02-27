@@ -38,14 +38,6 @@
         />
 
     <SwitchPreference
-        android:key="pref_enable_at_a_glance"
-        android:title="@string/enable_at_a_glance_title"
-        android:summary="@string/enable_at_a_glance_summary"
-        android:defaultValue="true"
-        android:persistent="true"
-        />
-
-    <SwitchPreference
         android:key="pref_add_icon_to_home"
         android:title="@string/auto_add_shortcuts_label"
         android:summary="@string/auto_add_shortcuts_description"
