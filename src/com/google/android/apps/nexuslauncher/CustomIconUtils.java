@@ -84,7 +84,6 @@ public class CustomIconUtils {
                 LauncherModel model = LauncherAppState.getInstance(context).getModel();
 
                 boolean noPack = CustomIconUtils.getCurrentPack(context).isEmpty();
-                Utilities.getPrefs(context).edit().putBoolean(DefaultAppSearchAlgorithm.SEARCH_HIDDEN_APPS, !noPack).apply();
                 if (noPack && LeanSettings.shouldResetAppVisibility(context)) {
                     CustomAppFilter.resetAppFilter(context);
                 }
