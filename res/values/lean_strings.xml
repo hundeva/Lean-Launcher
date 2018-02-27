@@ -2,6 +2,12 @@
 <resources>
     <string name="lean_launcher_app_name">Lean Launcher</string>
 
+    <string name="at_a_glance_category">At A Glance</string>
+    <string name="other_category">Other</string>
+    <string name="google_category">Google</string>
+    <string name="look_and_feel_category">Look &amp; Feel</string>
+    <string name="edit_apps_category">Edit apps</string>
+
     <string name="enable_at_a_glance_title">At A Glance</string>
     <string name="enable_at_a_glance_summary">Show at the top of your Home screen</string>
 
