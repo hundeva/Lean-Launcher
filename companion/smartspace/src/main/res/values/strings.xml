@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">At A Lean Glance</string>
+    <string name="app_name">Lean Glance</string>
     <string name="at_a_glance_enabled">Congratulations!\nAt A Glance should now work with Lean Launcher!</string>
     <string name="hide_companion_app">Hide companion app</string>
     <string name="open_lean_settings">Open Lean Settings</string>
