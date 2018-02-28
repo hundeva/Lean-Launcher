@@ -1,16 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
-
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
 
     defaultConfig {
         applicationId "com.google.android.apps.nexuslauncher"
-        minSdkVersion 21
-        targetSdkVersion 27
-        versionCode 1
-        versionName "0.1.0"
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
         setProperty("archivesBaseName", "LeanGlance-$version_name-$version_code")
     }
 
