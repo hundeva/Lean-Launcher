@@ -56,15 +56,9 @@ android {
         }
 
         release {
-            minifyEnabled false
-            signingConfig signingConfigs.lean
-        }
-
-        optimized {
-            initWith debug
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
-                    'proguard.flags'
+            signingConfig signingConfigs.lean
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.flags'
         }
     }
 
