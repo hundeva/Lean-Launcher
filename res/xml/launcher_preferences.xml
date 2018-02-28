@@ -156,15 +156,6 @@
             android:summary="%s"
             android:title="@string/icon_size_title" />
 
-        <ListPreference
-            android:defaultValue=""
-            android:entries="@array/icon_shape_override_paths_names"
-            android:entryValues="@array/icon_shape_override_paths_values"
-            android:key="pref_override_icon_shape"
-            android:persistent="false"
-            android:summary="%s"
-            android:title="@string/icon_shape_override_label" />
-
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/edit_apps_category">
@@ -180,6 +171,15 @@
                 android:targetPackage="@string/xmlApplicationId" />
 
         </Preference>
+
+        <ListPreference
+            android:defaultValue=""
+            android:entries="@array/icon_shape_override_paths_names"
+            android:entryValues="@array/icon_shape_override_paths_values"
+            android:key="pref_override_icon_shape"
+            android:persistent="false"
+            android:summary="%s"
+            android:title="@string/icon_shape_override_label" />
 
         <com.google.android.apps.nexuslauncher.CustomIconPreference
             android:defaultValue=""
