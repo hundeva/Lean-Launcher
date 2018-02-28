@@ -16,6 +16,7 @@ public class SmartspaceBroadcastReceiver extends BroadcastReceiver {
     public static final String ENABLE_UPDATE_PACKAGE = "com.google.android.googlequicksearchbox";
     public static final String ACTION_PING = "com.hdeva.launcher.AT_A_GLANCE_PING";
     public static final String ACTION_PING_RESPONSE = "com.hdeva.launcher.AT_A_GLANCE_PING_RESPONSE";
+    public static final String AT_A_GLANCE_TARGET_PACKAGE = "com.hdeva.launcher";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -24,6 +25,7 @@ public class SmartspaceBroadcastReceiver extends BroadcastReceiver {
             switch (action) {
                 case AT_A_GLANCE_SOURCE:
                     Intent proxy = new Intent(AT_A_GLANCE_PROXY_ACTION);
+                    proxy.setPackage(AT_A_GLANCE_TARGET_PACKAGE);
                     proxy.putExtras(intent.getExtras() == null ? Bundle.EMPTY : intent.getExtras());
                     context.sendBroadcast(proxy);
                     break;
@@ -43,6 +45,7 @@ public class SmartspaceBroadcastReceiver extends BroadcastReceiver {
                     }
 
                     Intent ping = new Intent(ACTION_PING_RESPONSE);
+                    ping.setPackage(AT_A_GLANCE_TARGET_PACKAGE);
                     ping.putExtra(ACTION_PING_RESPONSE, version);
                     context.sendBroadcast(ping);
                     break;

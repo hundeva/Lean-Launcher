@@ -31,7 +31,7 @@ public class SmartSpaceCompanionActivity extends Activity {
         hideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().sendBroadcast(new Intent(HIDE_ACTION));
+                v.getContext().sendBroadcast(new Intent(HIDE_ACTION).setPackage(SmartspaceBroadcastReceiver.AT_A_GLANCE_TARGET_PACKAGE));
                 finish();
             }
         });
@@ -40,7 +40,7 @@ public class SmartSpaceCompanionActivity extends Activity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().sendBroadcast(new Intent(SETTINGS_ACTION));
+                v.getContext().sendBroadcast(new Intent(SETTINGS_ACTION).setPackage(SmartspaceBroadcastReceiver.AT_A_GLANCE_TARGET_PACKAGE));
                 finish();
             }
         });

@@ -149,7 +149,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(SMARTSPACE_COMPANION).setSummary(getString(R.string.companion_app_not_installed));
             findPreference(SMARTSPACE_PREF).setEnabled(false);
             getActivity().registerReceiver(smartspaceReceiver, new IntentFilter(SMARTSPACE_PING_RESPONSE));
-            getActivity().sendBroadcast(new Intent(SMARTSPACE_PING));
+            getActivity().sendBroadcast(new Intent(SMARTSPACE_PING).setPackage("com.google.android.apps.nexuslauncher"));
         }
 
         @Override
