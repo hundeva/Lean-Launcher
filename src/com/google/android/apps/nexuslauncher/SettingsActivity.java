@@ -59,9 +59,9 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (isFinishing() && LeanSettings.isLeanSettingsDirty(this)) {
+    protected void onPause() {
+        super.onPause();
+        if (LeanSettings.isLeanSettingsDirty(this) && !isChangingConfigurations()) {
             LeanSettings.clearLeanSettingsDirty(this);
             LeanUtils.restart(this);
         }
