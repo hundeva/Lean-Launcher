@@ -28,7 +28,9 @@
         </intent>
     </com.android.launcher3.views.ButtonPreference>
 
-    <PreferenceCategory android:title="@string/at_a_glance_category">
+    <PreferenceScreen
+        android:icon="@drawable/ic_assistant_no_shadow"
+        android:title="@string/at_a_glance_category">
 
         <Preference
             android:key="pref_smartspace_companion"
@@ -47,9 +49,11 @@
             android:summary="@string/smartspace_preferences_in_settings_desc"
             android:title="@string/smartspace_preferences_in_settings" />
 
-    </PreferenceCategory>
+    </PreferenceScreen>
 
-    <PreferenceCategory android:title="@string/feed_category">
+    <PreferenceScreen
+        android:icon="@drawable/ic_rss_feed_no_shadow"
+        android:title="@string/feed_category">
 
         <SwitchPreference
             android:defaultValue="true"
@@ -57,9 +61,11 @@
             android:summary="@string/pref_show_google_now_summary"
             android:title="@string/title_show_google_app" />
 
-    </PreferenceCategory>
+    </PreferenceScreen>
 
-    <PreferenceCategory android:title="@string/search_category">
+    <PreferenceScreen
+        android:icon="@drawable/ic_search_no_shadow"
+        android:title="@string/search_category">
 
         <SwitchPreference
             android:defaultValue="true"
@@ -107,9 +113,11 @@
             android:summary="@string/summary_app_suggestions"
             android:title="@string/title_app_suggestions" />
 
-    </PreferenceCategory>
+    </PreferenceScreen>
 
-    <PreferenceCategory android:title="@string/look_and_feel_category">
+    <PreferenceScreen
+        android:icon="@drawable/ic_palette_no_shadow"
+        android:title="@string/look_and_feel_category">
 
         <ListPreference
             android:defaultValue="wallpaper"
@@ -165,9 +173,11 @@
             android:summary="%s"
             android:title="@string/icon_size_title" />
 
-    </PreferenceCategory>
+    </PreferenceScreen>
 
-    <PreferenceCategory android:title="@string/edit_apps_category">
+    <PreferenceScreen
+        android:icon="@drawable/ic_edit_black_no_shadow"
+        android:title="@string/edit_apps_category">
 
         <Preference
             android:key="pref_hide_apps"
@@ -204,9 +214,11 @@
             android:summary="@string/reset_app_visibility_summary"
             android:title="@string/reset_app_visibility_title" />
 
-    </PreferenceCategory>
+    </PreferenceScreen>
 
-    <PreferenceCategory android:title="@string/other_category">
+    <PreferenceScreen
+        android:icon="@drawable/ic_dashboard_no_shadow"
+        android:title="@string/other_category">
 
         <SwitchPreference
             android:defaultValue="true"
@@ -249,9 +261,11 @@
             android:summary="@string/double_tap_to_lock_summary"
             android:title="@string/double_tap_to_lock_title" />
 
-    </PreferenceCategory>
+    </PreferenceScreen>
 
-    <PreferenceCategory android:title="@string/about">
+    <PreferenceScreen
+        android:icon="@drawable/ic_info_outline_no_shadow"
+        android:title="@string/about">
 
         <Preference
             android:key="about_lean"
@@ -287,6 +301,6 @@
                 android:data="@string/settingsApplicationId" />
         </Preference>
 
-    </PreferenceCategory>
+    </PreferenceScreen>
 
 </PreferenceScreen>
