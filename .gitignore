@@ -16,3 +16,4 @@ build/
 gradlew*
 *.jks
 gradle.properties
+google-services.json
