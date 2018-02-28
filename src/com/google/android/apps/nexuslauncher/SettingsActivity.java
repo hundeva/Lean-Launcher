@@ -109,6 +109,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.HOTSEAT_ICONS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.FORCE_COLORED_G_ICON).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.ICON_SIZE).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.HOTSEAT_BACKGROUND).setOnPreferenceChangeListener(this);
 
             try {
                 ApplicationInfo applicationInfo = mContext.getPackageManager().getApplicationInfo(GOOGLE_APP, 0);
@@ -171,6 +172,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     break;
 
                 case LeanSettings.THEME_KEY:
+                case LeanSettings.HOTSEAT_BACKGROUND:
                     if (preference instanceof ListPreference) {
                         ((ListPreference) preference).setValue((String) newValue);
                     }

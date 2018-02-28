@@ -23,6 +23,7 @@ public class LeanSettings {
     public static final String ICON_SIZE = "pref_icon_size";
     public static final String RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK = "pref_reset_app_visibility_on_default_icon_pack";
     public static final String SEARCH_PROVIDER = "pref_search_provider";
+    public static final String HOTSEAT_BACKGROUND = "pref_hotseat_background";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -40,6 +41,7 @@ public class LeanSettings {
     private static final String ICON_SIZE_DEFAULT = "average";
     private static final boolean RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK_DEFAULT = true;
     private static final String SEARCH_PROVIDER_DEFAULT = "https://www.google.com";
+    private static final String HOTSEAT_BACKGROUND_DEFAULT = "100";
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -181,6 +183,15 @@ public class LeanSettings {
 
     public static String getSearchProvider(Context context) {
         return prefs(context).getString(SEARCH_PROVIDER, SEARCH_PROVIDER_DEFAULT);
+    }
+
+    public static int getHotseatBackgroundAlpha(Context context) {
+        String string = prefs(context).getString(HOTSEAT_BACKGROUND, HOTSEAT_BACKGROUND_DEFAULT);
+        try {
+            return Integer.parseInt(string);
+        } catch (Throwable t) {
+            return 100;
+        }
     }
 
     private static SharedPreferences prefs(Context context) {

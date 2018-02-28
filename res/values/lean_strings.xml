@@ -149,4 +149,22 @@
         <item>https://www.duckduckgo.com</item>
     </string-array>
 
+    <string name="hotseat_background_title">Hotseat background</string>
+
+    <string name="hotseat_background_transparent">Transparent</string>
+    <string name="hotseat_background_gradient">Gradient</string>
+    <string name="hotseat_background_solid">Solid</string>
+
+    <string-array name="hotseat_background_names">
+        <item>@string/hotseat_background_transparent</item>
+        <item>@string/hotseat_background_gradient</item>
+        <item>@string/hotseat_background_solid</item>
+    </string-array>
+
+    <string-array name="hotseat_background_values">
+        <item>0</item>
+        <item>100</item>
+        <item>255</item>
+    </string-array>
+
 </resources>

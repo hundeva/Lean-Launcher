@@ -121,6 +121,15 @@
             android:title="@string/theme_title" />
 
         <ListPreference
+            android:defaultValue="100"
+            android:entries="@array/hotseat_background_names"
+            android:entryValues="@array/hotseat_background_values"
+            android:key="pref_hotseat_background"
+            android:persistent="true"
+            android:summary="%s"
+            android:title="@string/hotseat_background_title" />
+
+        <ListPreference
             android:defaultValue="default"
             android:entries="@array/grid_names"
             android:entryValues="@array/grid_values"
