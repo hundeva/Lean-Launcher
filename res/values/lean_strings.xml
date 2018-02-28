@@ -132,4 +132,21 @@
 
     <string name="at_a_glance_companion_url">https://github.com/hundeva/Lean-Launcher/releases/tag/lean-0.3.0</string>
 
+    <string name="search_provider_title">Search provider</string>
+    <string name="search_provider_google">Google</string>
+    <string name="search_provider_bing">Bing</string>
+    <string name="search_provider_duckduckgo">DuckDuckGo</string>
+
+    <string-array name="search_provider_names">
+        <item>@string/search_provider_google</item>
+        <item>@string/search_provider_bing</item>
+        <item>@string/search_provider_duckduckgo</item>
+    </string-array>
+
+    <string-array name="search_provider_values">
+        <item>https://www.google.com</item>
+        <item>https://www.bing.com</item>
+        <item>https://www.duckduckgo.com</item>
+    </string-array>
+
 </resources>

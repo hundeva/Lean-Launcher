@@ -68,6 +68,16 @@
             android:summary="@string/bottom_search_bar_summary"
             android:title="@string/bottom_search_bar_title" />
 
+        <ListPreference
+            android:defaultValue="https://www.google.com"
+            android:dependency="pref_bottom_search_bar"
+            android:entries="@array/search_provider_names"
+            android:entryValues="@array/search_provider_values"
+            android:key="pref_search_provider"
+            android:persistent="true"
+            android:summary="%s"
+            android:title="@string/search_provider_title" />
+
         <SwitchPreference
             android:defaultValue="false"
             android:dependency="pref_bottom_search_bar"

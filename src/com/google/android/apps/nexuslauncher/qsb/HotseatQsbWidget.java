@@ -115,24 +115,30 @@ public class HotseatQsbWidget extends AbstractQsbLayout {
     }
 
     private void doOnClick() {
-        final ConfigBuilder f = new ConfigBuilder(this, false);
-        if (mActivity.getGoogleNow().startSearch(f.build(), f.getExtras())) {
-            SharedPreferences devicePrefs = Utilities.getDevicePrefs(getContext());
-            devicePrefs.edit().putInt("key_hotseat_qsb_tap_count", devicePrefs.getInt("key_hotseat_qsb_tap_count", 0) + 1).apply();
-            playQsbAnimation();
-        } else {
-            getContext().sendOrderedBroadcast(getSearchIntent(), null,
-                    new BroadcastReceiver() {
-                        @Override
-                        public void onReceive(Context context, Intent intent) {
-                            Log.e("HotseatQsbSearch", getResultCode() + " " + getResultData());
-                            if (getResultCode() == 0) {
-                                fallbackSearch("com.google.android.googlequicksearchbox.TEXT_ASSIST");
-                            } else {
-                                playQsbAnimation();
+        String provider = LeanSettings.getSearchProvider(getContext());
+        if(provider.contains("google")) {
+            final ConfigBuilder f = new ConfigBuilder(this, false);
+            if (mActivity.getGoogleNow().startSearch(f.build(), f.getExtras())) {
+                SharedPreferences devicePrefs = Utilities.getDevicePrefs(getContext());
+                devicePrefs.edit().putInt("key_hotseat_qsb_tap_count", devicePrefs.getInt("key_hotseat_qsb_tap_count", 0) + 1).apply();
+                playQsbAnimation();
+            } else {
+                getContext().sendOrderedBroadcast(getSearchIntent(), null,
+                        new BroadcastReceiver() {
+                            @Override
+                            public void onReceive(Context context, Intent intent) {
+                                Log.e("HotseatQsbSearch", getResultCode() + " " + getResultData());
+                                if (getResultCode() == 0) {
+                                    fallbackSearch("com.google.android.googlequicksearchbox.TEXT_ASSIST");
+                                } else {
+                                    playQsbAnimation();
+                                }
                             }
-                        }
-                    }, null, 0, null, null);
+                        }, null, 0, null, null);
+            }
+        } else {
+            getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provider)));
+            playQsbAnimation();
         }
     }
 
