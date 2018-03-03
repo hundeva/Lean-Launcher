@@ -131,6 +131,7 @@
     <string name="companion_app_version_x">version %s</string>
 
     <string name="at_a_glance_companion_url">https://github.com/hundeva/Lean-Launcher/releases/tag/lean-1.0.0</string>
+    <string name="lean_launcher_github_release_url">https://github.com/hundeva/Lean-Launcher/releases/</string>
 
     <string name="search_provider_title">Search provider</string>
     <string name="search_provider_google">Google</string>
@@ -169,5 +170,6 @@
 
     <string name="important">Important</string>
     <string name="at_a_glance_requirement">At A Glance needs the Lean Glance companion app to show weather and calendar events next to the current date. This has to be downloaded separately, since it cannot be released to the Google Play Store. After installing, please start Lean Glance at least one time, so that it can start to receive and forward messages from the Google app to Lean Launcher! To get started, tap here.</string>
+    <string name="google_now_release_information">Google Now currently only works in the debug builds. A companion app is in the making, if you really want to have the feed in your launch at a swipe, please download the latest debug build from the Github of the project, and install that. To see the latest Github release, tap here.</string>
 
 </resources>

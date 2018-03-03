@@ -23,6 +23,7 @@ import android.preference.TwoStatePreference;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.launcher3.BuildConfig;
 import com.android.launcher3.R;
 import com.hdeva.launcher.LeanSettings;
 import com.hdeva.launcher.LeanUtils;
@@ -114,6 +115,10 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 ApplicationInfo applicationInfo = mContext.getPackageManager().getApplicationInfo(GOOGLE_APP, 0);
                 if (!applicationInfo.enabled) {
                     throw new PackageManager.NameNotFoundException();
+                }
+
+                if (!BuildConfig.DEBUG) {
+                    findPreference(ENABLE_MINUS_ONE_PREF).setEnabled(false);
                 }
             } catch (PackageManager.NameNotFoundException ignored) {
                 getPreferenceScreen().removePreference(findPreference(SettingsActivity.ENABLE_MINUS_ONE_PREF));

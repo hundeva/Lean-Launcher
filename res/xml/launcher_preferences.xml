@@ -72,6 +72,17 @@
             android:summary="@string/pref_show_google_now_summary"
             android:title="@string/title_show_google_app" />
 
+        <Preference
+            android:key="pref_google_now_companion_important"
+            android:summary="@string/google_now_release_information"
+            android:title="@string/important">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/lean_launcher_github_release_url" />
+
+        </Preference>
+
     </PreferenceScreen>
 
     <PreferenceScreen
