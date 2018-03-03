@@ -32,6 +32,13 @@
         android:icon="@drawable/ic_assistant_no_shadow"
         android:title="@string/at_a_glance_category">
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="pref_smartspace"
+            android:persistent="true"
+            android:summary="@string/smartspace_preferences_in_settings_desc"
+            android:title="@string/smartspace_preferences_in_settings" />
+
         <Preference
             android:key="pref_smartspace_companion"
             android:title="@string/companion_app_title">
@@ -42,12 +49,16 @@
 
         </Preference>
 
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="pref_smartspace"
-            android:persistent="true"
-            android:summary="@string/smartspace_preferences_in_settings_desc"
-            android:title="@string/smartspace_preferences_in_settings" />
+        <Preference
+            android:key="pref_smartspace_companion_important"
+            android:summary="@string/at_a_glance_requirement"
+            android:title="@string/important">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/at_a_glance_companion_url" />
+
+        </Preference>
 
     </PreferenceScreen>
 

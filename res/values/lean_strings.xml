@@ -167,4 +167,7 @@
         <item>255</item>
     </string-array>
 
+    <string name="important">Important</string>
+    <string name="at_a_glance_requirement">At A Glance needs the Lean Glance companion app to show weather and calendar events next to the current date. This has to be downloaded separately, since it cannot be released to the Google Play Store. After installing, please start Lean Glance at least one time, so that it can start to receive and forward messages from the Google app to Lean Launcher! To get started, tap here.</string>
+
 </resources>
