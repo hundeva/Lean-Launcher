@@ -8,8 +8,8 @@ android {
         applicationId "com.google.android.apps.nexuslauncher"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
-        versionCode version_code
-        versionName version_name
+        versionName "1.0.0"
+        versionCode 5
         setProperty("archivesBaseName", "LeanGlance-$version_name-$version_code")
     }
 
