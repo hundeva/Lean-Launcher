@@ -77,7 +77,6 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             public void onReceive(Context context, Intent intent) {
                 String version = intent.getStringExtra(SMARTSPACE_PING_RESPONSE);
                 findPreference(SMARTSPACE_COMPANION).setSummary(context.getString(R.string.companion_app_version_x, version));
-                findPreference(SMARTSPACE_PREF).setEnabled(true);
             }
         };
 
@@ -147,7 +146,6 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             super.onResume();
             mIconPackPref.reloadIconPacks();
             findPreference(SMARTSPACE_COMPANION).setSummary(getString(R.string.companion_app_not_installed));
-            findPreference(SMARTSPACE_PREF).setEnabled(false);
             getActivity().registerReceiver(smartspaceReceiver, new IntentFilter(SMARTSPACE_PING_RESPONSE));
             getActivity().sendBroadcast(new Intent(SMARTSPACE_PING).setPackage("com.google.android.apps.nexuslauncher"));
         }
