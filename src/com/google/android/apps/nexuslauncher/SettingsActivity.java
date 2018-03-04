@@ -112,7 +112,12 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.FORCE_COLORED_G_ICON).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.ICON_SIZE).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.HOTSEAT_BACKGROUND).setOnPreferenceChangeListener(this);
-            findPreference(SMARTSPACE_SETTINGS).setOnPreferenceClickListener(this);
+
+            if (SmartspaceController.get(mContext).cY()) {
+                findPreference(SMARTSPACE_SETTINGS).setOnPreferenceClickListener(this);
+            } else {
+                getPreferenceScreen().removePreference(findPreference(SMARTSPACE_SETTINGS));
+            }
 
             try {
                 ApplicationInfo applicationInfo = mContext.getPackageManager().getApplicationInfo(GOOGLE_APP, 0);
@@ -232,7 +237,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
         public boolean onPreferenceClick(Preference preference) {
             switch (preference.getKey()) {
                 case SMARTSPACE_SETTINGS:
-                    SmartspaceController.get(getContext()).cZ();
+                    SmartspaceController.get(mContext).cZ();
                     return true;
             }
             return false;
