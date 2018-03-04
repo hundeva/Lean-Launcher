@@ -14,6 +14,7 @@ import com.android.launcher3.InfoDropTarget;
 import com.android.launcher3.ItemInfo;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
+import com.android.launcher3.Utilities;
 import com.android.launcher3.model.WidgetItem;
 import com.android.launcher3.util.PackageUserKey;
 import com.android.launcher3.widget.WidgetsBottomSheet;
@@ -69,7 +70,14 @@ public abstract class SystemShortcut extends ItemInfo {
 
         @Override
         public View.OnClickListener getOnClickListener(Launcher launcher, final ItemInfo itemInfo) {
-            if (LeanSettings.isDesktopLocked(launcher.getApplicationContext())) {
+            boolean isSystemApp;
+            try {
+                isSystemApp = Utilities.isSystemApp(launcher, itemInfo.getIntent());
+            } catch (Throwable t) {
+                isSystemApp = false;
+            }
+
+            if (isSystemApp || LeanSettings.isDesktopLocked(launcher.getApplicationContext())) {
                 return null;
             }
 
