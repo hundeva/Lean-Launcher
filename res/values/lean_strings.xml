@@ -172,4 +172,7 @@
     <string name="at_a_glance_requirement">At A Glance needs the Lean Glance companion app to show weather and calendar events next to the current date. This has to be downloaded separately, since it cannot be released to the Google Play Store. Please note that this cannot be installed on Pixel devices, furthermore, if you have a different Pixel Launcher variant installed, you have to uninstall that first. After installing, please start Lean Glance at least one time, so that it can start to receive and forward messages from the Google app to Lean Launcher! To get started, tap here.</string>
     <string name="google_now_release_information">Google Now currently only works in the debug builds. A companion app is in the making, if you really want to have the feed in your launcher at a swipe, please download the latest debug build from the Github of the project, and install that. To see the latest Github release, tap here.</string>
 
+    <string name="smartspace_settings_title">Preferences</string>
+    <string name="smartspace_settings_summary">Calendar events, etc.</string>
+
 </resources>

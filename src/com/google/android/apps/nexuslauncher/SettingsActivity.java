@@ -25,6 +25,7 @@ import android.util.Log;
 
 import com.android.launcher3.BuildConfig;
 import com.android.launcher3.R;
+import com.google.android.apps.nexuslauncher.smartspace.SmartspaceController;
 import com.hdeva.launcher.LeanSettings;
 import com.hdeva.launcher.LeanUtils;
 
@@ -39,6 +40,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
     private static final String SMARTSPACE_COMPANION = "pref_smartspace_companion";
     private static final String SMARTSPACE_PING = "com.hdeva.launcher.AT_A_GLANCE_PING";
     private static final String SMARTSPACE_PING_RESPONSE = "com.hdeva.launcher.AT_A_GLANCE_PING_RESPONSE";
+    private static final String SMARTSPACE_SETTINGS = "pref_smartspace_settings";
 
     @Override
     protected void onCreate(final Bundle bundle) {
@@ -69,7 +71,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
     }
 
     public static class MySettingsFragment extends com.android.launcher3.SettingsActivity.LauncherSettingsFragment
-            implements Preference.OnPreferenceChangeListener {
+            implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
         private CustomIconPreference mIconPackPref;
         private Context mContext;
 
@@ -110,6 +112,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.FORCE_COLORED_G_ICON).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.ICON_SIZE).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.HOTSEAT_BACKGROUND).setOnPreferenceChangeListener(this);
+            findPreference(SMARTSPACE_SETTINGS).setOnPreferenceClickListener(this);
 
             try {
                 ApplicationInfo applicationInfo = mContext.getPackageManager().getApplicationInfo(GOOGLE_APP, 0);
@@ -221,6 +224,16 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     confirmationFragment.setTargetFragment(this, 0);
                     confirmationFragment.show(getFragmentManager(), preference.getKey());
                     break;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            switch (preference.getKey()) {
+                case SMARTSPACE_SETTINGS:
+                    SmartspaceController.get(getContext()).cZ();
+                    return true;
             }
             return false;
         }

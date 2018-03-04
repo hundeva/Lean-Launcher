@@ -40,6 +40,11 @@
             android:title="@string/smartspace_preferences_in_settings" />
 
         <Preference
+            android:key="pref_smartspace_settings"
+            android:summary="@string/smartspace_settings_summary"
+            android:title="@string/smartspace_settings_title" />
+
+        <Preference
             android:key="pref_smartspace_companion"
             android:title="@string/companion_app_title">
 
