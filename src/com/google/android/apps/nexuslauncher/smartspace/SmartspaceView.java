@@ -91,6 +91,7 @@ public class SmartspaceView extends FrameLayout implements ISmartspace, ValueAni
             @Override
             public void onClick(View v) {
                 if (dq != null && dq.isWeatherAvailable()) {
+                    // TODO if this workaround does not work, investigate the huawei weather permission: com.huawei.android.totemweather.permission.ACCESS_WEATHERCLOCK_PROVIDER
                     try {
                         cp(10001);
                         dq.dO.click(v);
