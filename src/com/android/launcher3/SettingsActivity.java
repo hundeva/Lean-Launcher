@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
 import com.android.launcher3.graphics.IconShapeOverride;
@@ -80,7 +81,7 @@ public class SettingsActivity extends Activity {
             Preference rotationPref = findPreference(Utilities.ALLOW_ROTATION_PREFERENCE_KEY);
             if (getResources().getBoolean(R.bool.allow_rotation)) {
                 // Launcher supports rotation by default. No need to show this setting.
-                getPreferenceScreen().removePreference(rotationPref);
+                ((PreferenceScreen) getPreferenceScreen().findPreference("pref_other_screen")).removePreference(rotationPref);
             } else {
                 mRotationLockObserver = new SystemDisplayRotationLockObserver(rotationPref, resolver);
 
@@ -95,7 +96,7 @@ public class SettingsActivity extends Activity {
             ButtonPreference iconBadgingPref =
                     (ButtonPreference) findPreference(ICON_BADGING_PREFERENCE_KEY);
             if (!Utilities.ATLEAST_OREO) {
-                getPreferenceScreen().removePreference(
+                ((PreferenceScreen) getPreferenceScreen().findPreference("pref_other_screen")).removePreference(
                         findPreference(SessionCommitReceiver.ADD_ICON_PREFERENCE_KEY));
             }
             if (!getResources().getBoolean(R.bool.notification_badging_enabled)) {
@@ -112,7 +113,7 @@ public class SettingsActivity extends Activity {
                 if (IconShapeOverride.isSupported(getActivity())) {
                     IconShapeOverride.handlePreferenceUi((ListPreference) iconShapeOverride);
                 } else {
-                    getPreferenceScreen().removePreference(iconShapeOverride);
+                    ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).removePreference(iconShapeOverride);
                 }
             }
         }

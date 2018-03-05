@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
 import android.text.TextUtils;
 import android.util.Log;
@@ -116,7 +117,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             if (SmartspaceController.get(mContext).cY()) {
                 findPreference(SMARTSPACE_SETTINGS).setOnPreferenceClickListener(this);
             } else {
-                getPreferenceScreen().removePreference(findPreference(SMARTSPACE_SETTINGS));
+                ((PreferenceScreen) getPreferenceScreen().findPreference("pref_smartspace_screen")).removePreference(findPreference(SMARTSPACE_SETTINGS));
             }
 
             try {
@@ -129,7 +130,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     findPreference(ENABLE_MINUS_ONE_PREF).setEnabled(false);
                 }
             } catch (PackageManager.NameNotFoundException ignored) {
-                getPreferenceScreen().removePreference(findPreference(SettingsActivity.ENABLE_MINUS_ONE_PREF));
+                ((PreferenceScreen) getPreferenceScreen().findPreference("pref_feed_screen")).removePreference(findPreference(SettingsActivity.ENABLE_MINUS_ONE_PREF));
             }
 
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);

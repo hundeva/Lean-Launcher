@@ -30,6 +30,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/ic_assistant_no_shadow"
+        android:key="pref_smartspace_screen"
         android:title="@string/at_a_glance_category">
 
         <SwitchPreference
@@ -69,6 +70,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/ic_rss_feed_no_shadow"
+        android:key="pref_feed_screen"
         android:title="@string/feed_category">
 
         <SwitchPreference
@@ -92,6 +94,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/ic_search_no_shadow"
+        android:key="pref_search_screen"
         android:title="@string/search_category">
 
         <SwitchPreference
@@ -144,6 +147,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/ic_palette_no_shadow"
+        android:key="pref_look_and_feel_screen"
         android:title="@string/look_and_feel_category">
 
         <ListPreference
@@ -204,6 +208,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/ic_edit_black_no_shadow"
+        android:key="pref_edit_apps_screen"
         android:title="@string/edit_apps_category">
 
         <Preference
@@ -245,6 +250,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/ic_dashboard_no_shadow"
+        android:key="pref_other_screen"
         android:title="@string/other_category">
 
         <SwitchPreference
@@ -292,6 +298,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/ic_info_outline_no_shadow"
+        android:key="pref_about_screen"
         android:title="@string/about">
 
         <Preference
