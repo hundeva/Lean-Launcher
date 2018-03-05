@@ -175,4 +175,8 @@
     <string name="smartspace_settings_title">Preferences</string>
     <string name="smartspace_settings_summary">Calendar events, etc.</string>
 
+    <string name="dark_bottom_search_title">Dark bottom search bar</string>
+    <string name="dark_top_search_title">Dark top search bar</string>
+    <string name="if_theme_is_dark">If theme is dark</string>
+
 </resources>

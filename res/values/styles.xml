@@ -54,6 +54,7 @@
         <item name="workspaceKeyShadowColor">@android:color/transparent</item>
         <item name="isWorkspaceDarkText">true</item>
         <item name="workspaceStatusBarScrim">@null</item>
+        <item name="isMainColorDark">true</item>
     </style>
 
     <style name="LauncherThemeDark" parent="@style/LauncherTheme">

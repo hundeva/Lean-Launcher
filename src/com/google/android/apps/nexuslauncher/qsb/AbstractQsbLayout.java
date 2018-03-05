@@ -34,6 +34,8 @@ import com.android.launcher3.graphics.ShadowGenerator.Builder;
 import com.google.android.apps.nexuslauncher.NexusLauncherActivity;
 
 public abstract class AbstractQsbLayout extends FrameLayout implements LauncherLayoutChangeListener, OnClickListener, OnSharedPreferenceChangeListener {
+    protected static final int DARK_QSB_COLOR = 0xA0424242;
+    protected static final int DARK_QSB_TEXT_COLOR = 0xffffffff;
     protected final static String GOOGLE_QSB = "com.google.android.googlequicksearchbox";
     protected final NexusLauncherActivity mActivity;
     protected int mColor;

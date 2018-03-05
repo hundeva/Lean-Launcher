@@ -24,6 +24,8 @@ public class LeanSettings {
     public static final String RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK = "pref_reset_app_visibility_on_default_icon_pack";
     public static final String SEARCH_PROVIDER = "pref_search_provider";
     public static final String HOTSEAT_BACKGROUND = "pref_hotseat_background";
+    public static final String DARK_BOTTOM_SEARCH_BAR = "pref_dark_bottom_search_bar";
+    public static final String DARK_TOP_SEARCH_BAR = "pref_dark_top_search_bar";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -42,6 +44,8 @@ public class LeanSettings {
     private static final boolean RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK_DEFAULT = true;
     private static final String SEARCH_PROVIDER_DEFAULT = "https://www.google.com";
     private static final String HOTSEAT_BACKGROUND_DEFAULT = "100";
+    private static final boolean DARK_BOTTOM_SEARCH_BAR_DEFAULT = false;
+    private static final boolean DARK_TOP_SEARCH_BAR_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -192,6 +196,14 @@ public class LeanSettings {
         } catch (Throwable t) {
             return 100;
         }
+    }
+
+    public static boolean isBottomSearchBarDark(Context context) {
+        return prefs(context).getBoolean(DARK_BOTTOM_SEARCH_BAR, DARK_BOTTOM_SEARCH_BAR_DEFAULT);
+    }
+
+    public static boolean isTopSearchBarDark(Context context) {
+        return prefs(context).getBoolean(DARK_TOP_SEARCH_BAR, DARK_TOP_SEARCH_BAR_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

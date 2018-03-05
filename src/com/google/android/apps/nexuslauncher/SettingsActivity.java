@@ -113,6 +113,8 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.FORCE_COLORED_G_ICON).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.ICON_SIZE).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.HOTSEAT_BACKGROUND).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.DARK_BOTTOM_SEARCH_BAR).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.DARK_TOP_SEARCH_BAR).setOnPreferenceChangeListener(this);
 
             if (SmartspaceController.get(mContext).cY()) {
                 findPreference(SMARTSPACE_SETTINGS).setOnPreferenceClickListener(this);
@@ -197,6 +199,8 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case LeanSettings.PHYSICAL_ANIMATION_KEY:
                 case LeanSettings.TRANSPARENT_NAVIGATION_BAR:
                 case LeanSettings.FORCE_COLORED_G_ICON:
+                case LeanSettings.DARK_BOTTOM_SEARCH_BAR:
+                case LeanSettings.DARK_TOP_SEARCH_BAR:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }

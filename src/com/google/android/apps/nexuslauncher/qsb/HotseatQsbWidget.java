@@ -26,6 +26,7 @@ import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.dragndrop.DragLayer;
+import com.android.launcher3.util.Themes;
 import com.hdeva.launcher.LeanSettings;
 
 public class HotseatQsbWidget extends AbstractQsbLayout {
@@ -68,7 +69,7 @@ public class HotseatQsbWidget extends AbstractQsbLayout {
 
     private void setColors() {
         View.inflate(new ContextThemeWrapper(getContext(), LeanSettings.isColoredGIconForced(getContext()) || mIsDefaultLiveWallpaper ? R.style.HotseatQsbTheme_Colored : R.style.HotseatQsbTheme), R.layout.qsb_hotseat_content, this);
-        bz(mIsDefaultLiveWallpaper ? 0xCCFFFFFF : 0x99FAFAFA);
+        bz(LeanSettings.isBottomSearchBarDark(getContext()) && Themes.getAttrBoolean(getContext(), R.attr.isMainColorDark) ? DARK_QSB_COLOR : mIsDefaultLiveWallpaper ? 0xCCFFFFFF : 0x99FAFAFA);
     }
 
     private void openQSB() {
