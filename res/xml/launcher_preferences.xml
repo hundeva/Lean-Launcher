@@ -237,6 +237,13 @@
 
         </Preference>
 
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_label_hidden_on_desktop"
+            android:persistent="true"
+            android:summary="@string/hide_app_label_summary"
+            android:title="@string/hide_app_label_title" />
+
         <ListPreference
             android:defaultValue=""
             android:entries="@array/icon_shape_override_paths_names"

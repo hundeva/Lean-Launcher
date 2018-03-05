@@ -60,6 +60,7 @@ import com.android.launcher3.util.GridOccupancy;
 import com.android.launcher3.util.ParcelableSparseArray;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.Thunk;
+import com.hdeva.launcher.LeanSettings;
 import com.hdeva.launcher.LeanUtils;
 
 import java.lang.annotation.Retention;
@@ -609,7 +610,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
         // Hotseat icons - remove text
         if (child instanceof BubbleTextView) {
             BubbleTextView bubbleChild = (BubbleTextView) child;
-            bubbleChild.setTextVisibility(mContainerType != HOTSEAT);
+            bubbleChild.setTextVisibility(mContainerType != HOTSEAT && !LeanSettings.isLabelHiddenOnDesktop(child.getContext()));
         }
 
         child.setScaleX(mChildScale);
