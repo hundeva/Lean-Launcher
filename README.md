@@ -6,6 +6,8 @@ This launcher is based on the o-mr1 version of Amir Zaidi's excellent work, the 
 
 ## Features
 
+Everything, that is available in Rootless Pixel Launcher, with some added options, such as
+
 - Notification dots
   - on supported devices
 - App shortcuts
@@ -37,15 +39,13 @@ This launcher is based on the o-mr1 version of Amir Zaidi's excellent work, the 
 - Edit apps
   - hide apps from your drawer
   - change icon shapes
-  - support
+  - support
 - Other
   - allow home screen rotation
   - disable spring animation
   - toggle navigation bar transparency
   - lock your desktop to prevent accidental changes
   - double tap to lock
-
-Everything, that is available in Rootless Pixel Launcher, with some added options, such as:
 
 ## Bug reports
 
