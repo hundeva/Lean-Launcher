@@ -41,6 +41,7 @@ import android.os.UserHandle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.compat.UserManagerCompat;
 import com.android.launcher3.config.FeatureFlags;
@@ -52,6 +53,8 @@ import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Provider;
 import com.android.launcher3.util.SQLiteCacheHelper;
 import com.android.launcher3.util.Thunk;
+import com.hdeva.launcher.LeanSettings;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -481,7 +484,8 @@ public class IconCache {
     }
 
     private void applyCacheEntry(CacheEntry entry, ItemInfoWithIcon info) {
-        info.title = Utilities.trim(entry.title);
+        String editedTitle = LeanSettings.getCustomAppName(mContext, info.getTargetComponent());
+        info.title = Utilities.trim(TextUtils.isEmpty(editedTitle) ? entry.title : editedTitle);
         info.contentDescription = entry.contentDescription;
         info.iconBitmap = entry.icon == null ? getDefaultIcon(info.user) : entry.icon;
         info.usingLowResIcon = entry.isLowResIcon;

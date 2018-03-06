@@ -244,6 +244,11 @@
             android:summary="@string/hide_app_label_summary"
             android:title="@string/hide_app_label_title" />
 
+        <Preference
+            android:key="pref_reset_app_names"
+            android:summary="@string/reset_app_names_summary"
+            android:title="@string/reset_app_names_title" />
+
         <ListPreference
             android:defaultValue=""
             android:entries="@array/icon_shape_override_paths_names"

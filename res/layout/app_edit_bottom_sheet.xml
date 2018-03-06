@@ -25,14 +25,18 @@
     android:layout_gravity="bottom"
     android:theme="?attr/widgetsTheme">
 
-    <TextView
+    <EditText
         style="@style/TextTitle"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textColor="?android:attr/textColorPrimary"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:singleLine="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:imeOptions="actionDone" />
 
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +46,7 @@
         android:fontFamily="sans-serif"
         android:textColor="?android:attr/textColorTertiary"
         android:textSize="14sp"
-        android:text="@string/action_edit" />
+        android:text="@string/tap_to_edit_app_name" />
 
     <fragment
         android:id="@+id/sheet_prefs"

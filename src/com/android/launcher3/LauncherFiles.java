@@ -22,6 +22,7 @@ public class LauncherFiles {
 
     public static final String WIDGET_PREVIEWS_DB = "widgetpreviews.db";
     public static final String APP_ICONS_DB = "app_icons.db";
+    public static final String CUSTOM_APP_NAMES = "com.hdeva.launcher.custom.app.name";
 
     public static final List<String> ALL_FILES = Collections.unmodifiableList(Arrays.asList(
             LAUNCHER_DB,
@@ -29,5 +30,6 @@ public class LauncherFiles {
             WIDGET_PREVIEWS_DB,
             MANAGED_USER_PREFERENCES_KEY + XML,
             DEVICE_PREFERENCES_KEY + XML,
+            CUSTOM_APP_NAMES + XML,
             APP_ICONS_DB));
 }

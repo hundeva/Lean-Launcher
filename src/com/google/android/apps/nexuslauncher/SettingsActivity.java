@@ -26,6 +26,7 @@ import android.util.Log;
 
 import com.android.launcher3.BuildConfig;
 import com.android.launcher3.R;
+import com.android.launcher3.Utilities;
 import com.google.android.apps.nexuslauncher.smartspace.SmartspaceController;
 import com.hdeva.launcher.LeanSettings;
 import com.hdeva.launcher.LeanUtils;
@@ -116,6 +117,8 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.DARK_BOTTOM_SEARCH_BAR).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.DARK_TOP_SEARCH_BAR).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.LABEL_HIDDEN_ON_DESKTOP).setOnPreferenceChangeListener(this);
+
+            findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
 
             if (SmartspaceController.get(mContext).cY()) {
                 findPreference(SMARTSPACE_SETTINGS).setOnPreferenceClickListener(this);
@@ -246,6 +249,9 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case SMARTSPACE_SETTINGS:
                     SmartspaceController.get(mContext).cZ();
                     return true;
+                case LeanSettings.RESET_APP_NAMES:
+                    new ResetAppNamesDialog().show(getFragmentManager(), preference.getKey());
+                    return true;
             }
             return false;
         }
@@ -267,6 +273,24 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     .setMessage(R.string.msg_disable_suggestions_prompt)
                     .setNegativeButton(android.R.string.cancel, null)
                     .setPositiveButton(R.string.label_turn_off_suggestions, this).create();
+        }
+    }
+
+    public static class ResetAppNamesDialog extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.reset_app_names_title)
+                    .setMessage(R.string.reset_app_names_description)
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Utilities.getCustomAppNamePrefs(getActivity()).edit().clear().apply();
+                            LeanUtils.reload(getActivity());
+                        }
+                    })
+                    .create();
         }
     }
 }

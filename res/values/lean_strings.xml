@@ -182,4 +182,11 @@
     <string name="hide_app_label_title">Hide app name</string>
     <string name="hide_app_label_summary">On the desktop</string>
 
+    <string name="reset_app_names_title">Reset app names</string>
+    <string name="reset_app_names_summary">To default</string>
+    <string name="reset_app_names_description">This will reset the name of all apps to their default.</string>
+
+    <string name="tap_to_edit_app_name">Tap to edit app name</string>
+    <string name="enter_new_app_name">Enter new app name</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.hdeva.launcher;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -27,6 +28,7 @@ public class LeanSettings {
     public static final String DARK_BOTTOM_SEARCH_BAR = "pref_dark_bottom_search_bar";
     public static final String DARK_TOP_SEARCH_BAR = "pref_dark_top_search_bar";
     public static final String LABEL_HIDDEN_ON_DESKTOP = "pref_label_hidden_on_desktop";
+    public static final String RESET_APP_NAMES = "pref_reset_app_names";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -210,6 +212,20 @@ public class LeanSettings {
 
     public static boolean isLabelHiddenOnDesktop(Context context) {
         return prefs(context).getBoolean(LABEL_HIDDEN_ON_DESKTOP, LABEL_HIDDEN_ON_DESKTOP_DEFAULT);
+    }
+
+    public static String getCustomAppName(Context context, ComponentName componentName) {
+        if (componentName == null) {
+            return "";
+        } else {
+            return Utilities.getCustomAppNamePrefs(context).getString(componentName.flattenToString(), "");
+        }
+    }
+
+    public static void setCustomAppName(Context context, ComponentName componentName, String appName) {
+        if (componentName != null) {
+            Utilities.getCustomAppNamePrefs(context).edit().putString(componentName.flattenToString(), appName).apply();
+        }
     }
 
     private static SharedPreferences prefs(Context context) {

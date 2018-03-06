@@ -26,6 +26,9 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.launcher3.ItemInfo;
@@ -33,6 +36,8 @@ import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.graphics.DrawableFactory;
 import com.android.launcher3.widget.WidgetsBottomSheet;
+import com.hdeva.launcher.LeanSettings;
+import com.hdeva.launcher.LeanUtils;
 
 public class CustomBottomSheet extends WidgetsBottomSheet {
     private FragmentManager mFragmentManager;
@@ -47,9 +52,25 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
     }
 
     @Override
-    public void populateAndShow(ItemInfo itemInfo) {
+    public void populateAndShow(final ItemInfo itemInfo) {
         super.populateAndShow(itemInfo);
-        ((TextView) findViewById(R.id.title)).setText(itemInfo.title);
+        final EditText editText = (EditText) findViewById(R.id.title);
+        editText.setText(itemInfo.title);
+        editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    handleAppNameChange(v.getContext(), editText.getText().toString(), itemInfo.getTargetComponent());
+                }
+            }
+        });
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                handleAppNameChange(v.getContext(), editText.getText().toString(), itemInfo.getTargetComponent());
+                return true;
+            }
+        });
         ((PrefsFragment) mFragmentManager.findFragmentById(R.id.sheet_prefs)).loadForApp(itemInfo);
     }
 
@@ -64,6 +85,11 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
 
     @Override
     protected void onWidgetsBound() {
+    }
+
+    private void handleAppNameChange(Context context, String newName, ComponentName componentName) {
+        LeanSettings.setCustomAppName(context, componentName, newName);
+        LeanUtils.reload(context);
     }
 
     public static class PrefsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
