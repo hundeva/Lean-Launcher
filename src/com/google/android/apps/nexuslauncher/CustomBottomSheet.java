@@ -28,6 +28,7 @@ import android.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ import com.hdeva.launcher.LeanUtils;
 
 public class CustomBottomSheet extends WidgetsBottomSheet {
     private FragmentManager mFragmentManager;
+    private EditText editText;
 
     public CustomBottomSheet(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -54,7 +56,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
     @Override
     public void populateAndShow(final ItemInfo itemInfo) {
         super.populateAndShow(itemInfo);
-        final EditText editText = (EditText) findViewById(R.id.title);
+        editText = (EditText) findViewById(R.id.title);
         editText.setText(itemInfo.title);
         editText.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
@@ -88,6 +90,12 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
     }
 
     private void handleAppNameChange(Context context, String newName, ComponentName componentName) {
+        if (editText != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (inputMethodManager != null) {
+                inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            }
+        }
         LeanSettings.setCustomAppName(context, componentName, newName);
         LeanUtils.reload(context);
     }
