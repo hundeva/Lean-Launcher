@@ -67,7 +67,6 @@ import com.android.launcher3.dragndrop.DragView;
 import com.android.launcher3.graphics.IconPalette;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
-import com.hdeva.launcher.LeanSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,12 +170,12 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         icon.setClipToPadding(false);
         icon.mFolderName = (BubbleTextView) icon.findViewById(R.id.folder_icon_name);
         icon.mFolderName.setText(folderInfo.title);
-        icon.mFolderName.setTextVisibility(!LeanSettings.isLabelHiddenOnDesktop(group.getContext()));
         icon.mFolderName.setCompoundDrawablePadding(0);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) icon.mFolderName.getLayoutParams();
         lp.topMargin = grid.iconSizePx + grid.iconDrawablePaddingPx;
 
         icon.setTag(folderInfo);
+        icon.mFolderName.setTextVisibility(icon.mFolderName.shouldTextBeVisible());
         icon.setOnClickListener(launcher);
         icon.mInfo = folderInfo;
         icon.mLauncher = launcher;

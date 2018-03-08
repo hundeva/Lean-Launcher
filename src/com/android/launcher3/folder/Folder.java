@@ -793,7 +793,7 @@ public class Folder extends AbstractFloatingView implements DragSource, View.OnC
             mFolderIcon.setVisibility(View.VISIBLE);
             if (FeatureFlags.LAUNCHER3_NEW_FOLDER_ANIMATION) {
                 mFolderIcon.setBackgroundVisible(true);
-                mFolderIcon.mFolderName.setTextVisibility(!LeanSettings.isLabelHiddenOnDesktop(getContext()));
+                mFolderIcon.mFolderName.setTextVisibility(mFolderIcon.mFolderName.shouldTextBeVisible());
             }
             if (wasAnimated) {
                 if (FeatureFlags.LAUNCHER3_NEW_FOLDER_ANIMATION) {

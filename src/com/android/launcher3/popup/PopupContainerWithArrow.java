@@ -73,7 +73,6 @@ import com.android.launcher3.shortcuts.DeepShortcutView;
 import com.android.launcher3.shortcuts.ShortcutsItemView;
 import com.android.launcher3.util.PackageUserKey;
 import com.android.launcher3.util.Themes;
-import com.hdeva.launcher.LeanSettings;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -956,7 +955,7 @@ public class PopupContainerWithArrow extends AbstractFloatingView implements Dra
         }
         mIsOpen = false;
         mDeferContainerRemoval = false;
-        mOriginalIcon.setTextVisibility(mOriginalIcon.shouldTextBeVisible() && !LeanSettings.isLabelHiddenOnDesktop(getContext()));
+        mOriginalIcon.setTextVisibility(mOriginalIcon.shouldTextBeVisible());
         mOriginalIcon.forceHideBadge(false);
         mLauncher.getDragController().removeDragListener(this);
         mLauncher.getDragLayer().removeView(this);

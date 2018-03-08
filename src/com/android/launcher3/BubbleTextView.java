@@ -51,6 +51,7 @@ import com.android.launcher3.graphics.HolographicOutlineHelper;
 import com.android.launcher3.graphics.IconPalette;
 import com.android.launcher3.graphics.PreloadIconDrawable;
 import com.android.launcher3.model.PackageItemInfo;
+import com.hdeva.launcher.LeanSettings;
 
 import java.text.NumberFormat;
 
@@ -441,9 +442,28 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
 
     public boolean shouldTextBeVisible() {
         // Text should be visible everywhere but the hotseat.
+        // ... not in Lean Launcher
         Object tag = getParent() instanceof FolderIcon ? ((View) getParent()).getTag() : getTag();
         ItemInfo info = tag instanceof ItemInfo ? (ItemInfo) tag : null;
-        return info == null || info.container != LauncherSettings.Favorites.CONTAINER_HOTSEAT;
+
+        boolean visible;
+        if (info == null) {
+            // we don't know what item is it, show label
+            visible = true;
+        } else if (info.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+            // hotseat does not have labels
+            visible = false;
+        } else if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+            // desktop item visibility is depending on user setting
+            visible = !LeanSettings.isLabelHiddenOnDesktop(getContext());
+        } else if (info.container != ItemInfo.NO_ID) {
+            // this should be a folder, which is only possible on desktop
+            visible = !LeanSettings.isLabelHiddenOnDesktop(getContext());
+        } else {
+            // fallback is visible labels
+            visible = true;
+        }
+        return visible;
     }
 
     public void setTextVisibility(boolean visible) {
