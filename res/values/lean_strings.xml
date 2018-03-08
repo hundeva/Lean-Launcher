@@ -175,8 +175,8 @@
     <string name="smartspace_settings_title">Preferences</string>
     <string name="smartspace_settings_summary">Calendar events, etc.</string>
 
-    <string name="dark_bottom_search_title">Dark bottom search bar</string>
-    <string name="dark_top_search_title">Dark top search bar</string>
+    <string name="dark_bottom_search_title">Dark Google search bar</string>
+    <string name="dark_top_search_title">Dark app search bar</string>
     <string name="if_theme_is_dark">If theme is dark</string>
 
     <string name="hide_app_label_title">Hide app name</string>
