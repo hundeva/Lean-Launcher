@@ -28,6 +28,7 @@ public class LeanSettings {
     public static final String DARK_BOTTOM_SEARCH_BAR = "pref_dark_bottom_search_bar";
     public static final String DARK_TOP_SEARCH_BAR = "pref_dark_top_search_bar";
     public static final String LABEL_HIDDEN_ON_DESKTOP = "pref_label_hidden_on_desktop";
+    public static final String LABEL_HIDDEN_ON_ALL_APPS = "pref_label_hidden_on_all_apps";
     public static final String RESET_APP_NAMES = "pref_reset_app_names";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
@@ -50,6 +51,7 @@ public class LeanSettings {
     private static final boolean DARK_BOTTOM_SEARCH_BAR_DEFAULT = false;
     private static final boolean DARK_TOP_SEARCH_BAR_DEFAULT = false;
     private static final boolean LABEL_HIDDEN_ON_DESKTOP_DEFAULT = false;
+    private static final boolean LABEL_HIDDEN_ON_ALL_APPS_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -212,6 +214,10 @@ public class LeanSettings {
 
     public static boolean isLabelHiddenOnDesktop(Context context) {
         return prefs(context).getBoolean(LABEL_HIDDEN_ON_DESKTOP, LABEL_HIDDEN_ON_DESKTOP_DEFAULT);
+    }
+
+    public static boolean isLabelHiddenOnAllApps(Context context) {
+        return prefs(context).getBoolean(LABEL_HIDDEN_ON_ALL_APPS, LABEL_HIDDEN_ON_ALL_APPS_DEFAULT);
     }
 
     public static String getCustomAppName(Context context, ComponentName componentName) {

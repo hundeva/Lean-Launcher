@@ -117,6 +117,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.DARK_BOTTOM_SEARCH_BAR).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.DARK_TOP_SEARCH_BAR).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.LABEL_HIDDEN_ON_DESKTOP).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.LABEL_HIDDEN_ON_ALL_APPS).setOnPreferenceChangeListener(this);
 
             findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
 
@@ -206,6 +207,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case LeanSettings.DARK_BOTTOM_SEARCH_BAR:
                 case LeanSettings.DARK_TOP_SEARCH_BAR:
                 case LeanSettings.LABEL_HIDDEN_ON_DESKTOP:
+                case LeanSettings.LABEL_HIDDEN_ON_ALL_APPS:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }

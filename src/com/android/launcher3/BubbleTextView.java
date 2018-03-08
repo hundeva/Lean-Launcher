@@ -454,13 +454,16 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
             // hotseat does not have labels
             visible = false;
         } else if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-            // desktop item visibility is depending on user setting
+            // desktop item label visibility is depending on user setting
             visible = !LeanSettings.isLabelHiddenOnDesktop(getContext());
+        } else if(info.container == ItemInfo.NO_ID) {
+            // app drawer label visibility is depending on user setting
+            visible = !LeanSettings.isLabelHiddenOnAllApps(getContext());
         } else if (info.container != ItemInfo.NO_ID) {
             // this should be a folder, which is only possible on desktop
             visible = !LeanSettings.isLabelHiddenOnDesktop(getContext());
         } else {
-            // fallback is visible labels
+            // fallback is visible labels, this should never actually happen
             visible = true;
         }
         return visible;

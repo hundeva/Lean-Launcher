@@ -338,6 +338,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
                 AppInfo info = mApps.getAdapterItems().get(position).appInfo;
                 BubbleTextView icon = (BubbleTextView) holder.itemView;
                 icon.applyFromApplicationInfo(info);
+                icon.setTextVisibility(icon.shouldTextBeVisible());
                 break;
             case VIEW_TYPE_DISCOVERY_ITEM:
                 AppDiscoveryAppInfo appDiscoveryAppInfo = (AppDiscoveryAppInfo)

@@ -180,7 +180,8 @@
     <string name="if_theme_is_dark">If theme is dark</string>
 
     <string name="hide_app_label_title">Hide app name</string>
-    <string name="hide_app_label_summary">On the desktop</string>
+    <string name="hide_app_label_on_desktop_summary">On the desktop</string>
+    <string name="hide_app_label_on_all_apps_summary">In your app drawer</string>
 
     <string name="reset_app_names_title">Reset app names</string>
     <string name="reset_app_names_summary">To default</string>
