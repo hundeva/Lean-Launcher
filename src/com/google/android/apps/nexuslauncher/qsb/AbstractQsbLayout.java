@@ -16,7 +16,6 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.net.Uri;
 import android.os.Process;
 import android.util.AttributeSet;
 import android.view.View;
@@ -32,6 +31,7 @@ import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.graphics.ShadowGenerator.Builder;
 import com.google.android.apps.nexuslauncher.NexusLauncherActivity;
+import com.hdeva.launcher.LeanSettings;
 
 public abstract class AbstractQsbLayout extends FrameLayout implements LauncherLayoutChangeListener, OnClickListener, OnSharedPreferenceChangeListener {
     protected static final int DARK_QSB_COLOR = 0xA0424242;
@@ -211,7 +211,7 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
     }
 
     private void loadPreferences(SharedPreferences sharedPreferences) {
-        mMicIconView.setVisibility(sharedPreferences.getBoolean("opa_enabled", true) ? View.GONE : View.VISIBLE);
+        mMicIconView.setVisibility(LeanSettings.isQsbVoiceIconVisible(getContext()) ? View.VISIBLE : View.GONE);
         requestLayout();
     }
 }

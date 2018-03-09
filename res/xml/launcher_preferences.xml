@@ -143,6 +143,12 @@
             android:summary="@string/summary_app_suggestions"
             android:title="@string/title_app_suggestions" />
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="pref_qsb_voice_icon"
+            android:summary="@string/qsb_voice_icon_summary"
+            android:title="@string/qsb_voice_icon_title" />
+
     </PreferenceScreen>
 
     <PreferenceScreen

@@ -88,7 +88,7 @@
     <string name="number_of_rows_title">Grid rows</string>
     <string name="number_of_hotseat_title">Hotseat icons</string>
 
-    <string name="force_colored_g_icon_title">Force colored G icon</string>
+    <string name="force_colored_g_icon_title">Force colored icons</string>
     <string name="force_colored_g_icon_summary">At the bottom search bar</string>
 
     <string name="double_tap_to_lock_title">Double tap to lock</string>
@@ -189,5 +189,8 @@
 
     <string name="tap_to_edit_app_name">Tap to edit app name</string>
     <string name="enter_new_app_name">Enter new app name</string>
+
+    <string name="qsb_voice_icon_title">Voice search shortcut</string>
+    <string name="qsb_voice_icon_summary">On the search bars</string>
 
 </resources>
