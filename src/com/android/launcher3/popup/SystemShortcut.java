@@ -69,7 +69,7 @@ public abstract class SystemShortcut extends ItemInfo {
         }
 
         @Override
-        public View.OnClickListener getOnClickListener(Launcher launcher, final ItemInfo itemInfo) {
+        public View.OnClickListener getOnClickListener(final Launcher launcher, final ItemInfo itemInfo) {
             boolean isSystemApp;
             try {
                 isSystemApp = Utilities.isSystemApp(launcher, itemInfo.getIntent());
@@ -85,6 +85,7 @@ public abstract class SystemShortcut extends ItemInfo {
                 @Override
                 public void onClick(View v) {
                     try {
+                        AbstractFloatingView.closeAllOpenViews(launcher);
                         Intent intent = new Intent(Intent.ACTION_DELETE);
                         intent.setData(Uri.parse("package:" + itemInfo.getTargetComponent().getPackageName()));
                         v.getContext().startActivity(intent);
