@@ -24,7 +24,6 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.support.v4.graphics.ColorUtils;
@@ -540,6 +539,10 @@ public class DragLayer extends InsettableFrameLayout {
                 }
             }
         }
+    }
+
+    public boolean isInWidgetResize() {
+        return mCurrentResizeFrame != null;
     }
 
     public void clearResizeFrame() {

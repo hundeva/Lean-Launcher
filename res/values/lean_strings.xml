@@ -193,5 +193,32 @@
 
     <string name="qsb_voice_icon_title">Voice search shortcut</string>
     <string name="qsb_voice_icon_summary">On the search bars</string>
+    
+    <string name="home_action_title">Home action on home screen</string>
+
+    <string name="home_action_nothing">Nothing</string>
+    <string name="home_action_quick_search">Quick search</string>
+    <string name="home_action_voice_search">Voice search</string>
+    <string name="home_action_app_drawer">Open app drawer</string>
+    <string name="home_action_app_search">Open app search</string>
+    <string name="home_action_overview">Enter overview</string>
+
+    <string-array name="home_action_names">
+        <item>@string/home_action_nothing</item>
+        <item>@string/home_action_quick_search</item>
+        <item>@string/home_action_voice_search</item>
+        <item>@string/home_action_app_drawer</item>
+        <item>@string/home_action_app_search</item>
+        <item>@string/home_action_overview</item>
+    </string-array>
+
+    <string-array name="home_action_values">
+        <item>nothing</item>
+        <item>quicksearch</item>
+        <item>voicesearch</item>
+        <item>appdrawer</item>
+        <item>appsearch</item>
+        <item>overview</item>
+    </string-array>
 
 </resources>

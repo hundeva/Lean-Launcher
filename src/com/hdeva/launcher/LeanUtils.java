@@ -5,17 +5,26 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.net.Uri;
+import android.os.Process;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherModel;
 import com.android.launcher3.R;
+import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.LooperExecutor;
 
@@ -23,6 +32,7 @@ public class LeanUtils {
 
     private static final long WAIT_BEFORE_RESTART = 250;
     private static final LeanDoubleTapToLockRegistry REGISTRY = new LeanDoubleTapToLockRegistry();
+    private static final String GOOGLE_QSB = "com.google.android.googlequicksearchbox";
 
     public static void reload(Context context) {
         LauncherAppState.getInstance(context).getModel().forceReload();
@@ -97,6 +107,73 @@ public class LeanUtils {
                 }
             }
         }
+    }
+
+    public static void startQuickSearch(final Launcher launcher) {
+        final String provider = LeanSettings.getSearchProvider(launcher);
+        if (provider.contains("google")) {
+            Point point = new Point(0, 0);
+            Intent intent = new Intent("com.google.nexuslauncher.FAST_TEXT_SEARCH")
+                    .setPackage("com.google.android.googlequicksearchbox")
+                    .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .putExtra("source_round_left", true)
+                    .putExtra("source_round_right", true)
+                    .putExtra("source_logo_offset", point)
+                    .putExtra("source_mic_offset", point)
+                    .putExtra("use_fade_animation", true);
+            intent.setSourceBounds(new Rect());
+            launcher.sendOrderedBroadcast(intent, null,
+                    new BroadcastReceiver() {
+                        @Override
+                        public void onReceive(Context context, Intent intent) {
+                            Log.e("HotseatQsbSearch", getResultCode() + " " + getResultData());
+                            if (getResultCode() == 0) {
+                                try {
+                                    launcher.startActivity(new Intent("com.google.android.googlequicksearchbox.TEXT_ASSIST")
+                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                            .setPackage(GOOGLE_QSB));
+                                } catch (ActivityNotFoundException e) {
+                                    try {
+                                        launcher.getPackageManager().getPackageInfo(GOOGLE_QSB, 0);
+                                        LauncherAppsCompat.getInstance(launcher)
+                                                .showAppDetailsForProfile(new ComponentName(GOOGLE_QSB, ".SearchActivity"), Process.myUserHandle());
+                                    } catch (PackageManager.NameNotFoundException ignored) {
+                                        launcher.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provider)));
+                                    }
+                                }
+                            }
+                        }
+                    }, null, 0, null, null);
+        } else {
+            launcher.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(provider)));
+        }
+    }
+
+    public static void startVoiceSearch(Launcher launcher) {
+        try {
+            launcher.startActivity(new Intent("android.intent.action.VOICE_ASSIST")
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    .setPackage(GOOGLE_QSB));
+        } catch (ActivityNotFoundException e) {
+            try {
+                launcher.getPackageManager().getPackageInfo(GOOGLE_QSB, 0);
+                LauncherAppsCompat.getInstance(launcher).showAppDetailsForProfile(new ComponentName(GOOGLE_QSB, ".SearchActivity"), Process.myUserHandle());
+            } catch (PackageManager.NameNotFoundException ignored) {
+                launcher.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com")));
+            }
+        }
+    }
+
+    public static void openAppDrawer(Launcher launcher) {
+        launcher.showAppsView(true, false);
+    }
+
+    public static void openAppSearch(Launcher launcher) {
+        launcher.showAppsViewWithSearch(true, false);
+    }
+
+    public static void openOverview(Launcher launcher) {
+        launcher.showOverviewMode(true);
     }
 
     private static ComponentName adminComponent(Context context) {

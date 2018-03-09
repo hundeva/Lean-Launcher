@@ -31,6 +31,7 @@ public class LeanSettings {
     public static final String LABEL_HIDDEN_ON_ALL_APPS = "pref_label_hidden_on_all_apps";
     public static final String RESET_APP_NAMES = "pref_reset_app_names";
     public static final String QSB_VOICE_ICON = "pref_qsb_voice_icon";
+    public static final String HOME_ACTION = "pref_home_action";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -238,6 +239,10 @@ public class LeanSettings {
 
     public static boolean isQsbVoiceIconVisible(Context context) {
         return prefs(context).getBoolean(QSB_VOICE_ICON, QSB_VOICE_ICON_DEFAULT);
+    }
+
+    public static String getHomeAction(Context context) {
+        return prefs(context).getString(HOME_ACTION, "");
     }
 
     private static SharedPreferences prefs(Context context) {

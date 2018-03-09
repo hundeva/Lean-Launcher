@@ -94,6 +94,11 @@ public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManag
         });
     }
 
+    @Override
+    public void startSearch() {
+        searchFallback();
+    }
+
     void useAlpha(int newAlpha) {
         int normalizedAlpha = Utilities.boundToRange(newAlpha, 0, 255);
         if (mAlpha != normalizedAlpha) {

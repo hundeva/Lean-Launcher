@@ -127,7 +127,7 @@ public class LauncherStateTransitionAnimation {
     /**
      * Starts an animation to the apps view.
      */
-    public void startAnimationToAllApps(final boolean animated) {
+    public void startAnimationToAllApps(final boolean animated, final boolean showSearch) {
         final AllAppsContainerView toView = mLauncher.getAppsView();
         final View buttonView = mLauncher.getStartViewForAllAppsRevealAnimation();
         PrivateTransitionCallbacks cb = new PrivateTransitionCallbacks(1f) {
@@ -151,6 +151,13 @@ public class LauncherStateTransitionAnimation {
             @Override
             void onTransitionComplete() {
                 mLauncher.getUserEventDispatcher().resetElapsedContainerMillis();
+                if(showSearch) {
+                    try {
+                        toView.getSearchUiManager().startSearch();
+                    } catch (Throwable t) {
+                        Log.e(TAG, "Failed to open search", t);
+                    }
+                }
             }
         };
         // Only animate the search bar if animating from spring loaded mode back to all apps

@@ -333,6 +333,15 @@
             android:summary="@string/double_tap_to_lock_summary"
             android:title="@string/double_tap_to_lock_title" />
 
+        <ListPreference
+            android:defaultValue="nothing"
+            android:entries="@array/home_action_names"
+            android:entryValues="@array/home_action_values"
+            android:key="pref_home_action"
+            android:persistent="true"
+            android:summary="%s"
+            android:title="@string/home_action_title" />
+
     </PreferenceScreen>
 
     <PreferenceScreen
