@@ -35,7 +35,6 @@ import com.android.launcher3.popup.SystemShortcut;
 import com.android.launcher3.util.Themes;
 import com.google.android.apps.nexuslauncher.DynamicIconProvider;
 import com.google.android.apps.nexuslauncher.graphics.IcuDateTextView;
-import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -91,18 +90,8 @@ public class SmartspaceView extends FrameLayout implements ISmartspace, ValueAni
             @Override
             public void onClick(View v) {
                 if (dq != null && dq.isWeatherAvailable()) {
-                    // TODO if this workaround does not work, investigate the huawei weather permission: com.huawei.android.totemweather.permission.ACCESS_WEATHERCLOCK_PROVIDER
-                    try {
-                        cp(10001);
-                        dq.dO.click(v);
-                    } catch (Throwable outer) {
-                        FirebaseCrash.report(new Exception("Failed to start default weather action", outer));
-                        try {
-                            fallbackWeather(v.getContext());
-                        } catch (Throwable internal) {
-                            FirebaseCrash.report(new Exception("Failed to start fallback weather action", internal));
-                        }
-                    }
+                    cp(10001);
+                    dq.dO.click(v);
                 }
             }
         };
@@ -114,16 +103,6 @@ public class SmartspaceView extends FrameLayout implements ISmartspace, ValueAni
         mSmartspaceBackgroundRes = R.drawable.bg_smartspace;
         dB = new TextPaint();
         dB.setTextSize((float) getResources().getDimensionPixelSize(R.dimen.smartspace_title_size));
-    }
-
-    private void fallbackWeather(Context context) {
-        Intent intent = new Intent(Intent.ACTION_VIEW)
-                .addCategory(Intent.CATEGORY_DEFAULT)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .setData(Uri.parse("dynact://velour/weather/ProxyActivity"))
-                .setPackage("com.google.android.googlequicksearchbox")
-                .setClassName("com.google.android.googlequicksearchbox", "com.google.android.apps.gsa.velour.DynamicActivityTrampoline");
-        context.startActivity(intent);
     }
 
     private void initListeners(final SmartspaceDataContainer e) {
