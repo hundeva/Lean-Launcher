@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="lean_launcher_app_name">Lean Launcher</string>
+    <string name="lean_settings">Lean Settings</string>
 
     <string name="at_a_glance_category">At A Glance</string>
     <string name="other_category">Other</string>
