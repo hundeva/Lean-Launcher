@@ -13,8 +13,8 @@ buildscript {
 
 allprojects {
     ext {
-        version_name = "1.0.4"
-        version_code = 9
+        version_name = "1.0.5"
+        version_code = 10
 
         compile_sdk_version = 27
         min_sdk_version = 21
