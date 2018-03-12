@@ -39,6 +39,7 @@ import com.android.launcher3.util.SettingsObserver;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -248,7 +249,7 @@ public class NotificationListener extends NotificationListenerService {
     private List<StatusBarNotification> filterNotifications(
             StatusBarNotification[] notifications) {
         if (notifications == null) return null;
-        Set<Integer> removedNotifications = new ArraySet<>();
+        Set<Integer> removedNotifications = Utilities.ATLEAST_MARSHMALLOW ? new ArraySet<Integer>() : new HashSet<Integer>();
         for (int i = 0; i < notifications.length; i++) {
             if (shouldBeFilteredOut(notifications[i])) {
                 removedNotifications.add(i);

@@ -25,6 +25,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.os.Process;
 import android.service.notification.StatusBarNotification;
 import android.view.View;
 
@@ -35,6 +36,7 @@ import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.graphics.IconPalette;
 import com.android.launcher3.util.PackageUserKey;
+import com.hdeva.launcher.LeanUtils;
 
 /**
  * An object that contains relevant information from a {@link StatusBarNotification}. This should
@@ -92,15 +94,29 @@ public class NotificationInfo implements View.OnClickListener {
 
         // try to load the icon associated with the application info of the notification
         if (mIconDrawable == null) {
-            ApplicationInfo appInfo = LauncherAppsCompat.getInstance(context).getApplicationInfo(packageUserKey.mPackageName, 0, statusBarNotification.getUser());
-            mIconDrawable = appInfo.loadIcon(context.getPackageManager());
+            ApplicationInfo appInfo;
+            try {
+                appInfo = LauncherAppsCompat.getInstance(context).getApplicationInfo(packageUserKey.mPackageName, 0, statusBarNotification.getUser());
+            } catch (Throwable statusBarUserError) {
+                LeanUtils.reportNonFatal(statusBarUserError);
+                try {
+                    appInfo = LauncherAppsCompat.getInstance(context).getApplicationInfo(packageUserKey.mPackageName, 0, Process.myUserHandle());
+                } catch (Throwable myUserError) {
+                    LeanUtils.reportNonFatal(myUserError);
+                    appInfo = null;
+                }
+            }
+
+            if (appInfo != null) {
+                mIconDrawable = appInfo.loadIcon(context.getPackageManager());
+            }
         }
 
         if (mIconDrawable == null) {
             mIconDrawable = new BitmapDrawable(context.getResources(), LauncherAppState
                     .getInstance(context).getIconCache()
                     .getDefaultIcon(statusBarNotification.getUser()));
-            mBadgeIcon = Notification.BADGE_ICON_NONE;
+            mBadgeIcon = Utilities.ATLEAST_OREO ? Notification.BADGE_ICON_NONE : 0;
         }
         intent = notification.contentIntent;
         autoCancel = (notification.flags & Notification.FLAG_AUTO_CANCEL) != 0;
