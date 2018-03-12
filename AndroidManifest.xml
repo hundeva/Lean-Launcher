@@ -56,6 +56,12 @@
         android:protectionLevel="signatureOrSystem"/>
     <uses-permission android:name="${applicationId}.permission.QSB" />
 
+    <permission
+        android:name="com.google.android.apps.nexuslauncher.permission.QSB"
+        android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
+        android:protectionLevel="signatureOrSystem" />
+    <uses-permission android:name="com.google.android.apps.nexuslauncher.permission.QSB" />
+
     <!-- Custom -->
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
