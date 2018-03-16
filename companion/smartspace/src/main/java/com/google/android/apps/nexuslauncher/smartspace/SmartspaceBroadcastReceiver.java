@@ -12,11 +12,14 @@ public class SmartspaceBroadcastReceiver extends BroadcastReceiver {
     public static final String AT_A_GLANCE_SOURCE = "com.google.android.apps.nexuslauncher.UPDATE_SMARTSPACE";
     public static final String AT_A_GLANCE_PROXY_ACTION = "com.hdeva.launcher.AT_A_GLANCE";
     public static final String AT_A_GLANCE_FORCE_ENABLE = "com.hdeva.launcher.AT_A_GLANCE_FORCE_ENABLE";
+    public static final String AT_A_GLANCE_WEATHER_ACTION = "com.hdeva.launcher.AT_A_GLANCE_WEATHER_ACTION";
+    public static final String AT_A_GLANCE_PREFERENCE_ACTION = "com.hdeva.launcher.AT_A_GLANCE_PREFERENCE_ACTION";
     public static final String ENABLE_UPDATE_ACTION = "com.google.android.apps.gsa.smartspace.ENABLE_UPDATE";
     public static final String ENABLE_UPDATE_PACKAGE = "com.google.android.googlequicksearchbox";
     public static final String ACTION_PING = "com.hdeva.launcher.AT_A_GLANCE_PING";
     public static final String ACTION_PING_RESPONSE = "com.hdeva.launcher.AT_A_GLANCE_PING_RESPONSE";
     public static final String AT_A_GLANCE_TARGET_PACKAGE = "com.hdeva.launcher";
+    public static final String INTENT_EXTRA = "com.hdeva.launcher.INTENT_EXTRA";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -48,6 +51,14 @@ public class SmartspaceBroadcastReceiver extends BroadcastReceiver {
                     ping.setPackage(AT_A_GLANCE_TARGET_PACKAGE);
                     ping.putExtra(ACTION_PING_RESPONSE, version);
                     context.sendBroadcast(ping);
+                    break;
+                case AT_A_GLANCE_WEATHER_ACTION:
+                    Intent weather = intent.getParcelableExtra(INTENT_EXTRA);
+                    context.sendBroadcast(weather);
+                    break;
+                case AT_A_GLANCE_PREFERENCE_ACTION:
+                    Intent preference = intent.getParcelableExtra(INTENT_EXTRA);
+                    context.sendBroadcast(preference);
                     break;
             }
         }
