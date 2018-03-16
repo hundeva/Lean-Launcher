@@ -148,7 +148,11 @@ public class LeanUtils {
                 launcher.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        timeoutLockOverlay.setVisibility(View.GONE);
+                        try {
+                            timeoutLockOverlay.setVisibility(View.GONE);
+                        } catch (Throwable t) {
+                            Log.e("TimeoutLock", "Failed to hide timeout overlay", t);
+                        }
                     }
                 });
             }
