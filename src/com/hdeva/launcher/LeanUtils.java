@@ -15,15 +15,19 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.Process;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherModel;
+import com.android.launcher3.LauncherRootView;
 import com.android.launcher3.R;
+import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.LooperExecutor;
@@ -93,21 +97,62 @@ public class LeanUtils {
         return height;
     }
 
-    public static void handleWorkspaceTouchEvent(Context context, MotionEvent ev) {
+    public static void handleWorkspaceTouchEvent(Launcher launcher, MotionEvent ev) {
         REGISTRY.add(ev);
-        if (LeanSettings.isDoubleTapToLockEnabled(context) && REGISTRY.shouldLock()) {
-            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-            if (devicePolicyManager != null) {
-                if (devicePolicyManager.isAdminActive(adminComponent(context))) {
-                    devicePolicyManager.lockNow();
-                } else {
-                    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-                    intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent(context));
-                    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, context.getString(R.string.double_tap_to_lock_hint));
-                    context.startActivity(intent);
-                }
+        if (LeanSettings.isDoubleTapToLockEnabled(launcher) && REGISTRY.shouldLock()) {
+            if (LeanSettings.isDoubleTapToLockSecure(launcher)) {
+                secureLock(launcher);
+            } else {
+                timeoutLock(launcher);
             }
         }
+    }
+
+    private static void secureLock(Context context) {
+        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        if (devicePolicyManager != null) {
+            if (devicePolicyManager.isAdminActive(adminComponent(context))) {
+                devicePolicyManager.lockNow();
+            } else {
+                Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent(context));
+                intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, context.getString(R.string.double_tap_to_lock_hint));
+                context.startActivity(intent);
+            }
+        }
+    }
+
+    private static void timeoutLock(final Launcher launcher) {
+        if (Utilities.ATLEAST_MARSHMALLOW) {
+            if (Settings.System.canWrite(launcher)) {
+                doTimeoutLock(launcher);
+            } else {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                intent.setData(Uri.parse("package:" + launcher.getPackageName()));
+                launcher.startActivity(intent);
+            }
+        } else {
+            doTimeoutLock(launcher);
+        }
+    }
+
+    private static void doTimeoutLock(final Launcher launcher) {
+        final LauncherRootView launcherRootView = launcher.findViewById(R.id.launcher);
+        launcherRootView.setTimeoutLocking(true);
+        final int originalTimeout = Settings.System.getInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
+        Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout);
+                launcher.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        launcherRootView.setTimeoutLocking(false);
+                    }
+                });
+            }
+        }, 7500);
     }
 
     public static void startQuickSearch(final Launcher launcher) {

@@ -26,6 +26,8 @@ public class LauncherRootView extends InsettableFrameLayout {
 
     private View mAlignedView;
 
+    private boolean isTimeoutLocking;
+
     public LauncherRootView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -96,5 +98,19 @@ public class LauncherRootView extends InsettableFrameLayout {
                 canvas.drawRect(0, 0, mLeftInsetBarWidth, getHeight(), mOpaquePaint);
             }
         }
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        if (isTimeoutLocking) {
+            canvas.drawColor(Color.BLACK);
+        } else {
+            super.draw(canvas);
+        }
+    }
+
+    public void setTimeoutLocking(boolean isTimeoutLocking) {
+        this.isTimeoutLocking = isTimeoutLocking;
+        invalidate();
     }
 }

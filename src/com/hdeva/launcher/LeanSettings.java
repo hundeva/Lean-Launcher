@@ -32,6 +32,7 @@ public class LeanSettings {
     public static final String RESET_APP_NAMES = "pref_reset_app_names";
     public static final String QSB_VOICE_ICON = "pref_qsb_voice_icon";
     public static final String HOME_ACTION = "pref_home_action";
+    public static final String DOUBLE_TAP_TO_LOCK_IS_SECURE = "pref_double_tap_to_lock_is_secure";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -55,6 +56,7 @@ public class LeanSettings {
     private static final boolean LABEL_HIDDEN_ON_DESKTOP_DEFAULT = false;
     private static final boolean LABEL_HIDDEN_ON_ALL_APPS_DEFAULT = false;
     private static final boolean QSB_VOICE_ICON_DEFAULT = true;
+    private static final boolean DOUBLE_TAP_TO_LOCK_IS_SECURE_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -243,6 +245,10 @@ public class LeanSettings {
 
     public static String getHomeAction(Context context) {
         return prefs(context).getString(HOME_ACTION, "");
+    }
+
+    public static boolean isDoubleTapToLockSecure(Context context) {
+        return prefs(context).getBoolean(DOUBLE_TAP_TO_LOCK_IS_SECURE, DOUBLE_TAP_TO_LOCK_IS_SECURE_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {
