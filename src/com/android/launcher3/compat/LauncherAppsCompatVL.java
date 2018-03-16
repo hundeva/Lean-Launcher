@@ -32,9 +32,12 @@ import android.os.UserHandle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.ArrayMap;
+
 import com.android.launcher3.compat.ShortcutConfigActivityInfo.ShortcutConfigActivityInfoVL;
 import com.android.launcher3.shortcuts.ShortcutInfoCompat;
 import com.android.launcher3.util.PackageUserKey;
+import com.hdeva.launcher.LeanUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,9 +76,27 @@ public class LauncherAppsCompatVL extends LauncherAppsCompat {
         if (!isPrimaryUser && (flags == 0)) {
             // We are looking for an installed app on a secondary profile. Prior to O, the only
             // entry point for work profiles is through the LauncherActivity.
-            List<LauncherActivityInfo> activityList =
-                    mLauncherApps.getActivityList(packageName, user);
-            return activityList.size() > 0 ? activityList.get(0).getApplicationInfo() : null;
+            try {
+                // This may throw SecurityException (sometimes other exception...) on Lollipop
+                // Try this anyway, most of the times it should work
+                List<LauncherActivityInfo> activityList =
+                        mLauncherApps.getActivityList(packageName, user);
+                return activityList.size() > 0 ? activityList.get(0).getApplicationInfo() : null;
+            } catch (Throwable outer) {
+                LeanUtils.reportNonFatal(new Exception("Failed to query launcher apps for outer user: " + user.toString(), outer));
+                // Most likely a SecurityException (or something else...) got thrown on Lollipop
+                // Try falling back to Process.myUserHandle(), it should be good enough
+                try {
+                    List<LauncherActivityInfo> activityList =
+                            mLauncherApps.getActivityList(packageName, Process.myUserHandle());
+                    return activityList.size() > 0 ? activityList.get(0).getApplicationInfo() : null;
+                } catch (Throwable inner) {
+                    LeanUtils.reportNonFatal(new Exception("Failed to query launcher apps for inner user: " + user.toString(), inner));
+                    // Even Process.myUserHandle() wasn't good enough, return nothing
+                    // The caller should be able to handle this
+                    return null;
+                }
+            }
         }
         try {
             ApplicationInfo info =
