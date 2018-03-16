@@ -137,26 +137,44 @@ public class LeanUtils {
     }
 
     private static void doTimeoutLock(final Launcher launcher) {
-        final View timeoutLockOverlay = launcher.findViewById(R.id.launcher_timeout_lock_overlay);
-        timeoutLockOverlay.setVisibility(View.VISIBLE);
-        final int originalTimeout = Settings.System.getInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
-        Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout);
-                launcher.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            timeoutLockOverlay.setVisibility(View.GONE);
-                        } catch (Throwable t) {
-                            Log.e("TimeoutLock", "Failed to hide timeout overlay", t);
-                        }
+        try {
+            final View timeoutLockOverlay = launcher.findViewById(R.id.launcher_timeout_lock_overlay);
+            timeoutLockOverlay.setVisibility(View.VISIBLE);
+            final int originalTimeout = Settings.System.getInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
+            Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout);
+                        launcher.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    timeoutLockOverlay.setVisibility(View.GONE);
+                                } catch (Throwable runOnUiThrowable) {
+                                    Log.e("TimeoutLock", "Failed to hide timeout overlay, this should mean the launcher is destroyed anyway", runOnUiThrowable);
+                                }
+                            }
+                        });
+                    } catch (Throwable handlerThrowable) {
+                        Log.e("TimeoutLock", "Error trying to restore screen timeout to user default", handlerThrowable);
+                        LeanUtils.reportNonFatal(new Exception("Error trying to restore screen timeout to user default", handlerThrowable));
                     }
-                });
-            }
-        }, 7500);
+                }
+            }, 7500);
+        } catch (Throwable timeoutLockThrowable) {
+            Log.e("TimeoutLock", "Error trying to set up timeout lock", timeoutLockThrowable);
+            LeanUtils.reportNonFatal(new Exception("Error trying to set up timeout lock", timeoutLockThrowable));
+        }
+    }
+
+    public static void surelyHideTimeoutOverlay(Launcher launcher) {
+        try {
+            launcher.findViewById(R.id.launcher_timeout_lock_overlay).setVisibility(View.GONE);
+        } catch (Throwable t) {
+            Log.e("TimeoutLock", "Error trying to make sure timeout overlay is not visible", t);
+        }
     }
 
     public static void startQuickSearch(final Launcher launcher) {
@@ -241,4 +259,5 @@ public class LeanUtils {
     private LeanUtils() {
 
     }
+
 }
