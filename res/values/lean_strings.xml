@@ -221,4 +221,6 @@
         <item>overview</item>
     </string-array>
 
+    <string name="lean_glance_not_up_to_date_please_update">Lean Glance companion is outdated. Please update to make sure everything works correctly!</string>
+
 </resources>
