@@ -21,11 +21,11 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherModel;
-import com.android.launcher3.LauncherRootView;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.LauncherAppsCompat;
@@ -137,8 +137,8 @@ public class LeanUtils {
     }
 
     private static void doTimeoutLock(final Launcher launcher) {
-        final LauncherRootView launcherRootView = launcher.findViewById(R.id.launcher);
-        launcherRootView.setTimeoutLocking(true);
+        final View timeoutLockOverlay = launcher.findViewById(R.id.launcher_timeout_lock_overlay);
+        timeoutLockOverlay.setVisibility(View.VISIBLE);
         final int originalTimeout = Settings.System.getInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
         Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
         new Handler().postDelayed(new Runnable() {
@@ -148,7 +148,7 @@ public class LeanUtils {
                 launcher.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        launcherRootView.setTimeoutLocking(false);
+                        timeoutLockOverlay.setVisibility(View.GONE);
                     }
                 });
             }
