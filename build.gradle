@@ -5,7 +5,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.3'
         classpath 'com.google.gms:google-services:3.2.0'
     }
@@ -79,6 +79,7 @@ android {
             testApplicationId 'com.android.launcher3.tests'
             resValue "string", "xmlApplicationId", applicationId
             resValue "string", "settingsApplicationId", "package:$applicationId"
+            flavorDimensions 'default'
         }
 
         l3go {
@@ -86,6 +87,7 @@ android {
             testApplicationId 'com.android.launcher3.tests'
             resValue "string", "xmlApplicationId", applicationId
             resValue "string", "settingsApplicationId", "package:$applicationId"
+            flavorDimensions 'default'
         }
     }
     sourceSets {

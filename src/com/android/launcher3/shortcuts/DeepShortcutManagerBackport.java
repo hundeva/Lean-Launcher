@@ -42,7 +42,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class DeepShortcutManagerBackport {
-    public static Drawable getShortcutIconDrawable(ShortcutInfoCompat shortcutInfo, int density) {
+    static Drawable getShortcutIconDrawable(ShortcutInfoCompat shortcutInfo, int density) {
         return ((ShortcutInfoCompatBackport) shortcutInfo).getIcon(density);
     }
 
@@ -127,8 +127,13 @@ public class DeepShortcutManagerBackport {
                                     packageName,
                                     parseXml);
 
-                            if (info != null && info.getId() != null && exportedActivities.contains(info.getActivity().getClassName())) {
-                                shortcutInfoCompats.add(info);
+                            if (info != null && info.getId() != null) {
+                                for (ResolveInfo ri : pm.queryIntentActivities(ShortcutInfoCompatBackport.stripPackage(info.makeIntent()), 0)) {
+                                    if (ri.isDefault || ri.activityInfo.exported) {
+                                        shortcutInfoCompats.add(info);
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }

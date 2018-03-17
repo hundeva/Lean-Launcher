@@ -116,5 +116,5 @@
 -keep class com.google.android.apps.nexuslauncher.CustomAppPredictor { *; }
 
 # keep Lean extensions as-is
-# the impact of these classes are negligible compared to the who codebase
+# the impact of these classes are negligible compared to the whole codebase
 -keep class com.hdeva.launcher.** { *; }
