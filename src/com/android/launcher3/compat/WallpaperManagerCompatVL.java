@@ -45,6 +45,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.android.launcher3.Utilities;
+import com.hdeva.launcher.LeanUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -256,6 +257,9 @@ public class WallpaperManagerCompatVL extends WallpaperManagerCompat {
                         decoder.recycle();
                     } catch (IOException | NullPointerException e) {
                         Log.e(TAG, "Fetching partial bitmap failed, trying old method", e);
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "Runtime error while trying to fetch partial bitmap, trying old method", e);
+                        LeanUtils.reportNonFatal(new Exception("Runtime error while trying to fetch partial bitmap, trying old method", e));
                     }
                 }
                 if (bitmap == null) {
