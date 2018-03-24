@@ -7,6 +7,7 @@ import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.animation.SpringAnimation;
 import android.support.v4.graphics.ColorUtils;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.view.inputmethod.InputMethodManager;
 
 import com.android.launcher3.AbstractFloatingView;
 import com.android.launcher3.Hotseat;
@@ -33,7 +35,6 @@ import com.android.launcher3.userevent.nano.LauncherLogProto.ContainerType;
 import com.android.launcher3.util.SystemUiController;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.TouchController;
-import com.hdeva.launcher.LeanSettings;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -352,6 +353,8 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
      */
     public void preparePull(boolean start) {
         if (start) {
+            ((InputMethodManager) mLauncher.getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(mGradientView.getWindowToken(), 0);
             // Initialize values that should not change until #onDragEnd
             mStatusBarHeight = mLauncher.getDragLayer().getInsets().top;
             mHotseat.setVisibility(View.VISIBLE);
@@ -641,7 +644,7 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
     }
 
     private boolean hasSpringAnimationHandler() {
-        return FeatureFlags.LAUNCHER3_PHYSICS && mSpringAnimationHandler != null && LeanSettings.isPhysicalAnimationEnabled(mLauncher.getApplicationContext());
+        return FeatureFlags.LAUNCHER3_PHYSICS && mSpringAnimationHandler != null;
     }
 
     @Override
