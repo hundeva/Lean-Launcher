@@ -223,4 +223,7 @@
 
     <string name="lean_glance_not_up_to_date_please_update">Lean Glance companion is outdated. Please update to make sure everything works correctly!</string>
 
+    <string name="override_app_icon">Override app icon</string>
+    <string name="available_icon_packs">Available icon packs</string>
+
 </resources>

@@ -126,6 +126,17 @@
             android:label="@string/hide_apps_title"
             android:theme="@style/SettingsTheme" />
 
+        <activity
+            android:name="com.hdeva.launcher.IconPackListActivity"
+            android:autoRemoveFromRecents="true"
+            android:label="@string/available_icon_packs"
+            android:theme="@style/SettingsTheme" />
+
+        <activity
+            android:name="com.hdeva.launcher.IconPickerActivity"
+            android:autoRemoveFromRecents="true"
+            android:theme="@style/SettingsTheme" />
+
         <!--
         The settings provider contains Home's data, like the workspace favorites. The permissions
         should be changed to what is defined above. The authorities should also be changed to

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2015 Google Inc.
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2015 Google Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,18 +15,23 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:key="pref_app_icon_pack"
-        android:title="@string/pref_icon_pack"
-        android:summary="@string/icon_shape_system_default"
-        android:defaultValue="true"
-        android:persistent="false" />
+    <Preference
+        android:key="pref_override_app_icon"
+        android:persistent="false"
+        android:title="@string/override_app_icon">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.hdeva.launcher.IconPackListActivity"
+            android:targetPackage="@string/xmlApplicationId" />
+
+    </Preference>
 
     <SwitchPreference
-        android:key="pref_app_hide"
-        android:title="@string/hide_app"
-        android:summary="@string/hide_app_sum"
         android:defaultValue="false"
-        android:persistent="false" />
+        android:key="pref_app_hide"
+        android:persistent="false"
+        android:summary="@string/hide_app_sum"
+        android:title="@string/hide_app" />
 
 </PreferenceScreen>

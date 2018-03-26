@@ -101,9 +101,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
     }
 
     public static class PrefsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
-        private final static String PREF_PACK = "pref_app_icon_pack";
         private final static String PREF_HIDE = "pref_app_hide";
-        private SwitchPreference mPrefPack;
         private SwitchPreference mPrefHide;
 
         private String mComponentName;
@@ -119,28 +117,27 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
             mComponentName = itemInfo.getTargetComponent().toString();
             mPackageName = itemInfo.getTargetComponent().getPackageName();
 
-            mPrefPack = (SwitchPreference) findPreference(PREF_PACK);
             mPrefHide = (SwitchPreference) findPreference(PREF_HIDE);
 
             Context context = getActivity();
             CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(context);
 
-            ComponentName componentName = itemInfo.getTargetComponent();
-            boolean enable = factory.packCalendars.containsKey(componentName) || factory.packComponents.containsKey(componentName);
-            mPrefPack.setEnabled(enable);
-            mPrefPack.setChecked(enable && CustomIconProvider.isEnabledForApp(context, mComponentName));
-            if (enable) {
-                PackageManager pm = context.getPackageManager();
-                try {
-                    mPrefPack.setSummary(pm.getPackageInfo(factory.iconPack, 0).applicationInfo.loadLabel(pm));
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
+//            ComponentName componentName = itemInfo.getTargetComponent();
+//            boolean enable = factory.packCalendars.containsKey(componentName) || factory.packComponents.containsKey(componentName);
+//            mPrefPack.setEnabled(enable);
+//            mPrefPack.setChecked(enable && CustomIconProvider.isEnabledForApp(context, mComponentName));
+//            if (enable) {
+//                PackageManager pm = context.getPackageManager();
+//                try {
+//                    mPrefPack.setSummary(pm.getPackageInfo(factory.iconPack, 0).applicationInfo.loadLabel(pm));
+//                } catch (PackageManager.NameNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
             mPrefHide.setChecked(CustomAppFilter.isHiddenApp(context, mComponentName, mPackageName));
 
-            mPrefPack.setOnPreferenceChangeListener(this);
+//            mPrefPack.setOnPreferenceChangeListener(this);
             mPrefHide.setOnPreferenceChangeListener(this);
         }
 
@@ -149,10 +146,10 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
             boolean enabled = (boolean) newValue;
             Launcher launcher = Launcher.getLauncher(getActivity());
             switch (preference.getKey()) {
-                case PREF_PACK:
-                    CustomIconProvider.setAppState(launcher, mComponentName, enabled);
-                    CustomIconUtils.reloadIcons(launcher, mPackageName);
-                    break;
+//                case PREF_PACK:
+//                    CustomIconProvider.setAppState(launcher, mComponentName, enabled);
+//                    CustomIconUtils.reloadIcons(launcher, mPackageName);
+//                    break;
                 case PREF_HIDE:
                     CustomAppFilter.setComponentNameState(launcher, mComponentName, mPackageName, enabled);
                     break;
