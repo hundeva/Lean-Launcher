@@ -24,7 +24,7 @@ public class IconPackListActivity extends Activity {
     private String packageName;
 
     private RecyclerView recyclerView;
-    private IconPackAdapter adapter;
+    private IconPackListAdapter adapter;
 
     public static void openForComponent(Context context, String componentName, String packageName) {
         Intent intent = new Intent(context, IconPackListActivity.class);
@@ -75,7 +75,7 @@ public class IconPackListActivity extends Activity {
 
     private void setIconPacks() {
         Map<String, CharSequence> packs = CustomIconUtils.getPackProviders(this);
-        adapter = new IconPackAdapter(componentName, packageName);
+        adapter = new IconPackListAdapter(componentName, packageName);
         adapter.refresh(packs);
         recyclerView.setAdapter(adapter);
     }

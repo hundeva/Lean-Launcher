@@ -7,15 +7,18 @@ import android.widget.TextView;
 
 import com.android.launcher3.R;
 
-public class IconPackViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class IconPackListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private String componentName;
     private String packageName;
 
+    private String key;
+    private CharSequence value;
+
     private ViewGroup container;
     private TextView name;
 
-    public IconPackViewHolder(View itemView, String componentName, String packageName) {
+    public IconPackListViewHolder(View itemView, String componentName, String packageName) {
         super(itemView);
         this.componentName = componentName;
         this.packageName = packageName;
@@ -28,10 +31,12 @@ public class IconPackViewHolder extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View v) {
-
+        IconPickerActivity.fromPackForApp(v.getContext(), componentName, packageName, key, value);
     }
 
     public void bind(String key, CharSequence value) {
+        this.key = key;
+        this.value = value;
         name.setText(value);
     }
 }
