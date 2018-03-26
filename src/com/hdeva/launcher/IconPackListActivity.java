@@ -1,6 +1,82 @@
 package com.hdeva.launcher;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
+
+import com.android.launcher3.R;
+import com.google.android.apps.nexuslauncher.CustomIconUtils;
+
+import java.util.Map;
 
 public class IconPackListActivity extends Activity {
+
+    private static final String COMPONENT_NAME_KEY = "componentName";
+    private static final String PACKAGE_NAME_KEY = "packageName";
+
+    private String componentName;
+    private String packageName;
+
+    private RecyclerView recyclerView;
+    private IconPackAdapter adapter;
+
+    public static void openForComponent(Context context, String componentName, String packageName) {
+        Intent intent = new Intent(context, IconPackListActivity.class);
+        intent.putExtra(COMPONENT_NAME_KEY, componentName);
+        intent.putExtra(PACKAGE_NAME_KEY, packageName);
+        context.startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.lean_activity_icon_pack_list);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            componentName = extras.getString(COMPONENT_NAME_KEY);
+            packageName = extras.getString(PACKAGE_NAME_KEY);
+        }
+        bindViews();
+        setIconPacks();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean handled;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                handled = true;
+                onBackPressed();
+                break;
+            default:
+                handled = super.onOptionsItemSelected(item);
+                break;
+        }
+        return handled;
+    }
+
+    private void bindViews() {
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        recyclerView = findViewById(R.id.icon_list_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+    }
+
+    private void setIconPacks() {
+        Map<String, CharSequence> packs = CustomIconUtils.getPackProviders(this);
+        adapter = new IconPackAdapter(componentName, packageName);
+        adapter.refresh(packs);
+        recyclerView.setAdapter(adapter);
+    }
 }

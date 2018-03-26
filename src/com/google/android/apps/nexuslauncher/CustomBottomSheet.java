@@ -20,7 +20,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -37,6 +36,7 @@ import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.graphics.DrawableFactory;
 import com.android.launcher3.widget.WidgetsBottomSheet;
+import com.hdeva.launcher.IconPackListActivity;
 import com.hdeva.launcher.LeanSettings;
 import com.hdeva.launcher.LeanUtils;
 
@@ -100,8 +100,11 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
         LeanUtils.reload(context);
     }
 
-    public static class PrefsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+    public static class PrefsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+        private static final String PREF_OVERRIDE_ICON = "pref_override_app_icon";
         private final static String PREF_HIDE = "pref_app_hide";
+
+        private Preference overrideIcon;
         private SwitchPreference mPrefHide;
 
         private String mComponentName;
@@ -117,6 +120,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
             mComponentName = itemInfo.getTargetComponent().toString();
             mPackageName = itemInfo.getTargetComponent().getPackageName();
 
+            overrideIcon = findPreference(PREF_OVERRIDE_ICON);
             mPrefHide = (SwitchPreference) findPreference(PREF_HIDE);
 
             Context context = getActivity();
@@ -138,6 +142,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
             mPrefHide.setChecked(CustomAppFilter.isHiddenApp(context, mComponentName, mPackageName));
 
 //            mPrefPack.setOnPreferenceChangeListener(this);
+            overrideIcon.setOnPreferenceClickListener(this);
             mPrefHide.setOnPreferenceChangeListener(this);
         }
 
@@ -152,6 +157,18 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
 //                    break;
                 case PREF_HIDE:
                     CustomAppFilter.setComponentNameState(launcher, mComponentName, mPackageName, enabled);
+                    break;
+            }
+            return true;
+        }
+
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            switch (preference.getKey()) {
+                case PREF_OVERRIDE_ICON:
+                    IconPackListActivity.openForComponent(getActivity(), mComponentName, mPackageName);
+                    break;
+                default:
                     break;
             }
             return true;

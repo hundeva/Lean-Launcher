@@ -18,14 +18,7 @@
     <Preference
         android:key="pref_override_app_icon"
         android:persistent="false"
-        android:title="@string/override_app_icon">
-
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="com.hdeva.launcher.IconPackListActivity"
-            android:targetPackage="@string/xmlApplicationId" />
-
-    </Preference>
+        android:title="@string/override_app_icon" />
 
     <SwitchPreference
         android:defaultValue="false"
