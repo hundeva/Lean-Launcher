@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion compile_sdk_version
-    buildToolsVersion build_tools_version
 
     defaultConfig {
         applicationId "com.google.android.apps.nexuslauncher"
@@ -39,5 +38,5 @@ android.variantFilter { variant ->
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
