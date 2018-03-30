@@ -14,8 +14,10 @@ import com.android.launcher3.R;
 public class LeanTimeoutActivity extends Activity {
 
     private static final String ORIGINAL_TIMEOUT_KEY = "originalTimeoutKey";
+    private static final String ORIGINAL_STAY_ON_WHILE_PLUGGED_IN_KEY = "originalStayOnWhilePluggedInKey";
 
     private int originalTimeout;
+    private int originalStayOnWhilePluggedIn;
 
     public static void startTimeout(Context context) {
         context.startActivity(new Intent(context, LeanTimeoutActivity.class));
@@ -29,17 +31,21 @@ public class LeanTimeoutActivity extends Activity {
         setContentView(R.layout.lean_activity_timeout);
         if (savedInstanceState == null) {
             originalTimeout = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
+            originalStayOnWhilePluggedIn = Settings.System.getInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0);
         } else {
             originalTimeout = savedInstanceState.getInt(ORIGINAL_TIMEOUT_KEY);
+            originalStayOnWhilePluggedIn = savedInstanceState.getInt(ORIGINAL_STAY_ON_WHILE_PLUGGED_IN_KEY);
         }
 
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
+        Settings.System.putInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(ORIGINAL_TIMEOUT_KEY, originalTimeout);
+        outState.putInt(ORIGINAL_STAY_ON_WHILE_PLUGGED_IN_KEY, originalStayOnWhilePluggedIn);
     }
 
     @Override
@@ -59,6 +65,7 @@ public class LeanTimeoutActivity extends Activity {
     public void finish() {
         super.finish();
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout);
+        Settings.System.putInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, originalStayOnWhilePluggedIn);
     }
 
     @Override
