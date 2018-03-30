@@ -120,6 +120,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.LABEL_HIDDEN_ON_ALL_APPS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.QSB_VOICE_ICON).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.BLACK_COLORS).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.SHOW_CARET).setOnPreferenceChangeListener(this);
 
             findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
 
@@ -212,6 +213,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case LeanSettings.LABEL_HIDDEN_ON_ALL_APPS:
                 case LeanSettings.QSB_VOICE_ICON:
                 case LeanSettings.BLACK_COLORS:
+                case LeanSettings.SHOW_CARET:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }

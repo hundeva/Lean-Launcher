@@ -249,4 +249,7 @@
     <string name="black_colors_title">Black colors</string>
     <string name="black_colors_summary">Use black colors for dark theme</string>
 
+    <string name="show_caret_title">Show caret</string>
+    <string name="show_caret_summary">Above the Hotseat</string>
+
 </resources>
