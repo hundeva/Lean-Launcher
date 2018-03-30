@@ -226,4 +226,18 @@
     <string name="double_tap_to_secure_lock_title">Secure lock</string>
     <string name="double_tap_to_secure_lock_summary">When double tap to locking your device, disable biometric authentication</string>
 
+    <string name="gestures_and_actions">Gestures &amp; Actions</string>
+
+    <string name="bottom_search_category">Bottom search bar</string>
+    <string name="top_search_category">App search bar</string>
+
+    <string name="color_category">Colors</string>
+    <string name="sizes_category">Sizes</string>
+
+    <string name="visibility_category">Visibility</string>
+    <string name="icons_category">Icons</string>
+
+    <string name="gestures_category">Gestures</string>
+    <string name="actions_category">Actions</string>
+
 </resources>
