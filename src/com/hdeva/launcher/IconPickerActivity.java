@@ -10,6 +10,8 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.android.launcher3.R;
@@ -19,7 +21,9 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class IconPickerActivity extends Activity {
@@ -32,6 +36,9 @@ public class IconPickerActivity extends Activity {
     private final Map<ComponentName, Integer> packComponents = new HashMap<>();
     private final Map<ComponentName, String> packCalendars = new HashMap<>();
     private final Map<Integer, CustomClock.Metadata> packClocks = new HashMap<>();
+
+    private final List<ComponentName> filteredComponents = new ArrayList<>();
+    private final List<Integer> filteredResourceIds = new ArrayList<>();
 
     private String componentName;
     private String packageName;
@@ -60,6 +67,7 @@ public class IconPickerActivity extends Activity {
         }
         bindViews();
         parsePack();
+        filterPack();
         bindPack();
     }
 
@@ -139,6 +147,26 @@ public class IconPickerActivity extends Activity {
             }
         } catch (PackageManager.NameNotFoundException | XmlPullParserException | IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void filterPack() {
+        filteredComponents.clear();
+        filteredResourceIds.clear();
+
+        for (Map.Entry<ComponentName, Integer> entry : packComponents.entrySet()) {
+            if (TextUtils.equals(entry.getKey().getPackageName(), packageName)) {
+                Log.i(":::", "filter match");
+                Log.i(":::", entry.getKey().toString());
+                Log.i(":::", componentName);
+                filteredComponents.add(entry.getKey());
+                filteredResourceIds.add(entry.getValue());
+            }
+        }
+
+        Log.i(":::", "filter: " + filteredComponents.size());
+        for (int i = 0; i < filteredComponents.size(); i++) {
+            Log.i(":::", "filter: " + filteredComponents.get(i) + " -> " + filteredResourceIds.get(i));
         }
     }
 
