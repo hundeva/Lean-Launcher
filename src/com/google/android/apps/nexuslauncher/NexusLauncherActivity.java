@@ -71,7 +71,11 @@ public class NexusLauncherActivity extends Launcher {
         int orientFlag = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 16 : 8;
         boolean useGoogleInOrientation = (orientFlag & flags) != 0;
         if (useGoogleInOrientation && isDark) {
-            setTheme(R.style.GoogleSearchLauncherThemeDark);
+            if (LeanSettings.shouldUseBlackColors(this)) {
+                setTheme(R.style.GoogleSearchLauncherThemeBlack);
+            } else {
+                setTheme(R.style.GoogleSearchLauncherThemeDark);
+            }
         } else if (useGoogleInOrientation && supportsDarkText && Utilities.ATLEAST_NOUGAT) {
             setTheme(R.style.GoogleSearchLauncherThemeDarkText);
         } else if (useGoogleInOrientation) {

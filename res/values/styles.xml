@@ -73,6 +73,13 @@
         <item name="isMainColorDark">true</item>
     </style>
 
+    <style name="LauncherThemeBlack" parent="LauncherThemeDark">
+        <item name="android:colorPrimary">#f000</item>
+        <item name="allAppsScrimColor">#f000</item>
+        <item name="allAppsNavBarScrimColor">#f000</item>
+        <item name="workspaceStatusBarScrim">@null</item>
+    </style>
+
     <!--
     Theme overrides to element on homescreen, i.e., which are drawn on top on wallpaper.
     Various foreground colors are overridden to be workspaceTextColor so that they are properly
@@ -194,6 +201,9 @@
         <item name="android:keyboardLayout">@layout/search_container_all_apps_google</item>
     </style>
     <style name="GoogleSearchLauncherThemeDark" parent="@style/LauncherThemeDark">
+        <item name="android:keyboardLayout">@layout/search_container_all_apps_google</item>
+    </style>
+    <style name="GoogleSearchLauncherThemeBlack" parent="@style/LauncherThemeBlack">
         <item name="android:keyboardLayout">@layout/search_container_all_apps_google</item>
     </style>
     <style name="GoogleSearchLauncherThemeDarkText" parent="@style/LauncherThemeDarkText">

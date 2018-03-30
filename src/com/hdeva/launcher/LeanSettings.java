@@ -35,6 +35,7 @@ public class LeanSettings {
     public static final String DOUBLE_TAP_TO_LOCK_IS_SECURE = "pref_double_tap_to_lock_is_secure";
     public static final String ONE_FINGER_DOWN = "pref_one_finger_down";
     public static final String TWO_FINGER_DOWN = "pref_two_finger_down";
+    public static final String BLACK_COLORS = "pref_black_colors";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -61,6 +62,7 @@ public class LeanSettings {
     private static final boolean DOUBLE_TAP_TO_LOCK_IS_SECURE_DEFAULT = false;
     private static final boolean ONE_FINGER_DOWN_DEFAULT = true;
     private static final boolean TWO_FINGER_DOWN_DEFAULT = true;
+    private static final boolean BLACK_COLORS_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -261,6 +263,10 @@ public class LeanSettings {
 
     public static boolean isTwoFingerDownEnabled(Context context) {
         return prefs(context).getBoolean(TWO_FINGER_DOWN, TWO_FINGER_DOWN_DEFAULT);
+    }
+
+    public static boolean shouldUseBlackColors(Context context) {
+        return prefs(context).getBoolean(BLACK_COLORS, BLACK_COLORS_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

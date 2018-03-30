@@ -47,7 +47,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -498,7 +497,11 @@ public class Launcher extends BaseActivity
 
     protected void overrideTheme(boolean isDark, boolean supportsDarkText) {
         if (isDark) {
-            setTheme(R.style.LauncherThemeDark);
+            if (LeanSettings.shouldUseBlackColors(this)) {
+                setTheme(R.style.LauncherThemeBlack);
+            } else {
+                setTheme(R.style.LauncherThemeDark);
+            }
         } else if (supportsDarkText) {
             setTheme(R.style.LauncherThemeDarkText);
         }

@@ -189,6 +189,13 @@
 
             <SwitchPreference
                 android:defaultValue="false"
+                android:key="pref_black_colors"
+                android:persistent="true"
+                android:summary="@string/black_colors_summary"
+                android:title="@string/black_colors_title" />
+
+            <SwitchPreference
+                android:defaultValue="false"
                 android:key="pref_dark_bottom_search_bar"
                 android:persistent="true"
                 android:summary="@string/if_theme_is_dark"
