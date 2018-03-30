@@ -338,6 +338,20 @@
             android:key="pref_gestures_category"
             android:title="@string/gestures_category">
 
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="pref_one_finger_down"
+                android:persistent="true"
+                android:summary="@string/one_finger_down_summary"
+                android:title="@string/one_finger_down_title" />
+
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="pref_two_finger_down"
+                android:persistent="true"
+                android:summary="@string/two_finger_down_summary"
+                android:title="@string/two_finger_down_title" />
+
         </PreferenceCategory>
 
         <PreferenceCategory

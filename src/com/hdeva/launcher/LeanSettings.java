@@ -33,6 +33,8 @@ public class LeanSettings {
     public static final String QSB_VOICE_ICON = "pref_qsb_voice_icon";
     public static final String HOME_ACTION = "pref_home_action";
     public static final String DOUBLE_TAP_TO_LOCK_IS_SECURE = "pref_double_tap_to_lock_is_secure";
+    public static final String ONE_FINGER_DOWN = "pref_one_finger_down";
+    public static final String TWO_FINGER_DOWN = "pref_two_finger_down";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -57,6 +59,8 @@ public class LeanSettings {
     private static final boolean LABEL_HIDDEN_ON_ALL_APPS_DEFAULT = false;
     private static final boolean QSB_VOICE_ICON_DEFAULT = true;
     private static final boolean DOUBLE_TAP_TO_LOCK_IS_SECURE_DEFAULT = false;
+    private static final boolean ONE_FINGER_DOWN_DEFAULT = true;
+    private static final boolean TWO_FINGER_DOWN_DEFAULT = true;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -249,6 +253,14 @@ public class LeanSettings {
 
     public static boolean isDoubleTapToLockSecure(Context context) {
         return prefs(context).getBoolean(DOUBLE_TAP_TO_LOCK_IS_SECURE, DOUBLE_TAP_TO_LOCK_IS_SECURE_DEFAULT);
+    }
+
+    public static boolean isOneFingerDownEnabled(Context context) {
+        return prefs(context).getBoolean(ONE_FINGER_DOWN, ONE_FINGER_DOWN_DEFAULT);
+    }
+
+    public static boolean isTwoFingerDownEnabled(Context context) {
+        return prefs(context).getBoolean(TWO_FINGER_DOWN, TWO_FINGER_DOWN_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

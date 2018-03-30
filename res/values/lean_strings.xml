@@ -193,7 +193,7 @@
 
     <string name="qsb_voice_icon_title">Voice search shortcut</string>
     <string name="qsb_voice_icon_summary">On the search bars</string>
-    
+
     <string name="home_action_title">Home action on home screen</string>
 
     <string name="home_action_nothing">Nothing</string>
@@ -239,5 +239,11 @@
 
     <string name="gestures_category">Gestures</string>
     <string name="actions_category">Actions</string>
+
+    <string name="one_finger_down_title">Swipe down one finger</string>
+    <string name="one_finger_down_summary">For notifications</string>
+
+    <string name="two_finger_down_title">Swipe down two finger</string>
+    <string name="two_finger_down_summary">For quick settings</string>
 
 </resources>
