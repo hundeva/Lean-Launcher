@@ -1385,6 +1385,7 @@ public class Workspace extends PagedView
                 (amount >= 0 && (!hasCustomContent() || !mIsRtl));
 
         boolean shouldScrollOverlay = mLauncherOverlay != null &&
+                !mLauncher.isAllAppsVisible() &&
                 ((amount <= 0 && !mIsRtl) || (amount >= 0 && mIsRtl));
 
         boolean shouldZeroOverlay = mLauncherOverlay != null && mLastOverlayScroll != 0 &&
@@ -2566,8 +2567,8 @@ public class Workspace extends PagedView
                         // in its final location
 
                         final LauncherAppWidgetHostView hostView = (LauncherAppWidgetHostView) cell;
-                        AppWidgetProviderInfo pInfo = hostView.getAppWidgetInfo();
-                        if (pInfo != null && pInfo.resizeMode != AppWidgetProviderInfo.RESIZE_NONE
+                        LauncherAppWidgetProviderInfo pInfo = (LauncherAppWidgetProviderInfo) hostView.getAppWidgetInfo();
+                        if (pInfo != null && (pInfo.resizeMode != AppWidgetProviderInfo.RESIZE_NONE || pInfo.minSpanX > 1 || pInfo.minSpanY > 1)
                                 && !d.accessibleDrag) {
                             mDelayedResizeRunnable = new Runnable() {
                                 public void run() {

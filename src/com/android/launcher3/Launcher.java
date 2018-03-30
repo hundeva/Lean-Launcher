@@ -1049,6 +1049,9 @@ public class Launcher extends BaseActivity
         // Refresh shortcuts if the permission changed.
         mModel.refreshShortcutsIfRequired();
 
+        if (mAllAppsController.isTransitioning()) {
+            mAppsView.setVisibility(View.VISIBLE);
+        }
         if (shouldShowDiscoveryBounce()) {
             mAllAppsController.showDiscoveryBounce();
         }
@@ -1741,6 +1744,9 @@ public class Launcher extends BaseActivity
             // otherwise, just wait until onResume to set the state back to Workspace
             if (alreadyOnHome) {
                 workspaceChanged = showWorkspace(true);
+                if (!mAllAppsController.isDragging()) {
+                    showWorkspace(true);
+                }
             } else {
                 mOnResumeState = State.WORKSPACE;
             }
@@ -2483,7 +2489,7 @@ public class Launcher extends BaseActivity
             throw new IllegalArgumentException("Input must have a valid intent");
         }
         boolean success = startActivitySafely(v, intent, item);
-        getUserEventDispatcher().logAppLaunch(v, intent); // TODO for discovered apps b/35802115
+        getUserEventDispatcher().logAppLaunch(v, intent, item.user); // TODO for discovered apps b/35802115
 
         if (success && v instanceof BubbleTextView) {
             mWaitingForResume = (BubbleTextView) v;

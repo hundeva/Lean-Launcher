@@ -9,6 +9,7 @@ import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherModel;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.UserManagerCompat;
+import com.android.launcher3.util.ComponentKey;
 import com.hdeva.launcher.LeanUtils;
 
 import java.util.HashSet;
@@ -24,8 +25,8 @@ public class CustomAppFilter extends NexusAppFilter {
     }
 
     @Override
-    public boolean shouldShowApp(ComponentName componentName) {
-        return !isHiddenApp(mContext, componentName.toString(), componentName.getPackageName());
+    public boolean shouldShowApp(ComponentName componentName, UserHandle user) {
+        return !isHiddenApp(mContext, new ComponentKey(componentName, user));
     }
 
     static void resetAppFilter(Context context) {
@@ -34,16 +35,17 @@ public class CustomAppFilter extends NexusAppFilter {
         editor.apply();
     }
 
-    public static void hideComponent(Context context, ComponentName componentName, boolean hide) {
-        setComponentNameState(context, componentName.toString(), componentName.getPackageName(), hide);
+    public static void hideComponent(Context context, ComponentKey componentKey, boolean hide) {
+        setComponentNameState(context, componentKey, hide);
     }
 
-    static void setComponentNameState(Context context, String comp, String pkg, boolean hidden) {
+    static void setComponentNameState(Context context, ComponentKey key, boolean hidden) {
+        String comp = key.toString();
         Set<String> hiddenApps = getHiddenApps(context);
         while (hiddenApps.contains(comp)) {
             hiddenApps.remove(comp);
         }
-        if (hidden != CustomIconUtils.isPackProvider(context, pkg)) {
+        if (hidden != CustomIconUtils.isPackProvider(context, key.componentName.getPackageName())) {
             hiddenApps.add(comp);
         }
         setHiddenApps(context, hiddenApps);
@@ -58,12 +60,12 @@ public class CustomAppFilter extends NexusAppFilter {
         }
     }
 
-    public static boolean isHidden(Context context, ComponentName componentName) {
-        return isHiddenApp(context, componentName.toString(), componentName.getPackageName());
+    public static boolean isHidden(Context context, ComponentKey componentKey) {
+        return isHiddenApp(context, componentKey);
     }
 
-    static boolean isHiddenApp(Context context, String comp, String pkg) {
-        return getHiddenApps(context).contains(comp) != CustomIconUtils.isPackProvider(context, pkg);
+    static boolean isHiddenApp(Context context, ComponentKey key) {
+        return getHiddenApps(context).contains(key.toString()) != CustomIconUtils.isPackProvider(context, key.componentName.getPackageName());
     }
 
     private static Set<String> getHiddenApps(Context context) {

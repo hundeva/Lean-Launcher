@@ -16,8 +16,10 @@ public class CustomEditShortcut extends SystemShortcut {
 
     @Override
     public View.OnClickListener getOnClickListener(final Launcher launcher, final ItemInfo itemInfo) {
-        CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(launcher);
-        factory.ensureInitialLoadComplete();
+        if (CustomIconUtils.usingValidPack(launcher)) {
+            CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(launcher);
+            factory.ensureInitialLoadComplete();
+        }
 
         return new View.OnClickListener() {
             @Override

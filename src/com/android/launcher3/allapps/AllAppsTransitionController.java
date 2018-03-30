@@ -353,13 +353,17 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
         return mDetector.isDraggingOrSettling();
     }
 
+    public boolean isDragging() {
+        return mDetector.isDraggingState();
+    }
+
     /**
      * @param start {@code true} if start of new drag.
      */
     public void preparePull(boolean start) {
         if (start) {
             ((InputMethodManager) mLauncher.getSystemService(Context.INPUT_METHOD_SERVICE))
-                    .hideSoftInputFromWindow(mGradientView.getWindowToken(), 0);
+                    .hideSoftInputFromWindow(mLauncher.getAppsView().getWindowToken(), 0);
             // Initialize values that should not change until #onDragEnd
             mStatusBarHeight = mLauncher.getDragLayer().getInsets().top;
             mHotseat.setVisibility(View.VISIBLE);

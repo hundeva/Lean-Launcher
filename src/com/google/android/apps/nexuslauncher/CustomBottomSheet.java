@@ -36,6 +36,7 @@ import com.android.launcher3.ItemInfo;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.graphics.DrawableFactory;
+import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.widget.WidgetsBottomSheet;
 import com.hdeva.launcher.LeanSettings;
 import com.hdeva.launcher.LeanUtils;
@@ -106,8 +107,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
         private SwitchPreference mPrefPack;
         private SwitchPreference mPrefHide;
 
-        private String mComponentName;
-        private String mPackageName;
+        private ComponentKey mKey;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -116,8 +116,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
         }
 
         public void loadForApp(ItemInfo itemInfo) {
-            mComponentName = itemInfo.getTargetComponent().toString();
-            mPackageName = itemInfo.getTargetComponent().getPackageName();
+            mKey = new ComponentKey(itemInfo.getTargetComponent(), itemInfo.user);
 
             mPrefPack = (SwitchPreference) findPreference(PREF_PACK);
             mPrefHide = (SwitchPreference) findPreference(PREF_HIDE);
@@ -128,7 +127,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
             ComponentName componentName = itemInfo.getTargetComponent();
             boolean enable = factory.packCalendars.containsKey(componentName) || factory.packComponents.containsKey(componentName);
             mPrefPack.setEnabled(enable);
-            mPrefPack.setChecked(enable && CustomIconProvider.isEnabledForApp(context, mComponentName));
+            mPrefPack.setChecked(enable && CustomIconProvider.isEnabledForApp(context, mKey));
             if (enable) {
                 PackageManager pm = context.getPackageManager();
                 try {
@@ -138,7 +137,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
                 }
             }
 
-            mPrefHide.setChecked(CustomAppFilter.isHiddenApp(context, mComponentName, mPackageName));
+            mPrefHide.setChecked(CustomAppFilter.isHiddenApp(context, mKey));
 
             mPrefPack.setOnPreferenceChangeListener(this);
             mPrefHide.setOnPreferenceChangeListener(this);
@@ -150,11 +149,11 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
             Launcher launcher = Launcher.getLauncher(getActivity());
             switch (preference.getKey()) {
                 case PREF_PACK:
-                    CustomIconProvider.setAppState(launcher, mComponentName, enabled);
-                    CustomIconUtils.reloadIcons(launcher, mPackageName);
+                    CustomIconProvider.setAppState(launcher, mKey, enabled);
+                    CustomIconUtils.reloadIconByKey(launcher, mKey);
                     break;
                 case PREF_HIDE:
-                    CustomAppFilter.setComponentNameState(launcher, mComponentName, mPackageName, enabled);
+                    CustomAppFilter.setComponentNameState(launcher, mKey, enabled);
                     break;
             }
             return true;
