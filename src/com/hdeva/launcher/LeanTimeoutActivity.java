@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.android.launcher3.R;
 
@@ -23,6 +24,7 @@ public class LeanTimeoutActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         overridePendingTransition(0, 0);
+        disableTouches();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lean_activity_timeout);
         if (savedInstanceState == null) {
@@ -63,6 +65,11 @@ public class LeanTimeoutActivity extends Activity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         setImmersiveFullScreen();
+    }
+
+    private void disableTouches() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     private void setImmersiveFullScreen() {
