@@ -223,4 +223,7 @@
 
     <string name="lean_glance_not_up_to_date_please_update">Lean Glance companion is outdated. Please update to make sure everything works correctly!</string>
 
+    <string name="double_tap_to_secure_lock_title">Secure lock</string>
+    <string name="double_tap_to_secure_lock_summary">When double tap to locking your device, disable biometric authentication</string>
+
 </resources>

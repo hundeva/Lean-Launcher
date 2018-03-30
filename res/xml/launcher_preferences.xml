@@ -333,6 +333,14 @@
             android:summary="@string/double_tap_to_lock_summary"
             android:title="@string/double_tap_to_lock_title" />
 
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="pref_double_tap_to_lock"
+            android:key="pref_double_tap_to_lock_is_secure"
+            android:persistent="true"
+            android:summary="@string/double_tap_to_secure_lock_summary"
+            android:title="@string/double_tap_to_secure_lock_title" />
+
         <ListPreference
             android:defaultValue="nothing"
             android:entries="@array/home_action_names"

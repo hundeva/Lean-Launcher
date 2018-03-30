@@ -218,4 +218,6 @@
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <item name="android:colorControlNormal">@color/colorAccent</item>
     </style>
+
+    <style name="TimeoutTheme" parent="@android:style/Theme.Material.NoActionBar" />
 </resources>

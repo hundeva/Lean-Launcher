@@ -15,13 +15,11 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
-import android.os.Handler;
 import android.os.Process;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherAppState;
@@ -125,55 +123,14 @@ public class LeanUtils {
     private static void timeoutLock(final Launcher launcher) {
         if (Utilities.ATLEAST_MARSHMALLOW) {
             if (Settings.System.canWrite(launcher)) {
-                doTimeoutLock(launcher);
+                LeanTimeoutActivity.startTimeout(launcher);
             } else {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
                 intent.setData(Uri.parse("package:" + launcher.getPackageName()));
                 launcher.startActivity(intent);
             }
         } else {
-            doTimeoutLock(launcher);
-        }
-    }
-
-    private static void doTimeoutLock(final Launcher launcher) {
-        try {
-            final View timeoutLockOverlay = launcher.findViewById(R.id.launcher_timeout_lock_overlay);
-            timeoutLockOverlay.setVisibility(View.VISIBLE);
-            final int originalTimeout = Settings.System.getInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
-            Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Settings.System.putInt(launcher.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout);
-                        launcher.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    timeoutLockOverlay.setVisibility(View.GONE);
-                                } catch (Throwable runOnUiThrowable) {
-                                    Log.e("TimeoutLock", "Failed to hide timeout overlay, this should mean the launcher is destroyed anyway", runOnUiThrowable);
-                                }
-                            }
-                        });
-                    } catch (Throwable handlerThrowable) {
-                        Log.e("TimeoutLock", "Error trying to restore screen timeout to user default", handlerThrowable);
-                        LeanUtils.reportNonFatal(new Exception("Error trying to restore screen timeout to user default", handlerThrowable));
-                    }
-                }
-            }, 7500);
-        } catch (Throwable timeoutLockThrowable) {
-            Log.e("TimeoutLock", "Error trying to set up timeout lock", timeoutLockThrowable);
-            LeanUtils.reportNonFatal(new Exception("Error trying to set up timeout lock", timeoutLockThrowable));
-        }
-    }
-
-    public static void surelyHideTimeoutOverlay(Launcher launcher) {
-        try {
-            launcher.findViewById(R.id.launcher_timeout_lock_overlay).setVisibility(View.GONE);
-        } catch (Throwable t) {
-            Log.e("TimeoutLock", "Error trying to make sure timeout overlay is not visible", t);
+            LeanTimeoutActivity.startTimeout(launcher);
         }
     }
 

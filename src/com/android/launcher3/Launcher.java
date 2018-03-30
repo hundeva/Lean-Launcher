@@ -1020,8 +1020,6 @@ public class Launcher extends BaseActivity
             getWorkspace().reinflateWidgetsIfNecessary();
         }
 
-        LeanUtils.surelyHideTimeoutOverlay(this);
-
         if (DEBUG_RESUME_TIME) {
             Log.d(TAG, "Time spent in onResume: " + (System.currentTimeMillis() - startTime));
         }

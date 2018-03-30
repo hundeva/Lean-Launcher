@@ -81,14 +81,4 @@
 
     </com.android.launcher3.dragndrop.DragLayer>
 
-    <View
-        android:id="@+id/launcher_timeout_lock_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000"
-        android:clickable="true"
-        android:fitsSystemWindows="true"
-        android:focusable="true"
-        android:visibility="gone" />
-
 </com.android.launcher3.LauncherRootView>
