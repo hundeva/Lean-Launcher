@@ -37,8 +37,16 @@ public class LeanTimeoutActivity extends Activity {
             originalStayOnWhilePluggedIn = savedInstanceState.getInt(ORIGINAL_STAY_ON_WHILE_PLUGGED_IN_KEY);
         }
 
-        Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
-        Settings.System.putInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0);
+        try {
+            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
+        } catch (Throwable t) {
+            LeanUtils.reportNonFatal(new Exception("Error writing Settings.System.SCREEN_OFF_TIMEOUT", t));
+        }
+        try {
+            Settings.System.putInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0);
+        } catch (Throwable t) {
+            LeanUtils.reportNonFatal(new Exception("Error writing Settings.Global.STAY_ON_WHILE_PLUGGED_IN", t));
+        }
     }
 
     @Override
@@ -64,8 +72,16 @@ public class LeanTimeoutActivity extends Activity {
     @Override
     public void finish() {
         super.finish();
-        Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout);
-        Settings.System.putInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, originalStayOnWhilePluggedIn);
+        try {
+            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout);
+        } catch (Throwable t) {
+            LeanUtils.reportNonFatal(new Exception("Error writing Settings.System.SCREEN_OFF_TIMEOUT", t));
+        }
+        try {
+            Settings.System.putInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, originalStayOnWhilePluggedIn);
+        } catch (Throwable t) {
+            LeanUtils.reportNonFatal(new Exception("Error writing Settings.Global.STAY_ON_WHILE_PLUGGED_IN", t));
+        }
     }
 
     @Override
