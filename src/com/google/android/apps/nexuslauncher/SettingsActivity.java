@@ -126,6 +126,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.SHOW_CARET).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.GENERATED_ADAPTIVE_BACKGROUND).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.ALLOW_TWO_LINE_LABELS).setOnPreferenceChangeListener(this);
 
             findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
             findPreference(RESTART_PREFERENCE).setOnPreferenceClickListener(this);
@@ -149,7 +150,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 ((PreferenceScreen) getPreferenceScreen().findPreference("pref_feed_screen")).removePreference(findPreference(SettingsActivity.ENABLE_MINUS_ONE_PREF));
             }
 
-            if(!Utilities.ATLEAST_OREO) {
+            if (!Utilities.ATLEAST_OREO) {
                 ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS));
                 ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATED_ADAPTIVE_BACKGROUND));
             }
@@ -225,6 +226,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case LeanSettings.QSB_VOICE_ICON:
                 case LeanSettings.BLACK_COLORS:
                 case LeanSettings.SHOW_CARET:
+                case LeanSettings.ALLOW_TWO_LINE_LABELS:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }

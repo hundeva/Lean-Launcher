@@ -39,6 +39,7 @@ public class LeanSettings {
     public static final String SHOW_CARET = "pref_show_caret";
     public static final String GENERATE_ADAPTIVE_ICONS = "pref_generate_adaptive_icons";
     public static final String GENERATED_ADAPTIVE_BACKGROUND = "pref_generated_adaptive_background";
+    public static final String ALLOW_TWO_LINE_LABELS = "pref_allow_to_line_labels";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -69,6 +70,7 @@ public class LeanSettings {
     private static final boolean SHOW_CARET_DEFAULT = true;
     private static final boolean GENERATE_ADAPTIVE_ICONS_DEFAULT = false;
     private static final boolean GENERATED_ADAPTIVE_BACKGROUND_DEFAULT = false;
+    private static final boolean ALLOW_TWO_LINE_LABELS_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -285,6 +287,10 @@ public class LeanSettings {
 
     public static boolean shouldGenerateAdaptiveBackground(Context context) {
         return prefs(context).getBoolean(GENERATED_ADAPTIVE_BACKGROUND, GENERATED_ADAPTIVE_BACKGROUND_DEFAULT);
+    }
+
+    public static boolean shouldAllowTwoLineLabels(Context context) {
+        return prefs(context).getBoolean(ALLOW_TWO_LINE_LABELS, ALLOW_TWO_LINE_LABELS_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

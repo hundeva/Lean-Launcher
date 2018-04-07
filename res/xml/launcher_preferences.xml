@@ -361,6 +361,19 @@
 
         </PreferenceCategory>
 
+        <PreferenceCategory
+            android:key="pref_other_category"
+            android:title="@string/other_category">
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="pref_allow_to_line_labels"
+                android:persistent="true"
+                android:summary="@string/allow_two_line_labels_summary"
+                android:title="@string/allow_two_line_labels_title" />
+
+        </PreferenceCategory>
+
     </PreferenceScreen>
 
     <PreferenceScreen
