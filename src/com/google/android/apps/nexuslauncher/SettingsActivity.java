@@ -44,6 +44,8 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
     private static final String SMARTSPACE_PING_RESPONSE = "com.hdeva.launcher.AT_A_GLANCE_PING_RESPONSE";
     private static final String SMARTSPACE_SETTINGS = "pref_smartspace_settings";
 
+    private static final String RESTART_PREFERENCE = "restart_lean_launcher";
+
     @Override
     protected void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
@@ -123,6 +125,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.SHOW_CARET).setOnPreferenceChangeListener(this);
 
             findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
+            findPreference(RESTART_PREFERENCE).setOnPreferenceClickListener(this);
 
             if (SmartspaceController.get(mContext).cY()) {
                 findPreference(SMARTSPACE_SETTINGS).setOnPreferenceClickListener(this);
@@ -259,6 +262,9 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     return true;
                 case LeanSettings.RESET_APP_NAMES:
                     new ResetAppNamesDialog().show(getFragmentManager(), preference.getKey());
+                    return true;
+                case RESTART_PREFERENCE:
+                    LeanUtils.restart(mContext);
                     return true;
             }
             return false;

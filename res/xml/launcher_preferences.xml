@@ -486,6 +486,11 @@
                 android:data="@string/settingsApplicationId" />
         </Preference>
 
+        <Preference
+            android:key="restart_lean_launcher"
+            android:summary="@string/restart_lean_launcher_summary"
+            android:title="@string/restart_lean_launcher_title" />
+
     </PreferenceScreen>
 
 </PreferenceScreen>

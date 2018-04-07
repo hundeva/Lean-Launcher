@@ -252,4 +252,7 @@
     <string name="show_caret_title">Show caret</string>
     <string name="show_caret_summary">Above the Hotseat</string>
 
+    <string name="restart_lean_launcher_title">Restart Lean Launcher</string>
+    <string name="restart_lean_launcher_summary">For debug purposes</string>
+
 </resources>
