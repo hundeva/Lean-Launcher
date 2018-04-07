@@ -36,6 +36,7 @@ import com.android.launcher3.shortcuts.ShortcutInfoCompat;
 import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.MultiHashMap;
 import com.android.launcher3.util.PackageUserKey;
+import com.hdeva.launcher.LeanUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -197,9 +198,14 @@ public class PopupDataProvider implements NotificationListener.NotificationsChan
             // Look for the most recent notification that has an icon that should be shown in badge.
             for (NotificationKeyData notificationKeyData : badgeInfo.getNotificationKeys()) {
                 String notificationKey = notificationKeyData.notificationKey;
-                StatusBarNotification[] activeNotifications = notificationListener
-                        .getActiveNotifications(new String[]{notificationKey});
-                if (activeNotifications.length == 1) {
+                StatusBarNotification[] activeNotifications;
+                try {
+                    activeNotifications = notificationListener.getActiveNotifications(new String[]{notificationKey});
+                } catch (Throwable t) {
+                    activeNotifications = null;
+                    LeanUtils.reportNonFatal(new Exception("Error querying active status bar notifications", t));
+                }
+                if (activeNotifications != null && activeNotifications.length == 1) {
                     notificationInfo = new NotificationInfo(mLauncher, activeNotifications[0]);
                     if (notificationInfo.shouldShowIconInBadge()) {
                         // Found an appropriate icon.
