@@ -258,4 +258,7 @@
     <string name="generate_adaptive_icons_title">Generate adaptive icons</string>
     <string name="generate_adaptive_icons_summary">For apps without adaptive icons</string>
 
+    <string name="generate_adaptive_background_title">Extract color from legacy icon</string>
+    <string name="generate_adaptive_background_summary">For generated adaptive icon backgrounds</string>
+
 </resources>

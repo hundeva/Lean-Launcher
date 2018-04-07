@@ -38,6 +38,7 @@ public class LeanSettings {
     public static final String BLACK_COLORS = "pref_black_colors";
     public static final String SHOW_CARET = "pref_show_caret";
     public static final String GENERATE_ADAPTIVE_ICONS = "pref_generate_adaptive_icons";
+    public static final String GENERATED_ADAPTIVE_BACKGROUND = "pref_generated_adaptive_background";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -67,6 +68,7 @@ public class LeanSettings {
     private static final boolean BLACK_COLORS_DEFAULT = false;
     private static final boolean SHOW_CARET_DEFAULT = true;
     private static final boolean GENERATE_ADAPTIVE_ICONS_DEFAULT = false;
+    private static final boolean GENERATED_ADAPTIVE_BACKGROUND_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -279,6 +281,10 @@ public class LeanSettings {
 
     public static boolean shouldGenerateAdaptiveIcons(Context context) {
         return prefs(context).getBoolean(GENERATE_ADAPTIVE_ICONS, GENERATE_ADAPTIVE_ICONS_DEFAULT);
+    }
+
+    public static boolean shouldGenerateAdaptiveBackground(Context context) {
+        return prefs(context).getBoolean(GENERATED_ADAPTIVE_BACKGROUND, GENERATED_ADAPTIVE_BACKGROUND_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

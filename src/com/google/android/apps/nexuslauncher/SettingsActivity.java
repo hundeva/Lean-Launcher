@@ -125,6 +125,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.BLACK_COLORS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.SHOW_CARET).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.GENERATED_ADAPTIVE_BACKGROUND).setOnPreferenceChangeListener(this);
 
             findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
             findPreference(RESTART_PREFERENCE).setOnPreferenceClickListener(this);
@@ -150,6 +151,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
 
             if(!Utilities.ATLEAST_OREO) {
                 ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS));
+                ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATED_ADAPTIVE_BACKGROUND));
             }
 
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
@@ -230,6 +232,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     break;
 
                 case LeanSettings.GENERATE_ADAPTIVE_ICONS:
+                case LeanSettings.GENERATED_ADAPTIVE_BACKGROUND:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }

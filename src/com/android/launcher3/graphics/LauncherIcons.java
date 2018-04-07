@@ -16,6 +16,7 @@
 
 package com.android.launcher3.graphics;
 
+import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +50,7 @@ import com.android.launcher3.shortcuts.DeepShortcutManager;
 import com.android.launcher3.shortcuts.ShortcutInfoCompat;
 import com.android.launcher3.util.Provider;
 import com.hdeva.launcher.LeanSettings;
+import com.hdeva.launcher.LeanUtils;
 
 /**
  * Helper methods for generating various launcher icons
@@ -296,6 +298,7 @@ public class LauncherIcons {
      * shrink the legacy icon and set it as foreground. Use color drawable as background to
      * create AdaptiveIconDrawable.
      */
+    @TargetApi(Build.VERSION_CODES.O)
     static Drawable wrapToAdaptiveIconDrawable(Context context, Drawable drawable, float scale) {
         if (!((FeatureFlags.LEGACY_ICON_TREATMENT || LeanSettings.shouldGenerateAdaptiveIcons(context)) && Utilities.ATLEAST_OREO)) {
             return drawable;
@@ -308,6 +311,11 @@ public class LauncherIcons {
                 FixedScaleDrawable fsd = ((FixedScaleDrawable) iconWrapper.getForeground());
                 fsd.setDrawable(drawable);
                 fsd.setScale(scale);
+                if (LeanSettings.shouldGenerateAdaptiveBackground(context)) {
+                    Drawable background = iconWrapper.getBackground();
+                    Bitmap bitmap = LeanUtils.drawableToBitmap(iconWrapper.getForeground());
+                    background.setTint(LeanUtils.extractAdaptiveBackgroundFromBitmap(bitmap));
+                }
                 return (Drawable) iconWrapper;
             }
         } catch (Exception e) {

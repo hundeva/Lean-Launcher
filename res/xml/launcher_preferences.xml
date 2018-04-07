@@ -352,6 +352,13 @@
                 android:summary="@string/generate_adaptive_icons_summary"
                 android:title="@string/generate_adaptive_icons_title" />
 
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="pref_generated_adaptive_background"
+                android:persistent="true"
+                android:summary="@string/generate_adaptive_background_summary"
+                android:title="@string/generate_adaptive_background_title" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
