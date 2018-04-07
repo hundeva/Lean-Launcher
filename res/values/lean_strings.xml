@@ -255,4 +255,7 @@
     <string name="restart_lean_launcher_title">Restart Lean Launcher</string>
     <string name="restart_lean_launcher_summary">For debug purposes</string>
 
+    <string name="generate_adaptive_icons_title">Generate adaptive icons</string>
+    <string name="generate_adaptive_icons_summary">For apps without adaptive icons</string>
+
 </resources>

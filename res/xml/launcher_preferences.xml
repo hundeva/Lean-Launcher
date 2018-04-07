@@ -345,6 +345,13 @@
                 android:summary="@string/reset_app_visibility_summary"
                 android:title="@string/reset_app_visibility_title" />
 
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="pref_generate_adaptive_icons"
+                android:persistent="true"
+                android:summary="@string/generate_adaptive_icons_summary"
+                android:title="@string/generate_adaptive_icons_title" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>

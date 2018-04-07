@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
@@ -123,6 +124,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.QSB_VOICE_ICON).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.BLACK_COLORS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.SHOW_CARET).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS).setOnPreferenceChangeListener(this);
 
             findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
             findPreference(RESTART_PREFERENCE).setOnPreferenceClickListener(this);
@@ -144,6 +146,10 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 }
             } catch (PackageManager.NameNotFoundException ignored) {
                 ((PreferenceScreen) getPreferenceScreen().findPreference("pref_feed_screen")).removePreference(findPreference(SettingsActivity.ENABLE_MINUS_ONE_PREF));
+            }
+
+            if(!Utilities.ATLEAST_OREO) {
+                ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS));
             }
 
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
@@ -221,6 +227,26 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }
                     LeanUtils.reloadTheme(mContext);
+                    break;
+
+                case LeanSettings.GENERATE_ADAPTIVE_ICONS:
+                    if (preference instanceof TwoStatePreference) {
+                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
+                    }
+                    CustomIconUtils.applyIconPackAsync(mContext);
+
+                    final ProgressDialog adaptiveIconDialog = ProgressDialog.show(mContext,
+                            null /* title */,
+                            mContext.getString(R.string.state_loading),
+                            true /* indeterminate */,
+                            false /* cancelable */);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            adaptiveIconDialog.cancel();
+                        }
+                    }, 1000);
                     break;
 
                 case ICON_PACK_PREF:
