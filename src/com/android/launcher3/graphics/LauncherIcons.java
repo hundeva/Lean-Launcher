@@ -115,7 +115,7 @@ public class LauncherIcons {
                 scale = normalizer.getScale(icon, null, dr.getIconMask(), outShape);
                 if ((FeatureFlags.LEGACY_ICON_TREATMENT || LeanSettings.shouldGenerateAdaptiveIcons(context)) &&
                         !outShape[0]){
-                    Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale);
+                    Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale, true);
                     if (wrappedIcon != icon) {
                         icon = wrappedIcon;
                         scale = normalizer.getScale(icon, null, null, null);
@@ -169,7 +169,7 @@ public class LauncherIcons {
                 scale = normalizer.getScale(icon, iconBounds, dr.getIconMask(), outShape);
                 if (Utilities.ATLEAST_OREO && (FeatureFlags.LEGACY_ICON_TREATMENT || LeanSettings.shouldGenerateAdaptiveIcons(context)) &&
                         !outShape[0]) {
-                    Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale);
+                    Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale, false);
                     if (wrappedIcon != icon) {
                         icon = wrappedIcon;
                         scale = normalizer.getScale(icon, iconBounds, null, null);
@@ -299,7 +299,7 @@ public class LauncherIcons {
      * create AdaptiveIconDrawable.
      */
     @TargetApi(Build.VERSION_CODES.O)
-    static Drawable wrapToAdaptiveIconDrawable(Context context, Drawable drawable, float scale) {
+    static Drawable wrapToAdaptiveIconDrawable(Context context, Drawable drawable, float scale, boolean extractColorIfEnabled) {
         if (!((FeatureFlags.LEGACY_ICON_TREATMENT || LeanSettings.shouldGenerateAdaptiveIcons(context)) && Utilities.ATLEAST_OREO)) {
             return drawable;
         }
@@ -311,7 +311,7 @@ public class LauncherIcons {
                 FixedScaleDrawable fsd = ((FixedScaleDrawable) iconWrapper.getForeground());
                 fsd.setDrawable(drawable);
                 fsd.setScale(scale);
-                if (LeanSettings.shouldGenerateAdaptiveBackground(context)) {
+                if (extractColorIfEnabled && LeanSettings.shouldGenerateAdaptiveBackground(context)) {
                     Drawable background = iconWrapper.getBackground();
                     Bitmap bitmap = LeanUtils.drawableToBitmap(iconWrapper.getForeground());
                     background.setTint(LeanUtils.extractAdaptiveBackgroundFromBitmap(bitmap));
