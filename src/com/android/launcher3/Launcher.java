@@ -2822,6 +2822,13 @@ public class Launcher extends BaseActivity
                 }
             }
         }
+
+        if ((v instanceof PageIndicator) ||
+                (v == mAllAppsButton && mAllAppsButton != null)) {
+            LeanUtils.openAppSearch(this);
+            return true;
+        }
+
         return true;
     }
 
