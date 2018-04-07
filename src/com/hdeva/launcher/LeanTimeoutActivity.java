@@ -15,6 +15,7 @@ public class LeanTimeoutActivity extends Activity {
 
     private static final String ORIGINAL_TIMEOUT_KEY = "originalTimeoutKey";
     private static final String ORIGINAL_STAY_ON_WHILE_PLUGGED_IN_KEY = "originalStayOnWhilePluggedInKey";
+    private static final int TIMEOUT_FALLBACK = 60000;
 
     private int originalTimeout;
     private int originalStayOnWhilePluggedIn;
@@ -30,7 +31,7 @@ public class LeanTimeoutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lean_activity_timeout);
         if (savedInstanceState == null) {
-            originalTimeout = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
+            originalTimeout = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, TIMEOUT_FALLBACK);
             originalStayOnWhilePluggedIn = Settings.System.getInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0);
         } else {
             originalTimeout = savedInstanceState.getInt(ORIGINAL_TIMEOUT_KEY);
@@ -65,23 +66,15 @@ public class LeanTimeoutActivity extends Activity {
     protected void onPause() {
         super.onPause();
         if (!isFinishing()) {
+            restoreTimeouts();
             finish();
         }
     }
 
     @Override
     public void finish() {
+        restoreTimeouts();
         super.finish();
-        try {
-            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout);
-        } catch (Throwable t) {
-            LeanUtils.reportNonFatal(new Exception("Error writing Settings.System.SCREEN_OFF_TIMEOUT", t));
-        }
-        try {
-            Settings.System.putInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, originalStayOnWhilePluggedIn);
-        } catch (Throwable t) {
-            LeanUtils.reportNonFatal(new Exception("Error writing Settings.Global.STAY_ON_WHILE_PLUGGED_IN", t));
-        }
     }
 
     @Override
@@ -103,5 +96,18 @@ public class LeanTimeoutActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         getWindow().getDecorView().setSystemUiVisibility(flags);
+    }
+
+    private void restoreTimeouts() {
+        try {
+            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, originalTimeout == 0 ? TIMEOUT_FALLBACK : originalTimeout);
+        } catch (Throwable t) {
+            LeanUtils.reportNonFatal(new Exception("Error writing Settings.System.SCREEN_OFF_TIMEOUT", t));
+        }
+        try {
+            Settings.System.putInt(getContentResolver(), Settings.Global.STAY_ON_WHILE_PLUGGED_IN, originalStayOnWhilePluggedIn);
+        } catch (Throwable t) {
+            LeanUtils.reportNonFatal(new Exception("Error writing Settings.Global.STAY_ON_WHILE_PLUGGED_IN", t));
+        }
     }
 }
