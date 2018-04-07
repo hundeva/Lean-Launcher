@@ -263,7 +263,11 @@ public class WallpaperManagerCompatVL extends WallpaperManagerCompat {
                     }
                 }
                 if (bitmap == null) {
-                    drawable = wm.getDrawable();
+                    try {
+                        drawable = wm.getDrawable();
+                    } catch (Throwable t) {
+                        LeanUtils.reportNonFatal(new Exception("Error getting wallpaper drawable", t));
+                    }
                 }
             }
 
