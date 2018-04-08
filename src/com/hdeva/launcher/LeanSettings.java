@@ -45,6 +45,7 @@ public class LeanSettings {
     public static final String SHORTCUT_UNLOCKED_EDIT = "pref_shortcut_unlocked_edit";
     public static final String SHORTCUT_LOCKED_UNINSTALL = "pref_shortcut_locked_uninstall";
     public static final String SHORTCUT_LOCKED_EDIT = "pref_shortcut_locked_edit";
+    public static final String CARET_LONG_PRESS = "pref_caret_long_press";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -81,6 +82,7 @@ public class LeanSettings {
     private static final boolean SHORTCUT_UNLOCKED_EDIT_DEFAULT = true;
     private static final boolean SHORTCUT_LOCKED_UNINSTALL_DEFAULT = false;
     private static final boolean SHORTCUT_LOCKED_EDIT_DEFAULT = false;
+    private static final boolean CARET_LONG_PRESS_DEFAULT = true;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -321,6 +323,10 @@ public class LeanSettings {
 
     public static boolean isLockedEditVisible(Context context) {
         return prefs(context).getBoolean(SHORTCUT_LOCKED_EDIT, SHORTCUT_LOCKED_EDIT_DEFAULT);
+    }
+
+    public static boolean shouldOpenAppSearchOnCaretLongPress(Context context) {
+        return prefs(context).getBoolean(CARET_LONG_PRESS, CARET_LONG_PRESS_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

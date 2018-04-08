@@ -272,4 +272,7 @@
     <string name="shortcut_uninstall_title">Uninstall</string>
     <string name="shortcut_edit_title">Edit</string>
 
+    <string name="search_apps_caret_title">Search apps</string>
+    <string name="search_apps_caret_summary">When long pressing caret</string>
+
 </resources>

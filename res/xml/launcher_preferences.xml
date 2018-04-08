@@ -429,6 +429,13 @@
                 android:summary="%s"
                 android:title="@string/home_action_title" />
 
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="pref_caret_long_press"
+                android:persistent="true"
+                android:summary="@string/search_apps_caret_summary"
+                android:title="@string/search_apps_caret_title" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
