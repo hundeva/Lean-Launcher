@@ -40,6 +40,11 @@ public class LeanSettings {
     public static final String GENERATE_ADAPTIVE_ICONS = "pref_generate_adaptive_icons";
     public static final String GENERATED_ADAPTIVE_BACKGROUND = "pref_generated_adaptive_background";
     public static final String ALLOW_TWO_LINE_LABELS = "pref_allow_to_line_labels";
+    public static final String SHORTCUT_UNLOCKED_WIDGETS = "pref_shortcut_unlocked_widgets";
+    public static final String SHORTCUT_UNLOCKED_UNINSTALL = "pref_shortcut_unlocked_uninstall";
+    public static final String SHORTCUT_UNLOCKED_EDIT = "pref_shortcut_unlocked_edit";
+    public static final String SHORTCUT_LOCKED_UNINSTALL = "pref_shortcut_locked_uninstall";
+    public static final String SHORTCUT_LOCKED_EDIT = "pref_shortcut_locked_edit";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -71,6 +76,11 @@ public class LeanSettings {
     private static final boolean GENERATE_ADAPTIVE_ICONS_DEFAULT = false;
     private static final boolean GENERATED_ADAPTIVE_BACKGROUND_DEFAULT = false;
     private static final boolean ALLOW_TWO_LINE_LABELS_DEFAULT = false;
+    private static final boolean SHORTCUT_UNLOCKED_WIDGETS_DEFAULT = true;
+    private static final boolean SHORTCUT_UNLOCKED_UNINSTALL_DEFAULT = true;
+    private static final boolean SHORTCUT_UNLOCKED_EDIT_DEFAULT = true;
+    private static final boolean SHORTCUT_LOCKED_UNINSTALL_DEFAULT = false;
+    private static final boolean SHORTCUT_LOCKED_EDIT_DEFAULT = false;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -291,6 +301,26 @@ public class LeanSettings {
 
     public static boolean shouldAllowTwoLineLabels(Context context) {
         return prefs(context).getBoolean(ALLOW_TWO_LINE_LABELS, ALLOW_TWO_LINE_LABELS_DEFAULT);
+    }
+
+    public static boolean isUnlockedWidgetsVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_UNLOCKED_WIDGETS, SHORTCUT_UNLOCKED_WIDGETS_DEFAULT);
+    }
+
+    public static boolean isUnlockedUninstallVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_UNLOCKED_UNINSTALL, SHORTCUT_UNLOCKED_UNINSTALL_DEFAULT);
+    }
+
+    public static boolean isUnlockedEditVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_UNLOCKED_EDIT, SHORTCUT_UNLOCKED_EDIT_DEFAULT);
+    }
+
+    public static boolean isLockedUninstallVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_LOCKED_UNINSTALL, SHORTCUT_LOCKED_UNINSTALL_DEFAULT);
+    }
+
+    public static boolean isLockedEditVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_LOCKED_EDIT, SHORTCUT_LOCKED_EDIT_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

@@ -264,4 +264,12 @@
     <string name="allow_two_line_labels_title">Allow two line labels</string>
     <string name="allow_two_line_labels_summary">For long app or folder names</string>
 
+    <string name="shortcuts_title">Shortcuts</string>
+    <string name="when_desktop_is_unlocked">When desktop is unlocked</string>
+    <string name="when_desktop_is_locked">When desktop is locked</string>
+
+    <string name="shortcut_widgets_title">Widgets</string>
+    <string name="shortcut_uninstall_title">Uninstall</string>
+    <string name="shortcut_edit_title">Edit</string>
+
 </resources>

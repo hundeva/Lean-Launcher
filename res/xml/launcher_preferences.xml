@@ -434,6 +434,55 @@
     </PreferenceScreen>
 
     <PreferenceScreen
+        android:icon="@drawable/ic_shortcut_no_shadow"
+        android:key="pref_shortcut_screen"
+        android:title="@string/shortcuts_title">
+
+        <PreferenceCategory
+            android:key="pref_unlocked_category"
+            android:title="@string/when_desktop_is_unlocked">
+
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="pref_shortcut_unlocked_widgets"
+                android:persistent="true"
+                android:title="@string/shortcut_widgets_title" />
+
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="pref_shortcut_unlocked_uninstall"
+                android:persistent="true"
+                android:title="@string/shortcut_uninstall_title" />
+
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="pref_shortcut_unlocked_edit"
+                android:persistent="true"
+                android:title="@string/shortcut_edit_title" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory
+            android:key="pref_locked_category"
+            android:title="@string/when_desktop_is_locked">
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="pref_shortcut_locked_uninstall"
+                android:persistent="true"
+                android:title="@string/shortcut_uninstall_title" />
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="pref_shortcut_locked_edit"
+                android:persistent="true"
+                android:title="@string/shortcut_edit_title" />
+
+        </PreferenceCategory>
+
+    </PreferenceScreen>
+
+    <PreferenceScreen
         android:icon="@drawable/ic_dashboard_no_shadow"
         android:key="pref_other_screen"
         android:title="@string/other_category">
