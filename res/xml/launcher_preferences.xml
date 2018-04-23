@@ -16,6 +16,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.android.launcher3.views.ButtonPreference
+        android:icon="@drawable/ic_notifications_no_shadow"
         android:key="pref_icon_badging"
         android:persistent="false"
         android:title="@string/icon_badging_title"
