@@ -86,9 +86,9 @@
     </style>
 
     <style name="LauncherThemeBlack" parent="LauncherThemeDark">
-        <item name="android:colorPrimary">#f000</item>
+        <item name="android:colorPrimary">#f222</item>
         <item name="allAppsScrimColor">#f000</item>
-        <item name="allAppsNavBarScrimColor">#f000</item>
+        <item name="allAppsNavBarScrimColor">#b000</item>
         <item name="workspaceStatusBarScrim">@null</item>
     </style>
 
