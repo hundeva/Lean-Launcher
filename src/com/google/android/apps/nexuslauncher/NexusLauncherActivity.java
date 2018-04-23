@@ -11,8 +11,8 @@ import com.android.launcher3.Utilities;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.util.ComponentKeyMapper;
 import com.android.launcher3.util.ViewOnDrawExecutor;
-import com.google.android.libraries.launcherclient.GoogleNow;
 import com.hdeva.launcher.LeanSettings;
+import com.google.android.libraries.gsa.launcherclient.LauncherClient;
 
 import java.util.List;
 
@@ -67,16 +67,17 @@ public class NexusLauncherActivity extends Launcher {
 
     public void overrideTheme(boolean isDark, boolean supportsDarkText) {
         isDark = LeanSettings.isDark(this, isDark);
-        int flags = Utilities.getDevicePrefs(this).getInt("pref_persistent_flags", 0);
+        int flags = Utilities.getDevicePrefs(this).getInt(NexusLauncherOverlay.PREF_PERSIST_FLAGS, 0);
         int orientFlag = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 16 : 8;
         boolean useGoogleInOrientation = (orientFlag & flags) != 0;
+        supportsDarkText &= Utilities.ATLEAST_NOUGAT;
         if (useGoogleInOrientation && isDark) {
             if (LeanSettings.shouldUseBlackColors(this)) {
                 setTheme(R.style.GoogleSearchLauncherThemeBlack);
             } else {
                 setTheme(R.style.GoogleSearchLauncherThemeDark);
             }
-        } else if (useGoogleInOrientation && supportsDarkText && Utilities.ATLEAST_NOUGAT) {
+        } else if (useGoogleInOrientation && supportsDarkText) {
             setTheme(R.style.GoogleSearchLauncherThemeDarkText);
         } else if (useGoogleInOrientation) {
             setTheme(R.style.GoogleSearchLauncherTheme);
@@ -86,10 +87,10 @@ public class NexusLauncherActivity extends Launcher {
     }
 
     public List<ComponentKeyMapper<AppInfo>> getPredictedApps() {
-        return mLauncher.fA.getPredictedApps();
+        return mLauncher.mCallbacks.getPredictedApps();
     }
 
-    public GoogleNow getGoogleNow() {
-        return mLauncher.fy;
+    public LauncherClient getGoogleNow() {
+        return mLauncher.mClient;
     }
 }

@@ -55,6 +55,13 @@ android {
         debug {
             minifyEnabled false
             signingConfig signingConfigs.lean
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.flags'
+        }
+
+        optimized {
+            initWith debug
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.flags'
         }
 
         release {
