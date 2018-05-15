@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -113,7 +114,10 @@ public class SettingsActivity extends Activity {
                 if (IconShapeOverride.isSupported(getActivity())) {
                     IconShapeOverride.handlePreferenceUi((ListPreference) iconShapeOverride);
                 } else {
-                    ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).removePreference(iconShapeOverride);
+                    ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen()
+                            .findPreference("pref_edit_apps_screen"))
+                            .findPreference("pref_icons_category"))
+                            .removePreference(iconShapeOverride);
                 }
             }
         }

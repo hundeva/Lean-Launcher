@@ -32,6 +32,20 @@ public class LeanSettings {
     public static final String RESET_APP_NAMES = "pref_reset_app_names";
     public static final String QSB_VOICE_ICON = "pref_qsb_voice_icon";
     public static final String HOME_ACTION = "pref_home_action";
+    public static final String DOUBLE_TAP_TO_LOCK_IS_SECURE = "pref_double_tap_to_lock_is_secure";
+    public static final String ONE_FINGER_DOWN = "pref_one_finger_down";
+    public static final String TWO_FINGER_DOWN = "pref_two_finger_down";
+    public static final String BLACK_COLORS = "pref_black_colors";
+    public static final String SHOW_CARET = "pref_show_caret";
+    public static final String GENERATE_ADAPTIVE_ICONS = "pref_generate_adaptive_icons";
+    public static final String GENERATED_ADAPTIVE_BACKGROUND = "pref_generated_adaptive_background";
+    public static final String ALLOW_TWO_LINE_LABELS = "pref_allow_to_line_labels";
+    public static final String SHORTCUT_UNLOCKED_WIDGETS = "pref_shortcut_unlocked_widgets";
+    public static final String SHORTCUT_UNLOCKED_UNINSTALL = "pref_shortcut_unlocked_uninstall";
+    public static final String SHORTCUT_UNLOCKED_EDIT = "pref_shortcut_unlocked_edit";
+    public static final String SHORTCUT_LOCKED_UNINSTALL = "pref_shortcut_locked_uninstall";
+    public static final String SHORTCUT_LOCKED_EDIT = "pref_shortcut_locked_edit";
+    public static final String CARET_LONG_PRESS = "pref_caret_long_press";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -55,6 +69,20 @@ public class LeanSettings {
     private static final boolean LABEL_HIDDEN_ON_DESKTOP_DEFAULT = false;
     private static final boolean LABEL_HIDDEN_ON_ALL_APPS_DEFAULT = false;
     private static final boolean QSB_VOICE_ICON_DEFAULT = true;
+    private static final boolean DOUBLE_TAP_TO_LOCK_IS_SECURE_DEFAULT = false;
+    private static final boolean ONE_FINGER_DOWN_DEFAULT = true;
+    private static final boolean TWO_FINGER_DOWN_DEFAULT = true;
+    private static final boolean BLACK_COLORS_DEFAULT = false;
+    private static final boolean SHOW_CARET_DEFAULT = true;
+    private static final boolean GENERATE_ADAPTIVE_ICONS_DEFAULT = false;
+    private static final boolean GENERATED_ADAPTIVE_BACKGROUND_DEFAULT = false;
+    private static final boolean ALLOW_TWO_LINE_LABELS_DEFAULT = false;
+    private static final boolean SHORTCUT_UNLOCKED_WIDGETS_DEFAULT = true;
+    private static final boolean SHORTCUT_UNLOCKED_UNINSTALL_DEFAULT = true;
+    private static final boolean SHORTCUT_UNLOCKED_EDIT_DEFAULT = true;
+    private static final boolean SHORTCUT_LOCKED_UNINSTALL_DEFAULT = false;
+    private static final boolean SHORTCUT_LOCKED_EDIT_DEFAULT = false;
+    private static final boolean CARET_LONG_PRESS_DEFAULT = true;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -243,6 +271,62 @@ public class LeanSettings {
 
     public static String getHomeAction(Context context) {
         return prefs(context).getString(HOME_ACTION, "");
+    }
+
+    public static boolean isDoubleTapToLockSecure(Context context) {
+        return prefs(context).getBoolean(DOUBLE_TAP_TO_LOCK_IS_SECURE, DOUBLE_TAP_TO_LOCK_IS_SECURE_DEFAULT);
+    }
+
+    public static boolean isOneFingerDownEnabled(Context context) {
+        return prefs(context).getBoolean(ONE_FINGER_DOWN, ONE_FINGER_DOWN_DEFAULT);
+    }
+
+    public static boolean isTwoFingerDownEnabled(Context context) {
+        return prefs(context).getBoolean(TWO_FINGER_DOWN, TWO_FINGER_DOWN_DEFAULT);
+    }
+
+    public static boolean shouldUseBlackColors(Context context) {
+        return prefs(context).getBoolean(BLACK_COLORS, BLACK_COLORS_DEFAULT);
+    }
+
+    public static boolean shouldShowCaret(Context context) {
+        return prefs(context).getBoolean(SHOW_CARET, SHOW_CARET_DEFAULT);
+    }
+
+    public static boolean shouldGenerateAdaptiveIcons(Context context) {
+        return prefs(context).getBoolean(GENERATE_ADAPTIVE_ICONS, GENERATE_ADAPTIVE_ICONS_DEFAULT);
+    }
+
+    public static boolean shouldGenerateAdaptiveBackground(Context context) {
+        return prefs(context).getBoolean(GENERATED_ADAPTIVE_BACKGROUND, GENERATED_ADAPTIVE_BACKGROUND_DEFAULT);
+    }
+
+    public static boolean shouldAllowTwoLineLabels(Context context) {
+        return prefs(context).getBoolean(ALLOW_TWO_LINE_LABELS, ALLOW_TWO_LINE_LABELS_DEFAULT);
+    }
+
+    public static boolean isUnlockedWidgetsVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_UNLOCKED_WIDGETS, SHORTCUT_UNLOCKED_WIDGETS_DEFAULT);
+    }
+
+    public static boolean isUnlockedUninstallVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_UNLOCKED_UNINSTALL, SHORTCUT_UNLOCKED_UNINSTALL_DEFAULT);
+    }
+
+    public static boolean isUnlockedEditVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_UNLOCKED_EDIT, SHORTCUT_UNLOCKED_EDIT_DEFAULT);
+    }
+
+    public static boolean isLockedUninstallVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_LOCKED_UNINSTALL, SHORTCUT_LOCKED_UNINSTALL_DEFAULT);
+    }
+
+    public static boolean isLockedEditVisible(Context context) {
+        return prefs(context).getBoolean(SHORTCUT_LOCKED_EDIT, SHORTCUT_LOCKED_EDIT_DEFAULT);
+    }
+
+    public static boolean shouldOpenAppSearchOnCaretLongPress(Context context) {
+        return prefs(context).getBoolean(CARET_LONG_PRESS, CARET_LONG_PRESS_DEFAULT);
     }
 
     private static SharedPreferences prefs(Context context) {

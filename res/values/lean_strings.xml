@@ -193,7 +193,7 @@
 
     <string name="qsb_voice_icon_title">Voice search shortcut</string>
     <string name="qsb_voice_icon_summary">On the search bars</string>
-    
+
     <string name="home_action_title">Home action on home screen</string>
 
     <string name="home_action_nothing">Nothing</string>
@@ -222,6 +222,58 @@
     </string-array>
 
     <string name="lean_glance_not_up_to_date_please_update">Lean Glance companion is outdated. Please update to make sure everything works correctly!</string>
+
+    <string name="double_tap_to_secure_lock_title">Secure lock</string>
+    <string name="double_tap_to_secure_lock_summary">When double tap to locking your device, disable biometric authentication</string>
+
+    <string name="gestures_and_actions">Gestures &amp; Actions</string>
+
+    <string name="bottom_search_category">Bottom search bar</string>
+    <string name="top_search_category">App search bar</string>
+
+    <string name="color_category">Colors</string>
+    <string name="sizes_category">Sizes</string>
+
+    <string name="visibility_category">Visibility</string>
+    <string name="icons_category">Icons</string>
+
+    <string name="gestures_category">Gestures</string>
+    <string name="actions_category">Actions</string>
+
+    <string name="one_finger_down_title">Swipe down one finger</string>
+    <string name="one_finger_down_summary">For notifications</string>
+
+    <string name="two_finger_down_title">Swipe down two finger</string>
+    <string name="two_finger_down_summary">For quick settings</string>
+
+    <string name="black_colors_title">Black colors</string>
+    <string name="black_colors_summary">Use black colors for dark theme</string>
+
+    <string name="show_caret_title">Show caret</string>
+    <string name="show_caret_summary">Above the Hotseat</string>
+
+    <string name="restart_lean_launcher_title">Restart Lean Launcher</string>
+    <string name="restart_lean_launcher_summary">For debug purposes</string>
+
+    <string name="generate_adaptive_icons_title">Generate adaptive icons</string>
+    <string name="generate_adaptive_icons_summary">For apps without adaptive icons</string>
+
+    <string name="generate_adaptive_background_title">Extract color from legacy icon</string>
+    <string name="generate_adaptive_background_summary">For generated adaptive icon backgrounds</string>
+
+    <string name="allow_two_line_labels_title">Allow two line labels</string>
+    <string name="allow_two_line_labels_summary">For long app or folder names</string>
+
+    <string name="shortcuts_title">Shortcuts</string>
+    <string name="when_desktop_is_unlocked">When desktop is unlocked</string>
+    <string name="when_desktop_is_locked">When desktop is locked</string>
+
+    <string name="shortcut_widgets_title">Widgets</string>
+    <string name="shortcut_uninstall_title">Uninstall</string>
+    <string name="shortcut_edit_title">Edit</string>
+
+    <string name="search_apps_caret_title">Search apps</string>
+    <string name="search_apps_caret_summary">When long pressing caret</string>
 
     <string name="override_app_icon">Override app icon</string>
     <string name="available_icon_packs">Available icon packs</string>

@@ -35,6 +35,7 @@ import com.android.launcher3.userevent.nano.LauncherLogProto.ContainerType;
 import com.android.launcher3.util.SystemUiController;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.TouchController;
+import com.hdeva.launcher.LeanSettings;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -231,13 +232,17 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
                 if (velocity > NOTIFICATION_OPEN_VELOCITY &&
                         (mNotificationState == NotificationState.Free || mNotificationState == NotificationState.Closed)) {
                     if (pointerCount == 1) {
-                        mNotificationState = openNotifications() ?
-                                NotificationState.Opened :
-                                NotificationState.Locked;
+                        if (LeanSettings.isOneFingerDownEnabled(mLauncher)) {
+                            mNotificationState = openNotifications() ?
+                                    NotificationState.Opened :
+                                    NotificationState.Locked;
+                        }
                     } else if (pointerCount == 2) {
-                        mNotificationState = openSettings() ?
-                                NotificationState.Opened :
-                                NotificationState.Locked;
+                        if (LeanSettings.isTwoFingerDownEnabled(mLauncher)) {
+                            mNotificationState = openSettings() ?
+                                    NotificationState.Opened :
+                                    NotificationState.Locked;
+                        }
                     }
                 } else if (velocity < NOTIFICATION_CLOSE_VELOCITY &&
                         mNotificationState == NotificationState.Opened) {
@@ -348,13 +353,17 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
         return mDetector.isDraggingOrSettling();
     }
 
+    public boolean isDragging() {
+        return mDetector.isDraggingState();
+    }
+
     /**
      * @param start {@code true} if start of new drag.
      */
     public void preparePull(boolean start) {
         if (start) {
             ((InputMethodManager) mLauncher.getSystemService(Context.INPUT_METHOD_SERVICE))
-                    .hideSoftInputFromWindow(mGradientView.getWindowToken(), 0);
+                    .hideSoftInputFromWindow(mLauncher.getAppsView().getWindowToken(), 0);
             // Initialize values that should not change until #onDragEnd
             mStatusBarHeight = mLauncher.getDragLayer().getInsets().top;
             mHotseat.setVisibility(View.VISIBLE);
@@ -395,6 +404,7 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
         if (mGradientView == null) {
             mGradientView = (GradientView) mLauncher.findViewById(R.id.gradient_bg);
             mGradientView.setVisibility(View.VISIBLE);
+            mGradientView.setShiftScrim(!Utilities.ATLEAST_MARSHMALLOW);
         }
         mGradientView.setProgress(progress);
     }

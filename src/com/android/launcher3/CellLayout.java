@@ -352,7 +352,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
                 && mStylusEventHelper.onMotionEvent(ev)) {
             return true;
         }
-        LeanUtils.handleWorkspaceTouchEvent(getContext(), ev);
+        LeanUtils.handleWorkspaceTouchEvent(mLauncher, ev);
         return handled;
     }
 

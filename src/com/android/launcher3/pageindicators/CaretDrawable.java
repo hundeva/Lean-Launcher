@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 
 import com.android.launcher3.R;
 import com.android.launcher3.util.Themes;
+import com.hdeva.launcher.LeanSettings;
 
 public class CaretDrawable extends Drawable {
     public static final float PROGRESS_CARET_POINTING_UP = -1f;
@@ -63,6 +64,10 @@ public class CaretDrawable extends Drawable {
 
         mUseShadow = !Themes.getAttrBoolean(context, R.attr.isWorkspaceDarkText);
         mCaretSizePx = res.getDimensionPixelSize(R.dimen.all_apps_caret_size);
+
+        if (!LeanSettings.shouldShowCaret(context)) {
+            setAlpha(0);
+        }
     }
 
     @Override

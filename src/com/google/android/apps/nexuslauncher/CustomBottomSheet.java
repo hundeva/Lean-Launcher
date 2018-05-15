@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -35,6 +36,7 @@ import com.android.launcher3.ItemInfo;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.graphics.DrawableFactory;
+import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.widget.WidgetsBottomSheet;
 import com.hdeva.launcher.IconPackListActivity;
 import com.hdeva.launcher.LeanSettings;
@@ -107,8 +109,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
         private Preference overrideIcon;
         private SwitchPreference mPrefHide;
 
-        private String mComponentName;
-        private String mPackageName;
+        private ComponentKey mKey;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -117,19 +118,18 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
         }
 
         public void loadForApp(ItemInfo itemInfo) {
-            mComponentName = itemInfo.getTargetComponent().toString();
-            mPackageName = itemInfo.getTargetComponent().getPackageName();
+            mKey = new ComponentKey(itemInfo.getTargetComponent(), itemInfo.user);
 
             overrideIcon = findPreference(PREF_OVERRIDE_ICON);
             mPrefHide = (SwitchPreference) findPreference(PREF_HIDE);
 
             Context context = getActivity();
-            CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(context);
+//            CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(context);
 
 //            ComponentName componentName = itemInfo.getTargetComponent();
 //            boolean enable = factory.packCalendars.containsKey(componentName) || factory.packComponents.containsKey(componentName);
 //            mPrefPack.setEnabled(enable);
-//            mPrefPack.setChecked(enable && CustomIconProvider.isEnabledForApp(context, mComponentName));
+//            mPrefPack.setChecked(enable && CustomIconProvider.isEnabledForApp(context, mKey));
 //            if (enable) {
 //                PackageManager pm = context.getPackageManager();
 //                try {
@@ -139,7 +139,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
 //                }
 //            }
 
-            mPrefHide.setChecked(CustomAppFilter.isHiddenApp(context, mComponentName, mPackageName));
+            mPrefHide.setChecked(CustomAppFilter.isHiddenApp(context, mKey));
 
 //            mPrefPack.setOnPreferenceChangeListener(this);
             overrideIcon.setOnPreferenceClickListener(this);
@@ -152,11 +152,11 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
             Launcher launcher = Launcher.getLauncher(getActivity());
             switch (preference.getKey()) {
 //                case PREF_PACK:
-//                    CustomIconProvider.setAppState(launcher, mComponentName, enabled);
-//                    CustomIconUtils.reloadIcons(launcher, mPackageName);
+//                    CustomIconProvider.setAppState(launcher, mKey, enabled);
+//                    CustomIconUtils.reloadIconByKey(launcher, mKey);
 //                    break;
                 case PREF_HIDE:
-                    CustomAppFilter.setComponentNameState(launcher, mComponentName, mPackageName, enabled);
+                    CustomAppFilter.setComponentNameState(launcher, mKey, enabled);
                     break;
             }
             return true;
@@ -166,7 +166,7 @@ public class CustomBottomSheet extends WidgetsBottomSheet {
         public boolean onPreferenceClick(Preference preference) {
             switch (preference.getKey()) {
                 case PREF_OVERRIDE_ICON:
-                    IconPackListActivity.openForComponent(getActivity(), mComponentName, mPackageName);
+                    IconPackListActivity.openForComponent(getActivity(), mKey);
                     break;
                 default:
                     break;

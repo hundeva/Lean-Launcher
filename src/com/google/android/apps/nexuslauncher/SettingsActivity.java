@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
@@ -43,6 +44,8 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
     private static final String SMARTSPACE_PING = "com.hdeva.launcher.AT_A_GLANCE_PING";
     private static final String SMARTSPACE_PING_RESPONSE = "com.hdeva.launcher.AT_A_GLANCE_PING_RESPONSE";
     private static final String SMARTSPACE_SETTINGS = "pref_smartspace_settings";
+
+    private static final String RESTART_PREFERENCE = "restart_lean_launcher";
 
     @Override
     protected void onCreate(final Bundle bundle) {
@@ -119,8 +122,14 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.LABEL_HIDDEN_ON_DESKTOP).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.LABEL_HIDDEN_ON_ALL_APPS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.QSB_VOICE_ICON).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.BLACK_COLORS).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.SHOW_CARET).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.GENERATED_ADAPTIVE_BACKGROUND).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.ALLOW_TWO_LINE_LABELS).setOnPreferenceChangeListener(this);
 
             findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
+            findPreference(RESTART_PREFERENCE).setOnPreferenceClickListener(this);
 
             if (SmartspaceController.get(mContext).cY()) {
                 findPreference(SMARTSPACE_SETTINGS).setOnPreferenceClickListener(this);
@@ -139,6 +148,11 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 }
             } catch (PackageManager.NameNotFoundException ignored) {
                 ((PreferenceScreen) getPreferenceScreen().findPreference("pref_feed_screen")).removePreference(findPreference(SettingsActivity.ENABLE_MINUS_ONE_PREF));
+            }
+
+            if (!Utilities.ATLEAST_OREO) {
+                ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS));
+                ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATED_ADAPTIVE_BACKGROUND));
             }
 
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
@@ -210,10 +224,34 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case LeanSettings.LABEL_HIDDEN_ON_DESKTOP:
                 case LeanSettings.LABEL_HIDDEN_ON_ALL_APPS:
                 case LeanSettings.QSB_VOICE_ICON:
+                case LeanSettings.BLACK_COLORS:
+                case LeanSettings.SHOW_CARET:
+                case LeanSettings.ALLOW_TWO_LINE_LABELS:
                     if (preference instanceof TwoStatePreference) {
                         ((TwoStatePreference) preference).setChecked((boolean) newValue);
                     }
                     LeanUtils.reloadTheme(mContext);
+                    break;
+
+                case LeanSettings.GENERATE_ADAPTIVE_ICONS:
+                case LeanSettings.GENERATED_ADAPTIVE_BACKGROUND:
+                    if (preference instanceof TwoStatePreference) {
+                        ((TwoStatePreference) preference).setChecked((boolean) newValue);
+                    }
+                    CustomIconUtils.applyIconPackAsync(mContext);
+
+                    final ProgressDialog adaptiveIconDialog = ProgressDialog.show(mContext,
+                            null /* title */,
+                            mContext.getString(R.string.state_loading),
+                            true /* indeterminate */,
+                            false /* cancelable */);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            adaptiveIconDialog.cancel();
+                        }
+                    }, 1000);
                     break;
 
                 case ICON_PACK_PREF:
@@ -255,6 +293,9 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     return true;
                 case LeanSettings.RESET_APP_NAMES:
                     new ResetAppNamesDialog().show(getFragmentManager(), preference.getKey());
+                    return true;
+                case RESTART_PREFERENCE:
+                    LeanUtils.restart(mContext);
                     return true;
             }
             return false;

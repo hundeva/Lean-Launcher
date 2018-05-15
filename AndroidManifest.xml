@@ -64,6 +64,8 @@
 
     <!-- Custom -->
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 
     <application
         android:backupAgent="com.android.launcher3.LauncherBackupAgent"
@@ -136,6 +138,12 @@
             android:name="com.hdeva.launcher.IconPickerActivity"
             android:autoRemoveFromRecents="true"
             android:theme="@style/SettingsTheme" />
+
+        <activity
+            android:name="com.hdeva.launcher.LeanTimeoutActivity"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/TimeoutTheme" />
 
         <!--
         The settings provider contains Home's data, like the workspace favorites. The permissions

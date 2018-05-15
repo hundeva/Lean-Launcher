@@ -11,21 +11,28 @@ import com.android.launcher3.popup.SystemShortcut;
 
 public class CustomEditShortcut extends SystemShortcut {
     public CustomEditShortcut() {
-        super(R.drawable.ic_edit_no_shadow, R.string.action_edit);
+        super(R.drawable.ic_edit_no_shadow, R.string.action_preferences);
     }
 
     @Override
     public View.OnClickListener getOnClickListener(final Launcher launcher, final ItemInfo itemInfo) {
-        CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(launcher);
-        factory.ensureInitialLoadComplete();
+        if (CustomIconUtils.usingValidPack(launcher)) {
+            CustomDrawableFactory factory = (CustomDrawableFactory) DrawableFactory.get(launcher);
+            factory.ensureInitialLoadComplete();
+        }
 
         return new View.OnClickListener() {
+            private boolean mOpened = false;
+
             @Override
             public void onClick(View view) {
-                AbstractFloatingView.closeAllOpenViews(launcher);
-                CustomBottomSheet cbs = (CustomBottomSheet) launcher.getLayoutInflater()
-                        .inflate(R.layout.app_edit_bottom_sheet, launcher.getDragLayer(), false);
-                cbs.populateAndShow(itemInfo);
+                if (!mOpened) {
+                    mOpened = true;
+                    AbstractFloatingView.closeAllOpenViews(launcher);
+                    CustomBottomSheet cbs = (CustomBottomSheet) launcher.getLayoutInflater()
+                            .inflate(R.layout.app_edit_bottom_sheet, launcher.getDragLayer(), false);
+                    cbs.populateAndShow(itemInfo);
+                }
             }
         };
     }

@@ -6,14 +6,19 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Process;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -25,6 +30,7 @@ import com.android.launcher3.CellLayout;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
+import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.dragndrop.DragLayer;
 import com.android.launcher3.util.Themes;
 import com.hdeva.launcher.LeanSettings;
@@ -69,7 +75,8 @@ public class HotseatQsbWidget extends AbstractQsbLayout {
 
     private void setColors() {
         View.inflate(new ContextThemeWrapper(getContext(), LeanSettings.isColoredGIconForced(getContext()) || mIsDefaultLiveWallpaper ? R.style.HotseatQsbTheme_Colored : R.style.HotseatQsbTheme), R.layout.qsb_hotseat_content, this);
-        bz(LeanSettings.isBottomSearchBarDark(getContext()) && Themes.getAttrBoolean(getContext(), R.attr.isMainColorDark) ? DARK_QSB_COLOR : mIsDefaultLiveWallpaper ? 0xCCFFFFFF : 0x99FAFAFA);
+        int color = LeanSettings.isBottomSearchBarDark(getContext()) && Themes.getAttrBoolean(getContext(), R.attr.isMainColorDark) ? R.color.qsb_dark_color : mIsDefaultLiveWallpaper ? R.color.qsb_background_hotseat_white : R.color.qsb_background_hotseat_default;
+        bz(ContextCompat.getColor(mActivity, color));
     }
 
     private void openQSB() {
@@ -145,8 +152,36 @@ public class HotseatQsbWidget extends AbstractQsbLayout {
 
     @Override
     protected void noGoogleAppSearch() {
-        getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com")));
-        playQsbAnimation();
+        final Intent searchIntent = new Intent("com.google.android.apps.searchlite.WIDGET_ACTION")
+                .setComponent(ComponentName.unflattenFromString("com.google.android.apps.searchlite/.ui.SearchActivity"))
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .putExtra("showKeyboard", true)
+                .putExtra("contentType", 12);
+
+        final Context context = getContext();
+        final PackageManager pm = context.getPackageManager();
+
+        if (pm.queryIntentActivities(searchIntent, 0).isEmpty()) {
+            try {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com")));
+                openQSB();
+            } catch (ActivityNotFoundException ignored) {
+                try {
+                    getContext().getPackageManager().getPackageInfo(GOOGLE_QSB, 0);
+                    LauncherAppsCompat.getInstance(getContext())
+                            .showAppDetailsForProfile(new ComponentName(GOOGLE_QSB, ".SearchActivity"), Process.myUserHandle());
+                } catch (PackageManager.NameNotFoundException ignored2) {
+                }
+            }
+        } else {
+            openQSB();
+            mAnimatorSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    context.startActivity(searchIntent);
+                }
+            });
+        }
     }
 
     private void playAnimation(boolean hideWorkspace, boolean longDuration) {

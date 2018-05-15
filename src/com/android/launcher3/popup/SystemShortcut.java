@@ -54,11 +54,17 @@ public abstract class SystemShortcut extends ItemInfo {
     public static class Edit extends com.google.android.apps.nexuslauncher.CustomEditShortcut {
         @Override
         public View.OnClickListener getOnClickListener(Launcher launcher, ItemInfo itemInfo) {
-            if (LeanSettings.isDesktopLocked(launcher.getApplicationContext())) {
-                return null;
+            if (LeanSettings.isDesktopLocked(launcher)) {
+                if (!LeanSettings.isLockedEditVisible(launcher)) {
+                    return null;
+                }
             } else {
-                return super.getOnClickListener(launcher, itemInfo);
+                if (!LeanSettings.isUnlockedEditVisible(launcher)) {
+                    return null;
+                }
             }
+
+            return super.getOnClickListener(launcher, itemInfo);
         }
     }
 
@@ -70,6 +76,16 @@ public abstract class SystemShortcut extends ItemInfo {
 
         @Override
         public View.OnClickListener getOnClickListener(final Launcher launcher, final ItemInfo itemInfo) {
+            if (LeanSettings.isDesktopLocked(launcher)) {
+                if (!LeanSettings.isLockedUninstallVisible(launcher)) {
+                    return null;
+                }
+            } else {
+                if (!LeanSettings.isUnlockedUninstallVisible(launcher)) {
+                    return null;
+                }
+            }
+
             boolean isSystemApp;
             try {
                 isSystemApp = Utilities.isSystemApp(launcher, itemInfo.getIntent());
@@ -77,7 +93,7 @@ public abstract class SystemShortcut extends ItemInfo {
                 isSystemApp = false;
             }
 
-            if (isSystemApp || LeanSettings.isDesktopLocked(launcher.getApplicationContext())) {
+            if (isSystemApp) {
                 return null;
             }
 
@@ -106,8 +122,12 @@ public abstract class SystemShortcut extends ItemInfo {
         @Override
         public View.OnClickListener getOnClickListener(final Launcher launcher,
                 final ItemInfo itemInfo) {
-            if (LeanSettings.isDesktopLocked(launcher.getApplicationContext())) {
+            if (LeanSettings.isDesktopLocked(launcher)) {
                 return null;
+            } else {
+                if (!LeanSettings.isUnlockedWidgetsVisible(launcher)) {
+                    return null;
+                }
             }
 
             final List<WidgetItem> widgets = launcher.getWidgetsForPackageUser(new PackageUserKey(

@@ -176,6 +176,13 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver {
         mOutlineHelper = HolographicOutlineHelper.getInstance(getContext());
         setAccessibilityDelegate(mLauncher.getAccessibilityDelegate());
 
+        if (LeanSettings.shouldAllowTwoLineLabels(getContext())) {
+            setSingleLine(false);
+            setLines(2);
+        } else {
+            setSingleLine(true);
+            setLines(1);
+        }
     }
 
     public void applyFromShortcutInfo(ShortcutInfo info) {

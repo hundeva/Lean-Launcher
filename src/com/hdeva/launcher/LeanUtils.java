@@ -12,11 +12,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Process;
 import android.os.SystemClock;
+import android.provider.Settings;
+import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -24,6 +30,7 @@ import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherModel;
 import com.android.launcher3.R;
+import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.LooperExecutor;
@@ -34,6 +41,7 @@ public class LeanUtils {
     private static final long WAIT_BEFORE_RESTART = 250;
     private static final LeanDoubleTapToLockRegistry REGISTRY = new LeanDoubleTapToLockRegistry();
     private static final String GOOGLE_QSB = "com.google.android.googlequicksearchbox";
+    private static final int WHITE = 0xffffffff;
 
     public static void reload(Context context) {
         LauncherAppState.getInstance(context).getModel().forceReload();
@@ -93,20 +101,42 @@ public class LeanUtils {
         return height;
     }
 
-    public static void handleWorkspaceTouchEvent(Context context, MotionEvent ev) {
+    public static void handleWorkspaceTouchEvent(Launcher launcher, MotionEvent ev) {
         REGISTRY.add(ev);
-        if (LeanSettings.isDoubleTapToLockEnabled(context) && REGISTRY.shouldLock()) {
-            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-            if (devicePolicyManager != null) {
-                if (devicePolicyManager.isAdminActive(adminComponent(context))) {
-                    devicePolicyManager.lockNow();
-                } else {
-                    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-                    intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent(context));
-                    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, context.getString(R.string.double_tap_to_lock_hint));
-                    context.startActivity(intent);
-                }
+        if (LeanSettings.isDoubleTapToLockEnabled(launcher) && REGISTRY.shouldLock()) {
+            if (LeanSettings.isDoubleTapToLockSecure(launcher)) {
+                secureLock(launcher);
+            } else {
+                timeoutLock(launcher);
             }
+        }
+    }
+
+    private static void secureLock(Context context) {
+        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        if (devicePolicyManager != null) {
+            if (devicePolicyManager.isAdminActive(adminComponent(context))) {
+                devicePolicyManager.lockNow();
+            } else {
+                Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent(context));
+                intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, context.getString(R.string.double_tap_to_lock_hint));
+                context.startActivity(intent);
+            }
+        }
+    }
+
+    private static void timeoutLock(final Launcher launcher) {
+        if (Utilities.ATLEAST_MARSHMALLOW) {
+            if (Settings.System.canWrite(launcher)) {
+                LeanTimeoutActivity.startTimeout(launcher);
+            } else {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                intent.setData(Uri.parse("package:" + launcher.getPackageName()));
+                launcher.startActivity(intent);
+            }
+        } else {
+            LeanTimeoutActivity.startTimeout(launcher);
         }
     }
 
@@ -189,7 +219,61 @@ public class LeanUtils {
         return new ComponentName(context, LeanDeviceAdmin.class);
     }
 
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        Bitmap bitmap;
+
+        try {
+            if (drawable instanceof BitmapDrawable) {
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+                if (bitmapDrawable.getBitmap() != null) {
+                    return bitmapDrawable.getBitmap();
+                }
+            }
+
+            if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+            } else {
+                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            }
+
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+        } catch (Throwable t) {
+            bitmap = null;
+        }
+        return bitmap;
+    }
+
+    public static int extractAdaptiveBackgroundFromBitmap(Bitmap bitmap) {
+        int background;
+        try {
+            Palette palette = Palette.from(bitmap).generate();
+            if (palette.getLightMutedSwatch() != null) {
+                background = palette.getLightMutedSwatch().getRgb();
+            } else if (palette.getMutedSwatch() != null) {
+                background = palette.getMutedSwatch().getRgb();
+            } else if (palette.getLightVibrantSwatch() != null) {
+                background = palette.getLightVibrantSwatch().getRgb();
+            } else if (palette.getVibrantSwatch() != null) {
+                background = palette.getVibrantSwatch().getRgb();
+            } else if (palette.getDarkVibrantSwatch() != null) {
+                background = palette.getDarkVibrantSwatch().getRgb();
+            } else if (palette.getDarkMutedSwatch() != null) {
+                background = palette.getDarkMutedSwatch().getRgb();
+            } else if (palette.getDominantSwatch() != null) {
+                background = palette.getDominantSwatch().getRgb();
+            } else {
+                background = WHITE;
+            }
+        } catch (Throwable t) {
+            background = WHITE;
+        }
+        return background;
+    }
+
     private LeanUtils() {
 
     }
+
 }

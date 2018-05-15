@@ -47,7 +47,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -498,7 +497,11 @@ public class Launcher extends BaseActivity
 
     protected void overrideTheme(boolean isDark, boolean supportsDarkText) {
         if (isDark) {
-            setTheme(R.style.LauncherThemeDark);
+            if (LeanSettings.shouldUseBlackColors(this)) {
+                setTheme(R.style.LauncherThemeBlack);
+            } else {
+                setTheme(R.style.LauncherThemeDark);
+            }
         } else if (supportsDarkText) {
             setTheme(R.style.LauncherThemeDarkText);
         }
@@ -527,12 +530,9 @@ public class Launcher extends BaseActivity
     }
 
     private void loadExtractedColorsAndColorItems() {
-        // TODO: do this in pre-N as well, once the extraction part is complete.
-        if (Utilities.ATLEAST_NOUGAT) {
-            mExtractedColors.load(this);
-            mHotseat.updateColor(mExtractedColors, !mPaused);
-            mWorkspace.getPageIndicator().updateColor(mExtractedColors);
-        }
+        mExtractedColors.load(this);
+        mHotseat.updateColor(mExtractedColors, !mPaused);
+        mWorkspace.getPageIndicator().updateColor(mExtractedColors);
     }
 
     private LauncherCallbacks mLauncherCallbacks;
@@ -1049,6 +1049,9 @@ public class Launcher extends BaseActivity
         // Refresh shortcuts if the permission changed.
         mModel.refreshShortcutsIfRequired();
 
+        if (mAllAppsController.isTransitioning()) {
+            mAppsView.setVisibility(View.VISIBLE);
+        }
         if (shouldShowDiscoveryBounce()) {
             mAllAppsController.showDiscoveryBounce();
         }
@@ -1741,6 +1744,9 @@ public class Launcher extends BaseActivity
             // otherwise, just wait until onResume to set the state back to Workspace
             if (alreadyOnHome) {
                 workspaceChanged = showWorkspace(true);
+                if (!mAllAppsController.isDragging()) {
+                    showWorkspace(true);
+                }
             } else {
                 mOnResumeState = State.WORKSPACE;
             }
@@ -2483,7 +2489,7 @@ public class Launcher extends BaseActivity
             throw new IllegalArgumentException("Input must have a valid intent");
         }
         boolean success = startActivitySafely(v, intent, item);
-        getUserEventDispatcher().logAppLaunch(v, intent); // TODO for discovered apps b/35802115
+        getUserEventDispatcher().logAppLaunch(v, intent, item.user); // TODO for discovered apps b/35802115
 
         if (success && v instanceof BubbleTextView) {
             mWaitingForResume = (BubbleTextView) v;
@@ -2813,6 +2819,14 @@ public class Launcher extends BaseActivity
                 }
             }
         }
+
+        if ((v instanceof PageIndicator) || (v == mAllAppsButton && mAllAppsButton != null)) {
+            if (LeanSettings.shouldOpenAppSearchOnCaretLongPress(this)) {
+                LeanUtils.openAppSearch(this);
+                return true;
+            }
+        }
+
         return true;
     }
 

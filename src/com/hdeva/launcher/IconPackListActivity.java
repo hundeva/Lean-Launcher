@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.android.launcher3.R;
+import com.android.launcher3.util.ComponentKey;
 import com.google.android.apps.nexuslauncher.CustomIconUtils;
 
 import java.util.Map;
@@ -25,6 +26,10 @@ public class IconPackListActivity extends Activity {
 
     private RecyclerView recyclerView;
     private IconPackListAdapter adapter;
+
+    public static void openForComponent(Context context, ComponentKey key) {
+        openForComponent(context, key.componentName.flattenToShortString(), key.componentName.getPackageName());
+    }
 
     public static void openForComponent(Context context, String componentName, String packageName) {
         Intent intent = new Intent(context, IconPackListActivity.class);
