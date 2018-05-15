@@ -114,7 +114,7 @@ public class CustomIconUtils {
         });
     }
 
-    static void reloadIconByKey(Context context, ComponentKey key) {
+    public static void reloadIconByKey(Context context, ComponentKey key) {
         LauncherModel model = LauncherAppState.getInstance(context).getModel();
         DeepShortcutManager shortcutManager = DeepShortcutManager.getInstance(context);
         reloadIcon(shortcutManager, model, key.user, key.componentName.getPackageName());

@@ -63,13 +63,12 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
     private void doFilter() {
         filteredIcons.clear();
-        if (TextUtils.isEmpty(filter)) {
-            return;
-        }
 
-        for (AppIconInfo appIconInfo : appIcons) {
-            if (appIconInfo.componentName != null && appIconInfo.componentName.getPackageName().contains(filter)) {
-                filteredIcons.add(appIconInfo);
+        if (!TextUtils.isEmpty(filter)) {
+            for (AppIconInfo appIconInfo : appIcons) {
+                if (appIconInfo.componentName != null && appIconInfo.componentName.getPackageName().contains(filter)) {
+                    filteredIcons.add(appIconInfo);
+                }
             }
         }
         notifyDataSetChanged();
