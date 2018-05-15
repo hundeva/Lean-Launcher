@@ -277,5 +277,6 @@
 
     <string name="override_app_icon">Override app icon</string>
     <string name="available_icon_packs">Available icon packs</string>
+    <string name="custom_app_filter_hint">Filter package names&#8230;</string>
 
 </resources>

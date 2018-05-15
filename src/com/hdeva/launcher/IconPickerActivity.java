@@ -4,35 +4,30 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.android.launcher3.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class IconPickerActivity extends Activity implements IconPackLoaderListener {
+public class IconPickerActivity extends Activity implements IconPackLoaderListener, TextWatcher {
 
     private static final String LOADER_TAG = "iconPackLoader";
     private static final String COMPONENT_NAME_KEY = "componentName";
     private static final String PACKAGE_NAME_KEY = "packageName";
     private static final String PACK_KEY_KEY = "packKey";
     private static final String PACK_VALUE_KEY = "packValue";
-
-    private final List<ComponentName> filteredComponents = new ArrayList<>();
-    private final List<Integer> filteredResourceIds = new ArrayList<>();
 
     private String componentName;
     private String packageName;
@@ -42,6 +37,8 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
     private IconPackLoader loader;
 
     private ProgressBar progressBar;
+    private LinearLayout container;
+    private EditText filter;
     private RecyclerView recyclerView;
 
     private AppIconAdapter adapter;
@@ -113,7 +110,11 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
         setTitle(packValue);
 
         progressBar = findViewById(R.id.icon_picker_progress);
+        container = findViewById(R.id.icon_picker_container);
+        filter = findViewById(R.id.icon_picker_filter);
         recyclerView = findViewById(R.id.icon_picker_recycler_view);
+
+        filter.addTextChangedListener(this);
 
         adapter = new AppIconAdapter(packKey);
         recyclerView.setLayoutManager(new GridLayoutManager(this, calculateGridCount()));
@@ -149,26 +150,6 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
         }
     }
 
-    private void filterPack() {
-        filteredComponents.clear();
-        filteredResourceIds.clear();
-
-        for (AppIconInfo appIconInfo : loader.getAppIcons()) {
-            if (TextUtils.equals(appIconInfo.componentName.getPackageName(), packageName)) {
-                Log.i(":::", "filter match");
-                Log.i(":::", appIconInfo.toString());
-                Log.i(":::", componentName);
-                filteredComponents.add(appIconInfo.componentName);
-                filteredResourceIds.add(appIconInfo.resourceId);
-            }
-        }
-
-        Log.i(":::", "filter: " + filteredComponents.size());
-        for (int i = 0; i < filteredComponents.size(); i++) {
-            Log.i(":::", "filter: " + filteredComponents.get(i) + " -> " + filteredResourceIds.get(i));
-        }
-    }
-
     private void bindPack() {
         if (loader.getAppIcons().isEmpty()) {
             progressBar.setVisibility(View.VISIBLE);
@@ -179,5 +160,20 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
         }
 
         adapter.setIconList(loader.getAppIcons());
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        adapter.filter(s.toString());
     }
 }

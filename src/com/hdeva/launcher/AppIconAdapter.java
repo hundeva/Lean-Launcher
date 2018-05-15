@@ -1,8 +1,8 @@
 package com.hdeva.launcher;
 
-import android.content.ComponentName;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +11,13 @@ import com.android.launcher3.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
-    private List<AppIconInfo> appIcons;
-    private String packKey;
+    private final List<AppIconInfo> appIcons = new ArrayList<>();
+    private final List<AppIconInfo> filteredIcons = new ArrayList<>();
+    private final String packKey;
+    private String filter;
 
     public AppIconAdapter(String packKey) {
         setHasStableIds(true);
@@ -32,21 +33,45 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull AppIconViewHolder holder, int position) {
-        holder.bind(packKey, appIcons.get(position));
+        holder.bind(packKey, getItem(position));
     }
 
     @Override
     public long getItemId(int position) {
-        return appIcons.get(position).componentName.hashCode();
+        return getItem(position).componentName.hashCode();
     }
 
     @Override
     public int getItemCount() {
-        return appIcons == null ? 0 : appIcons.size();
+        return filteredIcons.size() > 0 ? filteredIcons.size() : appIcons.size();
+    }
+
+    private AppIconInfo getItem(int position) {
+        return filteredIcons.size() > 0 ? filteredIcons.get(position) : appIcons.get(position);
     }
 
     public void setIconList(List<AppIconInfo> appIcons) {
-        this.appIcons = appIcons;
+        this.appIcons.clear();
+        this.appIcons.addAll(appIcons);
+        doFilter();
+    }
+
+    public void filter(String filter) {
+        this.filter = filter;
+        doFilter();
+    }
+
+    private void doFilter() {
+        filteredIcons.clear();
+        if (TextUtils.isEmpty(filter)) {
+            return;
+        }
+
+        for (AppIconInfo appIconInfo : appIcons) {
+            if (appIconInfo.componentName != null && appIconInfo.componentName.getPackageName().contains(filter)) {
+                filteredIcons.add(appIconInfo);
+            }
+        }
         notifyDataSetChanged();
     }
 }
