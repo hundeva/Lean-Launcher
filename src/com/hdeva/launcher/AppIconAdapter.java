@@ -43,11 +43,11 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
     @Override
     public int getItemCount() {
-        return filteredIcons.size() > 0 ? filteredIcons.size() : appIcons.size();
+        return !TextUtils.isEmpty(filter) || filteredIcons.size() > 0 ? filteredIcons.size() : appIcons.size();
     }
 
     private AppIconInfo getItem(int position) {
-        return filteredIcons.size() > 0 ? filteredIcons.get(position) : appIcons.get(position);
+        return !TextUtils.isEmpty(filter) || filteredIcons.size() > 0 ? filteredIcons.get(position) : appIcons.get(position);
     }
 
     public void setIconList(List<AppIconInfo> appIcons) {

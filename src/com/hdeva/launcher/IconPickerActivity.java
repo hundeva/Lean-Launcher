@@ -4,8 +4,10 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,9 +15,11 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -23,6 +27,7 @@ import com.android.launcher3.R;
 
 public class IconPickerActivity extends Activity implements IconPackLoaderListener, TextWatcher {
 
+    private static final String TAG = "IconPickerActivity";
     private static final String LOADER_TAG = "iconPackLoader";
     private static final String COMPONENT_NAME_KEY = "componentName";
     private static final String PACKAGE_NAME_KEY = "packageName";
@@ -63,9 +68,9 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
             packKey = extras.getString(PACK_KEY_KEY);
             packValue = extras.getString(PACK_VALUE_KEY);
         }
+
         bindViews();
         setupLoader();
-        //filterPack();
         bindPack();
     }
 
@@ -113,6 +118,14 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
         container = findViewById(R.id.icon_picker_container);
         filter = findViewById(R.id.icon_picker_filter);
         recyclerView = findViewById(R.id.icon_picker_recycler_view);
+
+        try {
+            WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+            final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+            recyclerView.setBackground(wallpaperDrawable);
+        } catch (Throwable t) {
+            Log.e(TAG, "Error setting wallpaper background on recycler view", t);
+        }
 
         filter.addTextChangedListener(this);
 
