@@ -557,6 +557,11 @@ public final class Utilities {
                 LauncherFiles.CUSTOM_APP_NAMES, Context.MODE_PRIVATE);
     }
 
+    public static SharedPreferences getCustomIconPrefs(Context context) {
+        return context.getSharedPreferences(
+                LauncherFiles.CUSTOM_ICON, Context.MODE_PRIVATE);
+    }
+
     public static SharedPreferences getDevicePrefs(Context context) {
         return context.getSharedPreferences(
                 LauncherFiles.DEVICE_PREFERENCES_KEY, Context.MODE_PRIVATE);

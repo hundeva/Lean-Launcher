@@ -16,11 +16,13 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
     private final List<AppIconInfo> appIcons = new ArrayList<>();
     private final List<AppIconInfo> filteredIcons = new ArrayList<>();
+    private final String appComponentName;
     private final String packKey;
     private String filter;
 
-    public AppIconAdapter(String packKey) {
+    public AppIconAdapter(String appComponentName, String packKey) {
         setHasStableIds(true);
+        this.appComponentName = appComponentName;
         this.packKey = packKey;
     }
 
@@ -33,7 +35,7 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull AppIconViewHolder holder, int position) {
-        holder.bind(packKey, getItem(position));
+        holder.bind(appComponentName, packKey, getItem(position));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.hdeva.launcher;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,10 +14,12 @@ import com.google.android.apps.nexuslauncher.CustomIconUtils;
 
 public class AppIconViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    ViewGroup container;
-    ImageView icon;
+    private ViewGroup container;
+    private ImageView icon;
 
-    AppIconInfo appIconInfo;
+    private String appComponentName;
+    private String packKey;
+    private AppIconInfo appIconInfo;
 
     public AppIconViewHolder(View itemView) {
         super(itemView);
@@ -28,13 +29,14 @@ public class AppIconViewHolder extends RecyclerView.ViewHolder implements View.O
         container.setOnClickListener(this);
     }
 
-    public void bind(String packKey, AppIconInfo appIconInfo) {
+    public void bind(String appComponentName, String packKey, AppIconInfo appIconInfo) {
+        this.appComponentName = appComponentName;
+        this.packKey = packKey;
         this.appIconInfo = appIconInfo;
 
         Drawable drawable;
         try {
-            Resources resources = itemView.getContext().getPackageManager().getResourcesForApplication(packKey);
-            drawable = resources.getDrawable(appIconInfo.resourceId);
+            drawable = itemView.getContext().getPackageManager().getDrawable(packKey, appIconInfo.resourceId, null);
         } catch (Throwable t) {
             drawable = null;
         }
@@ -48,8 +50,9 @@ public class AppIconViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
+        LeanSettings.setCustomIcon(v.getContext(), appComponentName, packKey, appIconInfo.resourceId);
+        CustomIconUtils.reloadIconByKey(v.getContext(), new ComponentKey(v.getContext(), appComponentName));
         Toast.makeText(v.getContext(), R.string.applying_icon, Toast.LENGTH_SHORT).show();
-        CustomIconUtils.reloadIconByKey(v.getContext(), new ComponentKey(v.getContext(), appIconInfo.componentName.flattenToString()));
 
         if (v.getContext() instanceof Activity) {
             ((Activity) v.getContext()).finish();

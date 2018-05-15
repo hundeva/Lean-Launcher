@@ -3,6 +3,7 @@ package com.hdeva.launcher;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Pair;
 
 import com.android.launcher3.Utilities;
 
@@ -87,6 +88,9 @@ public class LeanSettings {
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
     private static final String THEME_DARK = "dark";
+
+    private static final String CUSTOM_ICON_PACK_KEY_TEMPLATE = "%s#pack";
+    private static final String CUSTOM_ICON_RES_KEY_TEMPLATE = "%s#res";
 
     public static boolean isLeanSettingsDirty(Context context) {
         return prefs(context).getBoolean(SETTINGS_DIRTY, SETTINGS_DIRTY_DEFAULT);
@@ -327,6 +331,20 @@ public class LeanSettings {
 
     public static boolean shouldOpenAppSearchOnCaretLongPress(Context context) {
         return prefs(context).getBoolean(CARET_LONG_PRESS, CARET_LONG_PRESS_DEFAULT);
+    }
+
+    public static Pair<String, Integer> getCustomIcon(Context context, ComponentName forComponent) {
+        String iconPack = Utilities.getCustomIconPrefs(context).getString(String.format(CUSTOM_ICON_PACK_KEY_TEMPLATE, forComponent.flattenToString()), null);
+        int resId = Utilities.getCustomIconPrefs(context).getInt(String.format(CUSTOM_ICON_RES_KEY_TEMPLATE, forComponent.flattenToString()), 0);
+        return Pair.create(iconPack, resId);
+    }
+
+    public static void setCustomIcon(Context context, String forComponent, String iconPack, int iconResId) {
+        Utilities.getCustomIconPrefs(context)
+                .edit()
+                .putString(String.format(CUSTOM_ICON_PACK_KEY_TEMPLATE, forComponent), iconPack)
+                .putInt(String.format(CUSTOM_ICON_RES_KEY_TEMPLATE, forComponent), iconResId)
+                .apply();
     }
 
     private static SharedPreferences prefs(Context context) {

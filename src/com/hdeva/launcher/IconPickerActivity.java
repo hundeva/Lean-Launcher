@@ -129,7 +129,7 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
 
         filter.addTextChangedListener(this);
 
-        adapter = new AppIconAdapter(packKey);
+        adapter = new AppIconAdapter(componentName, packKey);
         recyclerView.setLayoutManager(new GridLayoutManager(this, calculateGridCount()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
