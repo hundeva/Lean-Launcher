@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.launcher3.R;
 import com.android.launcher3.util.ComponentKey;
@@ -52,9 +54,22 @@ public class IconPackListActivity extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.lean_menu_icon_picker, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean handled;
         switch (item.getItemId()) {
+            case R.id.menu_custom_icon_reset:
+                LeanSettings.setCustomIcon(this, componentName, null, 0);
+                CustomIconUtils.reloadIconByKey(this, new ComponentKey(this, componentName));
+                Toast.makeText(this, R.string.custom_icon_cleared, Toast.LENGTH_SHORT).show();
+                finish();
+                handled = true;
+                break;
             case android.R.id.home:
                 handled = true;
                 onBackPressed();

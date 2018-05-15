@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_custom_icon_reset"
+        android:icon="@drawable/ic_delete_no_shadow"
+        android:showAsAction="always"
+        android:title="@string/clear_custom_icon" />
+</menu>

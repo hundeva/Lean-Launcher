@@ -16,14 +16,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.launcher3.R;
+import com.android.launcher3.util.ComponentKey;
+import com.google.android.apps.nexuslauncher.CustomIconUtils;
 
 public class IconPickerActivity extends Activity implements IconPackLoaderListener, TextWatcher {
 
@@ -87,9 +90,22 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.lean_menu_icon_picker, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean handled;
         switch (item.getItemId()) {
+            case R.id.menu_custom_icon_reset:
+                LeanSettings.setCustomIcon(this, componentName, null, 0);
+                CustomIconUtils.reloadIconByKey(this, new ComponentKey(this, componentName));
+                Toast.makeText(this, R.string.custom_icon_cleared, Toast.LENGTH_SHORT).show();
+                finish();
+                handled = true;
+                break;
             case android.R.id.home:
                 handled = true;
                 onBackPressed();
