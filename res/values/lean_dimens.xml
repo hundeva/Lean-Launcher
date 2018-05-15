@@ -7,4 +7,6 @@
     <dimen name="hide_apps_icon_margin">16dp</dimen>
     <dimen name="all_apps_qsb_top_offset">4dp</dimen>
     <dimen name="all_apps_qsb_top_translation_y">30dp</dimen>
+    <dimen name="custom_app_icon_size">48dp</dimen>
+    <dimen name="custom_app_icon_margin">8dp</dimen>
 </resources>
