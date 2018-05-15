@@ -1,11 +1,13 @@
 package com.hdeva.launcher;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.launcher3.R;
 import com.android.launcher3.util.ComponentKey;
@@ -46,6 +48,11 @@ public class AppIconViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
+        Toast.makeText(v.getContext(), R.string.applying_icon, Toast.LENGTH_SHORT).show();
         CustomIconUtils.reloadIconByKey(v.getContext(), new ComponentKey(v.getContext(), appIconInfo.componentName.flattenToString()));
+
+        if (v.getContext() instanceof Activity) {
+            ((Activity) v.getContext()).finish();
+        }
     }
 }

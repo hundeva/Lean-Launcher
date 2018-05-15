@@ -1,5 +1,6 @@
 package com.hdeva.launcher;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,10 @@ public class IconPackListViewHolder extends RecyclerView.ViewHolder implements V
     @Override
     public void onClick(View v) {
         IconPickerActivity.fromPackForApp(v.getContext(), componentName, packageName, key, value);
+
+        if (v.getContext() instanceof Activity) {
+            ((Activity) v.getContext()).finish();
+        }
     }
 
     public void bind(String key, CharSequence value) {
