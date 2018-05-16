@@ -3,6 +3,7 @@ package com.hdeva.launcher;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Pair;
 
 import com.android.launcher3.Utilities;
@@ -340,11 +341,19 @@ public class LeanSettings {
     }
 
     public static void setCustomIcon(Context context, String forComponent, String iconPack, int iconResId) {
-        Utilities.getCustomIconPrefs(context)
-                .edit()
-                .putString(String.format(CUSTOM_ICON_PACK_KEY_TEMPLATE, forComponent), iconPack)
-                .putInt(String.format(CUSTOM_ICON_RES_KEY_TEMPLATE, forComponent), iconResId)
-                .apply();
+        if (TextUtils.isEmpty(forComponent)) {
+            return;
+        }
+
+        ComponentName componentName = ComponentName.unflattenFromString(forComponent);
+
+        if (componentName != null) {
+            Utilities.getCustomIconPrefs(context)
+                    .edit()
+                    .putString(String.format(CUSTOM_ICON_PACK_KEY_TEMPLATE, componentName.flattenToString()), iconPack)
+                    .putInt(String.format(CUSTOM_ICON_RES_KEY_TEMPLATE, componentName.flattenToString()), iconResId)
+                    .apply();
+        }
     }
 
     private static SharedPreferences prefs(Context context) {
