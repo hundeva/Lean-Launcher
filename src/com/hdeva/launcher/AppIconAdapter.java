@@ -40,7 +40,7 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).componentName.hashCode();
+        return getItem(position).resourceId;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
         if (!TextUtils.isEmpty(filter)) {
             for (AppIconInfo appIconInfo : appIcons) {
-                if (appIconInfo.componentName != null && appIconInfo.componentName.getPackageName().contains(filter)) {
+                if (appIconInfo.containsSimilarComponent(filter)) {
                     filteredIcons.add(appIconInfo);
                 }
             }

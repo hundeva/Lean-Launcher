@@ -9,15 +9,14 @@ import android.content.res.XmlResourceParser;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.SparseIntArray;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class IconPackLoader extends Fragment {
 
@@ -61,7 +60,7 @@ public class IconPackLoader extends Fragment {
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
-                    Set<Integer> resIdCache = new HashSet<>();
+                    SparseIntArray resIdCache = new SparseIntArray();
                     Resources res = getActivity().getPackageManager().getResourcesForApplication(packKey);
                     int resId = res.getIdentifier("appfilter", "xml", packKey);
                     if (resId != 0) {
@@ -84,9 +83,17 @@ public class IconPackLoader extends Fragment {
                                         if (parsed != null) {
                                             if (!isCalendar) {
                                                 int drawableId = res.getIdentifier(drawableName, "drawable", packKey);
-                                                if (drawableId != 0 && !resIdCache.contains(drawableId)) {
-                                                    resIdCache.add(drawableId);
-                                                    appIcons.add(new AppIconInfo(parsed, drawableId));
+                                                if (drawableId > 0) {
+                                                    int index = resIdCache.get(drawableId, -1);
+                                                    if (index == -1) {
+                                                        resIdCache.put(drawableId, appIcons.size());
+                                                        AppIconInfo appIconInfo = new AppIconInfo(drawableId);
+                                                        appIconInfo.addComponent(parsed);
+                                                        appIcons.add(appIconInfo);
+                                                    } else {
+                                                        AppIconInfo appIconInfo = appIcons.get(index);
+                                                        appIconInfo.addComponent(parsed);
+                                                    }
                                                 }
                                             }
                                         }
