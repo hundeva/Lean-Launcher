@@ -282,4 +282,14 @@
     <string name="clear_custom_icon">Clear custom icon</string>
     <string name="custom_icon_cleared">Custom icon cleared!</string>
 
+    <string name="at_a_glance_summary">Weather, calendar events, etc</string>
+    <string name="feed_summary">Google Feed at a swipe</string>
+    <string name="search_summary">App and Google search</string>
+    <string name="look_and_feel_summary">Theme, grid sizes</string>
+    <string name="edit_apps_summary">App visibility, icons</string>
+    <string name="gestures_and_actions_summary">Swipe, double tap, etc</string>
+    <string name="shortcuts_summary">App shortcut visibility</string>
+    <string name="other_summary">General settings</string>
+    <string name="about_summary">Lean Launcher</string>
+
 </resources>

@@ -32,6 +32,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_assistant_no_shadow"
         android:key="pref_smartspace_screen"
+        android:summary="@string/at_a_glance_summary"
         android:title="@string/at_a_glance_category">
 
         <SwitchPreference
@@ -72,6 +73,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_rss_feed_no_shadow"
         android:key="pref_feed_screen"
+        android:summary="@string/feed_summary"
         android:title="@string/feed_category">
 
         <SwitchPreference
@@ -96,6 +98,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_search_no_shadow"
         android:key="pref_search_screen"
+        android:summary="@string/search_summary"
         android:title="@string/search_category">
 
         <PreferenceCategory
@@ -173,6 +176,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_palette_no_shadow"
         android:key="pref_look_and_feel_screen"
+        android:summary="@string/look_and_feel_summary"
         android:title="@string/look_and_feel_category">
 
         <PreferenceCategory
@@ -280,6 +284,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_edit_black_no_shadow"
         android:key="pref_edit_apps_screen"
+        android:summary="@string/edit_apps_summary"
         android:title="@string/edit_apps_category">
 
         <PreferenceCategory
@@ -380,6 +385,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_gesture_no_shadow"
         android:key="pref_gestures"
+        android:summary="@string/gestures_and_actions_summary"
         android:title="@string/gestures_and_actions">
 
         <PreferenceCategory
@@ -444,6 +450,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_shortcut_no_shadow"
         android:key="pref_shortcut_screen"
+        android:summary="@string/shortcuts_summary"
         android:title="@string/shortcuts_title">
 
         <PreferenceCategory
@@ -493,6 +500,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_dashboard_no_shadow"
         android:key="pref_other_screen"
+        android:summary="@string/other_summary"
         android:title="@string/other_category">
 
         <SwitchPreference
@@ -534,6 +542,7 @@
     <PreferenceScreen
         android:icon="@drawable/ic_info_outline_no_shadow"
         android:key="pref_about_screen"
+        android:summary="@string/about_summary"
         android:title="@string/about">
 
         <Preference
