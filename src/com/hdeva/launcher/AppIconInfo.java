@@ -8,10 +8,12 @@ import java.util.List;
 
 public class AppIconInfo {
     private final List<ComponentName> componentNames = new ArrayList<>();
-    public final int resourceId;
+    public final String iconName;
+    public final int iconResourceId;
 
-    public AppIconInfo(int resourceId) {
-        this.resourceId = resourceId;
+    public AppIconInfo(String iconName, int iconResourceId) {
+        this.iconName = iconName;
+        this.iconResourceId = iconResourceId;
     }
 
     public void addComponent(ComponentName componentName) {
@@ -20,9 +22,25 @@ public class AppIconInfo {
         }
     }
 
-    public boolean containsSimilarComponent(String filter) {
+    public boolean quickFilter(String filter) {
         if (TextUtils.isEmpty(filter)) {
             return false;
+        }
+
+        if (iconName.contains(filter)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean detailedFilter(String filter) {
+        if (TextUtils.isEmpty(filter)) {
+            return false;
+        }
+
+        if (iconName.contains(filter)) {
+            return true;
         }
 
         for (ComponentName componentName : componentNames) {

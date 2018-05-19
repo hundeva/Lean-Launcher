@@ -2,4 +2,6 @@
 <resources>
     <color name="blue_grey_500">#607D8B</color>
     <color name="transparent">#00000000</color>
+    <color name="translucent_white">#c0ffffff</color>
+    <color name="black">#ff000000</color>
 </resources>

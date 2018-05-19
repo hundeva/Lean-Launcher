@@ -19,9 +19,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.launcher3.R;
@@ -44,10 +43,9 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
 
     private IconPackLoader loader;
 
-    private ProgressBar progressBar;
-    private LinearLayout container;
     private EditText filter;
     private RecyclerView recyclerView;
+    private ViewGroup loadingContainer;
 
     private AppIconAdapter adapter;
 
@@ -74,7 +72,7 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
 
         bindViews();
         setupLoader();
-        bindPack();
+        bindPack(loader.isCompletelyParsed());
     }
 
     @Override
@@ -118,8 +116,8 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
     }
 
     @Override
-    public void onIconPackLoaded() {
-        bindPack();
+    public void onIconPackLoaded(boolean completelyParsed) {
+        bindPack(completelyParsed);
     }
 
     private void bindViews() {
@@ -130,10 +128,9 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
         }
         setTitle(packValue);
 
-        progressBar = findViewById(R.id.icon_picker_progress);
-        container = findViewById(R.id.icon_picker_container);
         filter = findViewById(R.id.icon_picker_filter);
         recyclerView = findViewById(R.id.icon_picker_recycler_view);
+        loadingContainer = findViewById(R.id.icon_picker_loading_container);
 
         try {
             WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
@@ -179,16 +176,9 @@ public class IconPickerActivity extends Activity implements IconPackLoaderListen
         }
     }
 
-    private void bindPack() {
-        if (loader.getAppIcons().isEmpty()) {
-            progressBar.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
-
-        adapter.setIconList(loader.getAppIcons());
+    private void bindPack(boolean completelyParsed) {
+        loadingContainer.setVisibility(completelyParsed ? View.GONE : View.VISIBLE);
+        adapter.setIconList(loader.getAppIcons(), completelyParsed);
     }
 
     @Override

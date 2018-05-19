@@ -277,7 +277,8 @@
 
     <string name="override_app_icon">Override app icon</string>
     <string name="available_icon_packs">Available icon packs</string>
-    <string name="custom_app_filter_hint">Filter package names&#8230;</string>
+    <string name="custom_app_filter_hint">Search app icons&#8230;</string>
+    <string name="icon_pack_loading">Icon pack loading&#8230;</string>
     <string name="applying_icon">Applying icon&#8230;</string>
     <string name="clear_custom_icon">Clear custom icon</string>
     <string name="custom_icon_cleared">Custom icon cleared!</string>

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.launcher3.R;
@@ -36,7 +37,7 @@ public class AppIconViewHolder extends RecyclerView.ViewHolder implements View.O
 
         Drawable drawable;
         try {
-            drawable = itemView.getContext().getPackageManager().getDrawable(packKey, appIconInfo.resourceId, null);
+            drawable = itemView.getContext().getPackageManager().getDrawable(packKey, appIconInfo.iconResourceId, null);
         } catch (Throwable t) {
             drawable = null;
         }
@@ -50,7 +51,7 @@ public class AppIconViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
-        LeanSettings.setCustomIcon(v.getContext(), appComponentName, packKey, appIconInfo.resourceId);
+        LeanSettings.setCustomIcon(v.getContext(), appComponentName, packKey, appIconInfo.iconResourceId);
         CustomIconUtils.reloadIconByKey(v.getContext(), new ComponentKey(v.getContext(), appComponentName));
         Toast.makeText(v.getContext(), R.string.applying_icon, Toast.LENGTH_SHORT).show();
 

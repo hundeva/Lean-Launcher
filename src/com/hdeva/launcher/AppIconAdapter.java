@@ -19,6 +19,7 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
     private final String appComponentName;
     private final String packKey;
     private String filter;
+    private boolean completelyParsed;
 
     public AppIconAdapter(String appComponentName, String packKey) {
         setHasStableIds(true);
@@ -40,7 +41,7 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).resourceId;
+        return getItem(position).iconResourceId;
     }
 
     @Override
@@ -52,7 +53,8 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
         return !TextUtils.isEmpty(filter) || filteredIcons.size() > 0 ? filteredIcons.get(position) : appIcons.get(position);
     }
 
-    public void setIconList(List<AppIconInfo> appIcons) {
+    public void setIconList(List<AppIconInfo> appIcons, boolean completelyParsed) {
+        this.completelyParsed = completelyParsed;
         this.appIcons.clear();
         this.appIcons.addAll(appIcons);
         doFilter();
@@ -68,7 +70,7 @@ public class AppIconAdapter extends RecyclerView.Adapter<AppIconViewHolder> {
 
         if (!TextUtils.isEmpty(filter)) {
             for (AppIconInfo appIconInfo : appIcons) {
-                if (appIconInfo.containsSimilarComponent(filter)) {
+                if (completelyParsed ? appIconInfo.detailedFilter(filter) : appIconInfo.quickFilter(filter)) {
                     filteredIcons.add(appIconInfo);
                 }
             }

@@ -27,6 +27,7 @@ public class IconPackLoader extends Fragment {
     private AsyncTask<Void, Void, Void> task;
     private IconPackLoaderListener listener;
     private String packKey;
+    private boolean completelyParsed;
 
     public static IconPackLoader forPack(String packKey) {
         IconPackLoader fragment = new IconPackLoader();
@@ -38,6 +39,10 @@ public class IconPackLoader extends Fragment {
 
     public List<AppIconInfo> getAppIcons() {
         return appIcons;
+    }
+
+    public boolean isCompletelyParsed() {
+        return completelyParsed;
     }
 
     public void forceStop() {
@@ -87,7 +92,7 @@ public class IconPackLoader extends Fragment {
                                                     int index = resIdCache.get(drawableId, -1);
                                                     if (index == -1) {
                                                         resIdCache.put(drawableId, appIcons.size());
-                                                        AppIconInfo appIconInfo = new AppIconInfo(drawableId);
+                                                        AppIconInfo appIconInfo = new AppIconInfo(drawableName.replace("_", ""), drawableId);
                                                         appIconInfo.addComponent(parsed);
                                                         appIcons.add(appIconInfo);
                                                     } else {
@@ -115,15 +120,17 @@ public class IconPackLoader extends Fragment {
 
             @Override
             protected void onPostExecute(Void aVoid) {
+                completelyParsed = true;
                 if (listener != null) {
-                    listener.onIconPackLoaded();
+                    listener.onIconPackLoaded(true);
                 }
             }
 
             @Override
             protected void onProgressUpdate(Void... values) {
+                completelyParsed = false;
                 if (listener != null) {
-                    listener.onIconPackLoaded();
+                    listener.onIconPackLoaded(false);
                 }
             }
         }.execute();
