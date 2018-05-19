@@ -32,6 +32,8 @@ public class LeanSettings {
     public static final String LABEL_HIDDEN_ON_DESKTOP = "pref_label_hidden_on_desktop";
     public static final String LABEL_HIDDEN_ON_ALL_APPS = "pref_label_hidden_on_all_apps";
     public static final String RESET_APP_NAMES = "pref_reset_app_names";
+    public static final String RESET_APP_VISIBILITY = "pref_reset_app_visibility";
+    public static final String RESET_APP_ICONS = "pref_reset_app_icons";
     public static final String QSB_VOICE_ICON = "pref_qsb_voice_icon";
     public static final String HOME_ACTION = "pref_home_action";
     public static final String DOUBLE_TAP_TO_LOCK_IS_SECURE = "pref_double_tap_to_lock_is_secure";
@@ -227,10 +229,6 @@ public class LeanSettings {
         return offset;
     }
 
-    public static boolean shouldResetAppVisibility(Context context) {
-        return prefs(context).getBoolean(RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK, RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK_DEFAULT);
-    }
-
     public static String getSearchProvider(Context context) {
         return prefs(context).getString(SEARCH_PROVIDER, SEARCH_PROVIDER_DEFAULT);
     }
@@ -358,6 +356,10 @@ public class LeanSettings {
                     .putInt(String.format(CUSTOM_ICON_RES_KEY_TEMPLATE, componentName.flattenToString()), iconResId)
                     .apply();
         }
+    }
+
+    public static void clearCustomIcons(Context context) {
+        Utilities.getCustomIconPrefs(context).edit().clear().apply();
     }
 
     private static SharedPreferences prefs(Context context) {

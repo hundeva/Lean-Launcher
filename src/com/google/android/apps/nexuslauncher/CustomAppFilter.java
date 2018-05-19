@@ -29,7 +29,7 @@ public class CustomAppFilter extends NexusAppFilter {
         return !isHiddenApp(mContext, new ComponentKey(componentName, user));
     }
 
-    static void resetAppFilter(Context context) {
+    public static void resetAppFilter(Context context) {
         SharedPreferences.Editor editor = Utilities.getPrefs(context).edit();
         editor.putStringSet(HIDE_APPS_PREF, new HashSet<String>());
         editor.apply();

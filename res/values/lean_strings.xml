@@ -124,9 +124,6 @@
     <string name="companion_app_permission_label">Lean companion permission</string>
     <string name="companion_app_permission_description">Permission to enforce signature protection for companion apps.</string>
 
-    <string name="reset_app_visibility_title">Reset app visibility</string>
-    <string name="reset_app_visibility_summary">When changing to default icon pack</string>
-
     <string name="companion_app_title">Companion app</string>
     <string name="companion_app_not_installed">Not installed</string>
     <string name="companion_app_version_x">version %s</string>
@@ -183,10 +180,6 @@
     <string name="hide_app_label_title">Hide app name</string>
     <string name="hide_app_label_on_desktop_summary">On the desktop</string>
     <string name="hide_app_label_on_all_apps_summary">In your app drawer</string>
-
-    <string name="reset_app_names_title">Reset app names</string>
-    <string name="reset_app_names_summary">To default</string>
-    <string name="reset_app_names_description">This will reset the name of all apps to their default.</string>
 
     <string name="tap_to_edit_app_name">Tap to edit app name</string>
     <string name="enter_new_app_name">Enter new app name</string>
@@ -293,5 +286,16 @@
     <string name="shortcuts_summary">App shortcut visibility</string>
     <string name="other_summary">General settings</string>
     <string name="about_summary">Lean Launcher</string>
+
+    <string name="reset_category">Reset</string>
+    <string name="reset_app_names_title">Reset app names</string>
+    <string name="reset_app_names_summary">To default</string>
+    <string name="reset_app_names_description">This will reset the name of all apps to their default.</string>
+    <string name="reset_app_visibility_title">Reset app visibility</string>
+    <string name="reset_app_visibility_summary">To default</string>
+    <string name="reset_app_visibility_description">This will make all apps visible in your app drawer.</string>
+    <string name="reset_app_icons_title">Reset app icons</string>
+    <string name="reset_app_icons_summary">To system default</string>
+    <string name="reset_app_icons_description">This will reset all app icons to their system default.</string>
 
 </resources>

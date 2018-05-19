@@ -88,10 +88,6 @@ public class CustomIconUtils {
                 UserManagerCompat userManagerCompat = UserManagerCompat.getInstance(context);
                 LauncherModel model = LauncherAppState.getInstance(context).getModel();
 
-                boolean noPack = CustomIconUtils.getCurrentPack(context).isEmpty();
-                if (noPack && LeanSettings.shouldResetAppVisibility(context)) {
-                    CustomAppFilter.resetAppFilter(context);
-                }
                 for (UserHandle user : userManagerCompat.getUserProfiles()) {
                     model.onPackagesReload(user);
                 }

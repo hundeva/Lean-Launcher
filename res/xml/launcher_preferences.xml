@@ -317,11 +317,6 @@
                 android:summary="@string/hide_app_label_on_all_apps_summary"
                 android:title="@string/hide_app_label_title" />
 
-            <Preference
-                android:key="pref_reset_app_names"
-                android:summary="@string/reset_app_names_summary"
-                android:title="@string/reset_app_names_title" />
-
         </PreferenceCategory>
 
         <PreferenceCategory
@@ -345,13 +340,6 @@
                 android:title="@string/pref_icon_pack" />
 
             <SwitchPreference
-                android:defaultValue="true"
-                android:key="pref_reset_app_visibility_on_default_icon_pack"
-                android:persistent="true"
-                android:summary="@string/reset_app_visibility_summary"
-                android:title="@string/reset_app_visibility_title" />
-
-            <SwitchPreference
                 android:defaultValue="false"
                 android:key="pref_generate_adaptive_icons"
                 android:persistent="true"
@@ -364,6 +352,27 @@
                 android:persistent="true"
                 android:summary="@string/generate_adaptive_background_summary"
                 android:title="@string/generate_adaptive_background_title" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory
+            android:key="pref_reset_category"
+            android:title="@string/reset_category">
+
+            <Preference
+                android:key="pref_reset_app_names"
+                android:summary="@string/reset_app_names_summary"
+                android:title="@string/reset_app_names_title" />
+
+            <Preference
+                android:key="pref_reset_app_visibility"
+                android:summary="@string/reset_app_visibility_summary"
+                android:title="@string/reset_app_visibility_title" />
+
+            <Preference
+                android:key="pref_reset_app_icons"
+                android:summary="@string/reset_app_icons_summary"
+                android:title="@string/reset_app_icons_title" />
 
         </PreferenceCategory>
 
