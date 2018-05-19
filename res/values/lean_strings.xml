@@ -299,4 +299,6 @@
     <string name="reset_app_icons_summary">To system default</string>
     <string name="reset_app_icons_description">This will reset all app icons to their system default.</string>
 
+    <string name="restarting">Restarting&#8230;</string>
+
 </resources>

@@ -52,7 +52,7 @@ public class LeanUtils {
     }
 
     public static void restart(final Context context) {
-        ProgressDialog.show(context, null, context.getString(R.string.state_loading), true, false);
+        ProgressDialog.show(context, null, context.getString(R.string.restarting), true, false);
         new LooperExecutor(LauncherModel.getWorkerLooper()).execute(new Runnable() {
             @SuppressLint("ApplySharedPref")
             @Override
