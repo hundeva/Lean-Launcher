@@ -282,6 +282,7 @@
     <string name="applying_icon">Applying icon&#8230;</string>
     <string name="clear_custom_icon">Clear custom icon</string>
     <string name="custom_icon_cleared">Custom icon cleared!</string>
+    <string name="system_default">System default</string>
 
     <string name="at_a_glance_summary">Weather, calendar events, etc</string>
     <string name="feed_summary">Google Feed at a swipe</string>

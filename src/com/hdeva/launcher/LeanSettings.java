@@ -90,6 +90,10 @@ public class LeanSettings {
     private static final String THEME_LIGHT = "light";
     private static final String THEME_DARK = "dark";
 
+    public static final String SYSTEM_DEFAULT_ICON_KEY = "system_default_icon_key";
+    public static final CharSequence SYSTEM_DEFAULT_ICON_VALUE = "system_default_icon_key";
+    public static final String SYSTEM_DEFAULT_ICON_PACK = "system_default_icon_pack";
+    public static final int SYSTEM_DEFAULT_ICON_RES_ID = -10;
     private static final String CUSTOM_ICON_PACK_KEY_TEMPLATE = "%s#pack";
     private static final String CUSTOM_ICON_RES_KEY_TEMPLATE = "%s#res";
 

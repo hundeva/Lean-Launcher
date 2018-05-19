@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 
 import com.android.launcher3.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class IconPackListAdapter extends RecyclerView.Adapter<IconPackListViewHolder> {
 
-    private String[] keys;
-    private CharSequence[] values;
+    private final List<String> keys = new ArrayList<>();
+    private final List<CharSequence> values = new ArrayList<>();
 
     private String componentName;
     private String packageName;
@@ -33,22 +35,29 @@ public class IconPackListAdapter extends RecyclerView.Adapter<IconPackListViewHo
 
     @Override
     public void onBindViewHolder(@NonNull IconPackListViewHolder iconPackListViewHolder, int i) {
-        iconPackListViewHolder.bind(keys[i], values[i]);
+        iconPackListViewHolder.bind(keys.get(i), values.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return keys == null ? 0 : keys.length;
+        return keys.size();
     }
 
     @Override
     public long getItemId(int position) {
-        return keys[position].hashCode();
+        return keys.get(position).hashCode();
     }
 
     public void refresh(Map<String, CharSequence> iconPacks) {
-        keys = iconPacks.keySet().toArray(new String[iconPacks.size()]);
-        values = iconPacks.values().toArray(new CharSequence[iconPacks.size()]);
+        keys.clear();
+        values.clear();
+
+        keys.add(LeanSettings.SYSTEM_DEFAULT_ICON_KEY);
+        values.add(LeanSettings.SYSTEM_DEFAULT_ICON_VALUE);
+        for (Map.Entry<String, CharSequence> entry : iconPacks.entrySet()) {
+            keys.add(entry.getKey());
+            values.add(entry.getValue());
+        }
         notifyDataSetChanged();
     }
 }
