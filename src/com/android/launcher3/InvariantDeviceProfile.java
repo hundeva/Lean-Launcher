@@ -157,7 +157,8 @@ public class InvariantDeviceProfile {
         iconSize = interpolatedDeviceProfileOut.iconSize * iconSizeModifier;
         landscapeIconSize = interpolatedDeviceProfileOut.landscapeIconSize * iconSizeModifier;
         iconBitmapSize = Utilities.pxFromDp(iconSize, dm);
-        iconTextSize = interpolatedDeviceProfileOut.iconTextSize * iconSizeModifier;
+        float iconTextSizeModifier = LeanSettings.getIconTextSizeModifier(context);
+        iconTextSize = interpolatedDeviceProfileOut.iconTextSize * iconTextSizeModifier;
         fillResIconDpi = getLauncherIconDensity(iconBitmapSize);
 
         // If the partner customization apk contains any grid overrides, apply them

@@ -264,6 +264,15 @@
                 android:summary="%s"
                 android:title="@string/icon_size_title" />
 
+            <ListPreference
+                android:defaultValue="average"
+                android:entries="@array/icon_size_names"
+                android:entryValues="@array/icon_size_values"
+                android:key="pref_icon_text_size"
+                android:persistent="true"
+                android:summary="%s"
+                android:title="@string/icon_text_size_title" />
+
         </PreferenceCategory>
 
         <PreferenceCategory

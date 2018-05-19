@@ -24,6 +24,7 @@ public class LeanSettings {
     public static final String FORCE_COLORED_G_ICON = "pref_colored_g_icon";
     public static final String DOUBLE_TAP_TO_LOCK = "pref_double_tap_to_lock";
     public static final String ICON_SIZE = "pref_icon_size";
+    public static final String ICON_TEXT_SIZE = "pref_icon_text_size";
     public static final String RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK = "pref_reset_app_visibility_on_default_icon_pack";
     public static final String SEARCH_PROVIDER = "pref_search_provider";
     public static final String HOTSEAT_BACKGROUND = "pref_hotseat_background";
@@ -65,6 +66,7 @@ public class LeanSettings {
     private static final boolean FORCE_COLORED_G_ICON_DEFAULT = false;
     private static final boolean DOUBLE_TAP_TO_LOCK_DEFAULT = false;
     private static final String ICON_SIZE_DEFAULT = "average";
+    private static final String ICON_TEXT_SIZE_DEFAULT = "average";
     private static final boolean RESET_APP_VISIBILITY_ON_DEFAULT_ICON_PACK_DEFAULT = true;
     private static final String SEARCH_PROVIDER_DEFAULT = "https://www.google.com";
     private static final String HOTSEAT_BACKGROUND_DEFAULT = "100";
@@ -204,9 +206,18 @@ public class LeanSettings {
     }
 
     public static float getIconSizeModifier(Context context) {
-        String saved = prefs(context).getString(ICON_SIZE, ICON_SIZE_DEFAULT);
+        String modifier = prefs(context).getString(ICON_SIZE, ICON_SIZE_DEFAULT);
+        return translateModifier(modifier);
+    }
+
+    public static float getIconTextSizeModifier(Context context) {
+        String modifier = prefs(context).getString(ICON_TEXT_SIZE, ICON_TEXT_SIZE_DEFAULT);
+        return translateModifier(modifier);
+    }
+
+    private static float translateModifier(String modifier) {
         float offset;
-        switch (saved) {
+        switch (modifier) {
             case "extrasmall":
                 offset = 0.75F;
                 break;

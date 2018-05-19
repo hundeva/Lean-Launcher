@@ -98,6 +98,7 @@
     <string name="double_tap_to_lock_disable_warning">By disabling admin access, you will not be able to use double tap to lock on your home screen.</string>
 
     <string name="icon_size_title">Icon size</string>
+    <string name="icon_text_size_title">Icon label size</string>
 
     <string name="icon_size_extra_small">Extra small (-25%)</string>
     <string name="icon_size_small">Small (-10%)</string>
