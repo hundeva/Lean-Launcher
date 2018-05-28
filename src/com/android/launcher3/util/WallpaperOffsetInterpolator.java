@@ -9,6 +9,7 @@ import android.view.animation.Interpolator;
 
 import com.android.launcher3.Utilities;
 import com.android.launcher3.Workspace;
+import com.hdeva.launcher.LeanUtils;
 
 /**
  * Utility class to handle wallpaper scrolling along with workspace.
@@ -64,6 +65,8 @@ public class WallpaperOffsetInterpolator implements Choreographer.FrameCallback 
                     setWallpaperOffsetSteps();
                 } catch (IllegalArgumentException e) {
                     Log.e(TAG, "Error updating wallpaper offset: " + e);
+                } catch (SecurityException e) {
+                    LeanUtils.reportNonFatal(new Exception("Error setting wallpaper offset.", e));
                 }
             }
         }
