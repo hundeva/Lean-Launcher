@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Pair;
 
+import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 
 public class LeanSettings {
@@ -51,6 +52,7 @@ public class LeanSettings {
     public static final String SHORTCUT_LOCKED_UNINSTALL = "pref_shortcut_locked_uninstall";
     public static final String SHORTCUT_LOCKED_EDIT = "pref_shortcut_locked_edit";
     public static final String CARET_LONG_PRESS = "pref_caret_long_press";
+    public static final String DATE_FORMAT = "pref_date_format";
 
     private static final boolean SETTINGS_DIRTY_DEFAULT = false;
     private static final boolean LOCK_DESKTOP_DEFAULT = false;
@@ -89,6 +91,7 @@ public class LeanSettings {
     private static final boolean SHORTCUT_LOCKED_UNINSTALL_DEFAULT = false;
     private static final boolean SHORTCUT_LOCKED_EDIT_DEFAULT = false;
     private static final boolean CARET_LONG_PRESS_DEFAULT = true;
+    private static final int DATE_FORMAT_DEFAULT = R.string.date_format_normal;
 
     private static final String THEME_WALLPAPER = "wallpaper";
     private static final String THEME_LIGHT = "light";
@@ -371,6 +374,10 @@ public class LeanSettings {
 
     public static void clearCustomIcons(Context context) {
         Utilities.getCustomIconPrefs(context).edit().clear().apply();
+    }
+
+    public static String getDateFormat(Context context) {
+        return prefs(context).getString(DATE_FORMAT, context.getString(DATE_FORMAT_DEFAULT));
     }
 
     private static SharedPreferences prefs(Context context) {

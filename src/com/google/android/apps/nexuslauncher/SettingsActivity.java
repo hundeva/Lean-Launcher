@@ -128,6 +128,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.GENERATED_ADAPTIVE_BACKGROUND).setOnPreferenceChangeListener(this);
             findPreference(LeanSettings.ALLOW_TWO_LINE_LABELS).setOnPreferenceChangeListener(this);
+            findPreference(LeanSettings.DATE_FORMAT).setOnPreferenceChangeListener(this);
 
             findPreference(LeanSettings.RESET_APP_NAMES).setOnPreferenceClickListener(this);
             findPreference(LeanSettings.RESET_APP_VISIBILITY).setOnPreferenceClickListener(this);
@@ -211,6 +212,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
 
                 case LeanSettings.THEME_KEY:
                 case LeanSettings.HOTSEAT_BACKGROUND:
+                case LeanSettings.DATE_FORMAT:
                     if (preference instanceof ListPreference) {
                         ((ListPreference) preference).setValue((String) newValue);
                     }

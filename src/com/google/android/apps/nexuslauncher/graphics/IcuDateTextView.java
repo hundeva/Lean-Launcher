@@ -6,14 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.icu.text.DateFormat;
-import android.icu.text.DisplayContext;
-import android.text.format.DateUtils;
 import android.util.AttributeSet;
 
-import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
-
-import java.util.Locale;
+import com.hdeva.launcher.LeanUtils;
 
 public class IcuDateTextView extends DoubleShadowTextView {
     private DateFormat mDateFormat;
@@ -29,25 +25,14 @@ public class IcuDateTextView extends DoubleShadowTextView {
         mTimeChangeReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                reloadDateFormat(!Intent.ACTION_TIME_TICK.equals(intent.getAction()));
+                reloadDateFormat();
             }
         };
     }
 
     @TargetApi(24)
-    public void reloadDateFormat(boolean forcedChange) {
-        String format;
-        if (Utilities.ATLEAST_NOUGAT) {
-            if (mDateFormat == null || forcedChange) {
-                (mDateFormat = DateFormat.getInstanceForSkeleton(getContext()
-                        .getString(R.string.icu_abbrev_wday_month_day_no_year), Locale.getDefault()))
-                        .setContext(DisplayContext.CAPITALIZATION_FOR_STANDALONE);
-            }
-            format = mDateFormat.format(System.currentTimeMillis());
-        } else {
-            format = DateUtils.formatDateTime(getContext(), System.currentTimeMillis(),
-                    DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH);
-        }
+    public void reloadDateFormat() {
+        String format = LeanUtils.formatDateTime(getContext(), System.currentTimeMillis());
         setText(format);
         setContentDescription(format);
     }
@@ -71,7 +56,7 @@ public class IcuDateTextView extends DoubleShadowTextView {
         if (!mIsVisible && isVisible) {
             mIsVisible = true;
             registerReceiver();
-            reloadDateFormat(true);
+            reloadDateFormat();
         } else if (mIsVisible && !isVisible) {
             unregisterReceiver();
             mIsVisible = false;

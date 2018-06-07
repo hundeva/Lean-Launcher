@@ -36,6 +36,10 @@ import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.LooperExecutor;
 import com.google.firebase.crash.FirebaseCrash;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class LeanUtils {
 
     private static final long WAIT_BEFORE_RESTART = 250;
@@ -270,6 +274,11 @@ public class LeanUtils {
             background = WHITE;
         }
         return background;
+    }
+
+    public static String formatDateTime(Context context, long timeInMillis) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(LeanSettings.getDateFormat(context), Locale.getDefault());
+        return simpleDateFormat.format(new Date(timeInMillis));
     }
 
     private LeanUtils() {
