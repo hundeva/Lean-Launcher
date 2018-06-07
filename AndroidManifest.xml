@@ -84,6 +84,10 @@
         android:restoreAnyVersion="true"
         android:supportsRtl="true" >
 
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
         <!--
         Main launcher activity. When extending only change the name, and keep all the
         attributes and intent filters the same
