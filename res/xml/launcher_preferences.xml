@@ -203,14 +203,14 @@
                 android:defaultValue="false"
                 android:key="pref_dark_bottom_search_bar"
                 android:persistent="true"
-                android:summary="@string/if_theme_is_dark"
+                android:summary="@string/bottom_search_bar_summary"
                 android:title="@string/dark_bottom_search_title" />
 
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="pref_dark_top_search_bar"
                 android:persistent="true"
-                android:summary="@string/if_theme_is_dark"
+                android:summary="@string/top_search_bar_summary"
                 android:title="@string/dark_top_search_title" />
 
             <ListPreference

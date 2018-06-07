@@ -176,7 +176,6 @@
 
     <string name="dark_bottom_search_title">Dark Google search bar</string>
     <string name="dark_top_search_title">Dark app search bar</string>
-    <string name="if_theme_is_dark">If theme is dark</string>
 
     <string name="hide_app_label_title">Hide app name</string>
     <string name="hide_app_label_on_desktop_summary">On the desktop</string>
