@@ -295,6 +295,13 @@
                 android:summary="@string/show_caret_summary"
                 android:title="@string/show_caret_title" />
 
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="pref_page_indicator"
+                android:persistent="true"
+                android:summary="@string/show_page_indicator_summary"
+                android:title="@string/show_page_indicator_title" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
