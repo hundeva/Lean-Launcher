@@ -33,6 +33,7 @@ import com.android.launcher3.model.WidgetItem;
 import com.android.launcher3.util.LabelComparator;
 import com.android.launcher3.util.MultiHashMap;
 import com.android.launcher3.util.PackageUserKey;
+import com.hdeva.launcher.LeanUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -109,6 +110,13 @@ public class WidgetsListAdapter extends Adapter<WidgetsRowViewHolder> {
 
         WidgetItemComparator widgetComparator = new WidgetItemComparator();
         for (Map.Entry<PackageItemInfo, ArrayList<WidgetItem>> entry : widgets.entrySet()) {
+            try {
+                if (entry.getKey().packageName.toLowerCase().contains("huawei")) {
+                    continue;
+                }
+            } catch (Throwable t) {
+                LeanUtils.reportNonFatal(new Exception("Error inspecting widget for origin", t));
+            }
             WidgetListRowEntry row = new WidgetListRowEntry(entry.getKey(), entry.getValue());
             row.titleSectionName = mIndexer.computeSectionName(row.pkgItem.title);
             Collections.sort(row.widgets, widgetComparator);
