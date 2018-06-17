@@ -302,14 +302,18 @@
 
     <string name="date_format_title">Date format</string>
 
-    <string name="date_format_long">EEEE, MMMM d</string>
-    <string name="date_format_normal">EEEE, MMM d</string>
-    <string name="date_format_short">EEE, MMM d</string>
+    <string name="date_format_long_name">Long</string>
+    <string name="date_format_normal_name">Normal</string>
+    <string name="date_format_short_name">Short</string>
+
+    <string name="date_format_long">EEEEMMMMd</string>
+    <string name="date_format_normal">EEEEMMMd</string>
+    <string name="date_format_short">EEEMMMd</string>
 
     <string-array name="date_format_names">
-        <item>@string/date_format_long</item>
-        <item>@string/date_format_normal</item>
-        <item>@string/date_format_short</item>
+        <item>@string/date_format_long_name</item>
+        <item>@string/date_format_normal_name</item>
+        <item>@string/date_format_short_name</item>
     </string-array>
 
     <string-array name="date_format_values">
