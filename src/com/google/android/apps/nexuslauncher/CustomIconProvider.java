@@ -179,7 +179,7 @@ public class CustomIconProvider extends DynamicIconProvider {
                 int resId = Integer.parseInt(appIcon.substring(1));
                 return resourcesForApplication.getDrawableForDensity(resId, iconDpi);
             }
-        } catch (PackageManager.NameNotFoundException | Resources.NotFoundException | IOException | XmlPullParserException ex) {
+        } catch (PackageManager.NameNotFoundException | Resources.NotFoundException | IOException | XmlPullParserException | NumberFormatException ex) {
             ex.printStackTrace();
         }
         return null;
