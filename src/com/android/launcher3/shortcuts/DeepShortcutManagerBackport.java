@@ -117,7 +117,8 @@ public class DeepShortcutManagerBackport {
             }
 
             if (resource != null) {
-                parseXml = resourcesForApplication.getXml(Integer.parseInt(resource.substring(1)));
+                int resId = resourcesForApplication.getIdentifier(resource, null, packageName);
+                parseXml = resourcesForApplication.getXml(resId == 0 ? Integer.parseInt(resource.substring(1)) : resId);
                 while ((eventType = parseXml.nextToken()) != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_TAG) {
                         if (parseXml.getName().equals("shortcut")) {
@@ -139,7 +140,7 @@ public class DeepShortcutManagerBackport {
                     }
                 }
             }
-        } catch (PackageManager.NameNotFoundException | Resources.NotFoundException | XmlPullParserException | IOException e) {
+        } catch (PackageManager.NameNotFoundException | Resources.NotFoundException | XmlPullParserException | IOException | NumberFormatException e) {
             e.printStackTrace();
         }
     }
