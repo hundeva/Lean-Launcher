@@ -325,4 +325,6 @@
     <string name="show_page_indicator_title">Show page indicator</string>
     <string name="show_page_indicator_summary">Using horizontal lines</string>
 
+    <string name="privacy_policy">Privacy policy</string>
+
 </resources>

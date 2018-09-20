@@ -614,6 +614,15 @@
         </Preference>
 
         <Preference
+            android:key="about_privacy_policy"
+            android:persistent="false"
+            android:title="@string/privacy_policy">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://sites.google.com/view/hundeva-privacy-policy" />
+        </Preference>
+
+        <Preference
             android:key="restart_lean_launcher"
             android:summary="@string/restart_lean_launcher_summary"
             android:title="@string/restart_lean_launcher_title" />
