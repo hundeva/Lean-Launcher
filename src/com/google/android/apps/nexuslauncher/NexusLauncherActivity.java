@@ -5,14 +5,15 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.android.launcher3.AppInfo;
+import com.android.launcher3.BuildConfig;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.util.ComponentKeyMapper;
 import com.android.launcher3.util.ViewOnDrawExecutor;
-import com.hdeva.launcher.LeanSettings;
 import com.google.android.libraries.gsa.launcherclient.LauncherClient;
+import com.hdeva.launcher.LeanSettings;
 
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class NexusLauncherActivity extends Launcher {
     }
 
     private boolean showSmartspace() {
-        return Utilities.getPrefs(this).getBoolean(SettingsActivity.SMARTSPACE_PREF, true);
+        return BuildConfig.DEBUG && Utilities.getPrefs(this).getBoolean(SettingsActivity.SMARTSPACE_PREF, true);
     }
 
     public void overrideTheme(boolean isDark, boolean supportsDarkText) {

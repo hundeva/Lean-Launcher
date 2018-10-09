@@ -84,7 +84,10 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             @Override
             public void onReceive(Context context, Intent intent) {
                 String version = intent.getStringExtra(SMARTSPACE_PING_RESPONSE);
-                findPreference(SMARTSPACE_COMPANION).setSummary(context.getString(R.string.companion_app_version_x, version));
+                Preference smartspaceCompanion = findPreference(SMARTSPACE_COMPANION);
+                if (smartspaceCompanion != null) {
+                    smartspaceCompanion.setSummary(context.getString(R.string.companion_app_version_x, version));
+                }
             }
         };
 
@@ -146,10 +149,6 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 if (!applicationInfo.enabled) {
                     throw new PackageManager.NameNotFoundException();
                 }
-
-                if (!BuildConfig.DEBUG) {
-                    findPreference(ENABLE_MINUS_ONE_PREF).setEnabled(false);
-                }
             } catch (PackageManager.NameNotFoundException ignored) {
                 ((PreferenceScreen) getPreferenceScreen().findPreference("pref_feed_screen")).removePreference(findPreference(SettingsActivity.ENABLE_MINUS_ONE_PREF));
             }
@@ -157,6 +156,11 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             if (!Utilities.ATLEAST_OREO) {
                 ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATE_ADAPTIVE_ICONS));
                 ((PreferenceCategory) ((PreferenceScreen) getPreferenceScreen().findPreference("pref_edit_apps_screen")).findPreference("pref_icons_category")).removePreference(findPreference(LeanSettings.GENERATED_ADAPTIVE_BACKGROUND));
+            }
+
+            if (!BuildConfig.DEBUG) {
+                getPreferenceScreen().removePreference(findPreference("pref_feed_screen"));
+                getPreferenceScreen().removePreference(findPreference("pref_smartspace_screen"));
             }
 
             mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
@@ -185,7 +189,10 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
         public void onResume() {
             super.onResume();
             mIconPackPref.reloadIconPacks();
-            findPreference(SMARTSPACE_COMPANION).setSummary(getString(R.string.companion_app_not_installed));
+            Preference smartspaceCompanion = findPreference(SMARTSPACE_COMPANION);
+            if (smartspaceCompanion != null) {
+                smartspaceCompanion.setSummary(getString(R.string.companion_app_not_installed));
+            }
             getActivity().registerReceiver(smartspaceReceiver, new IntentFilter(SMARTSPACE_PING_RESPONSE));
             getActivity().sendBroadcast(new Intent(SMARTSPACE_PING).setPackage("com.google.android.apps.nexuslauncher"));
         }
