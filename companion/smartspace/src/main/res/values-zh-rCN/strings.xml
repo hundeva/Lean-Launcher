@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">"Launcher3"</string>
+    <string name="at_a_glance_enabled">恭喜！\n
+    现在一览 At A Glance 应该可以跟 Lean Launcher 工作了！</string>
+    <string name="hide_companion_app">隐藏辅助应用</string>
+    <string name="open_lean_settings">打开 Lean 设定</string>
+</resources>
