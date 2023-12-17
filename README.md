@@ -1,3 +1,7 @@
+# Important note
+
+Unfortunately, due to lack of time and energy, Lean Launcher did not receive updates for a long time now. This is not going to change, and the repository is now archived. Anyone who wants to, can fork it and work on it though.
+
 # Lean Launcher
 
 The customisable open source Pixel Launcher by hundeva (https://github.com/hundeva/Lean-Launcher)
