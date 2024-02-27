@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lean_launcher_app_name">Lean Launcher</string>
+    <string name="lean_settings">Lean 设定</string>
+
+    <string name="at_a_glance_category">At A Glance</string>
+    <string name="other_category">其他</string>
+    <string name="feed_category">Feed</string>
+    <string name="search_category">搜索</string>
+    <string name="look_and_feel_category">外观和感受</string>
+    <string name="edit_apps_category">编辑应用</string>
+
+    <string name="enable_at_a_glance_title">At A Glance</string>
+    <string name="enable_at_a_glance_summary">显示在您的主屏幕顶端</string>
+
+    <string name="lock_desktop_title">锁定桌面</string>
+    <string name="lock_desktop_summary">阻止图标和小控件的变化</string>
+    <string name="desktop_is_locked">桌面已锁定</string>
+
+    <string name="theme_title">主题</string>
+    <string name="theme_wallpaper">来自壁纸</string>
+    <string name="theme_always_light">亮色</string>
+    <string name="theme_always_dark">暗色</string>
+
+
+
+    <string name="bottom_search_bar_title">Google 搜索栏</string>
+    <string name="bottom_search_bar_summary">在您屏幕底部</string>
+
+    <string name="top_search_bar_title">应用搜索栏</string>
+    <string name="top_search_bar_summary">在您应用抽屉的顶端</string>
+
+    <string name="physical_animation_title">物理动画</string>
+    <string name="physical_animation_summary">使用水波纹效果</string>
+
+    <string name="hide_apps_title">隐藏应用</string>
+    <string name="hide_apps_summary">从应用抽屉</string>
+
+    <string name="lean_github_url">https://github.com/hundeva/Lean-Launcher</string>
+
+    <string name="about_lean_title">Lean Launcher</string>
+    <string name="about_lean_summary">来自 hundeva</string>
+
+    <string name="about_based_on_title">基于 Rootless Pixel Launcher</string>
+    <string name="about_based_on_summary">来自 Amir Zaidi</string>
+
+    <string name="transparent_navigation_bar_title">半透明导航栏</string>
+    <string name="transparent_navigation_bar_summary">在应用抽屉</string>
+
+    <string name="extra_bottom_padding_title">额外的底部空隙</string>
+    <string name="extra_bottom_padding_summary">如果图标太接近底部搜索栏时启用</string>
+
+    <string name="num_default">默认</string>
+    <string name="num_three">三</string>
+    <string name="num_four">四</string>
+    <string name="num_five">五</string>
+    <string name="num_six">六</string>
+    <string name="num_seven">七</string>
+
+
+
+    <string name="number_of_columns_title">分隔列</string>
+    <string name="number_of_rows_title">分隔行</string>
+    <string name="number_of_hotseat_title">停靠区图标</string>
+
+    <string name="force_colored_g_icon_title">强制彩色图标</string>
+    <string name="force_colored_g_icon_summary">在底部搜索栏</string>
+
+    <string name="double_tap_to_lock_title">双击来锁屏</string>
+    <string name="double_tap_to_lock_summary">在您的主屏幕上</string>
+    <string name="double_tap_to_lock_hint">要使用双击锁定功能，您需要为 Lean Launcher 启用管理权限。这是一个安全锁，意味着如果您设定了 PIN 的话，在下次解锁时需要输入。</string>
+    <string name="double_tap_to_lock_disable_warning">禁用管理访问，您将不能双击来锁定您的主屏幕。</string>
+
+    <string name="icon_size_title">图标大小</string>
+    <string name="icon_text_size_title">图标标签大小</string>
+
+    <string name="icon_size_extra_small">特小(-25%)</string>
+    <string name="icon_size_small">小 (-10%)</string>
+    <string name="icon_size_average">平均(默认)</string>
+    <string name="icon_size_large">大(+10%)</string>
+    <string name="icon_size_extra_large">特大 (+25%)</string>
+
+
+
+    <string name="companion_app_permission_label">Lean 辅助权限</string>
+    <string name="companion_app_permission_description">用于辅助应用的强制签名保护的权限。</string>
+
+    <string name="companion_app_title">辅助应用</string>
+    <string name="companion_app_not_installed">未安装</string>
+    <string name="companion_app_version_x">版本 %s</string>
+
+    <string name="at_a_glance_companion_url">https://github.com/hundeva/Lean-Launcher/releases/tag/lean-1.0.6</string>
+    <string name="lean_launcher_github_release_url">https://github.com/hundeva/Lean-Launcher/releases/</string>
+
+    <string name="search_provider_title">搜索提供商</string>
+    <string name="search_provider_google">Google</string>
+    <string name="search_provider_bing">Bing</string>
+    <string name="search_provider_duckduckgo">DuckDuckGo</string>
+
+
+
+    <string name="hotseat_background_title">停靠区背景</string>
+
+    <string name="hotseat_background_transparent">半透明</string>
+    <string name="hotseat_background_gradient">渐进</string>
+    <string name="hotseat_background_solid">固定</string>
+
+
+
+    <string name="important">重要</string>
+    <string name="at_a_glance_requirement">At A Glance 需要 Lean Glance 辅助程序来在当前日期旁边显示天气和日历事件。这个需要分开下载，因为这个应用无法在 Google Play Store 发布。请注意这个无法在 Pixel 设备上安装，此外，如果您在使用其他的改版 Pixel Launcher，您需要先卸载它。在安装后，请至少启动 Lean Glance 一次，这样它可以开始接收并转发来自 Google 应用的消息给 Lean Launcher！开始设置，轻触这里。</string>
+    <string name="google_now_release_information">Google Now 当前仅在调试版本工作。正在制作对应的辅助应用，如果您真的想要在您的启动器上实现轻扫查看订阅流，请从项目的 Github 页面下载最新的调试版本。要查看 Github 上最新的调试版本发布，点击这里。</string>
+
+    <string name="smartspace_settings_title">首选项</string>
+    <string name="smartspace_settings_summary">日历事件等</string>
+
+    <string name="dark_bottom_search_title">黑色 Google 搜索栏</string>
+    <string name="dark_top_search_title">黑色应用搜索栏</string>
+
+    <string name="hide_app_label_title">隐藏应用名称</string>
+    <string name="hide_app_label_on_desktop_summary">在桌面上</string>
+    <string name="hide_app_label_on_all_apps_summary">在您的应用抽屉里</string>
+
+    <string name="tap_to_edit_app_name">点击来改变应用名称</string>
+    <string name="enter_new_app_name">编辑新应用名称</string>
+
+    <string name="qsb_voice_icon_title">语音搜索快捷方式</string>
+    <string name="qsb_voice_icon_summary">在搜索栏</string>
+
+    <string name="home_action_title">在主屏幕上 HOME 按键的动作</string>
+
+    <string name="home_action_nothing">什么都不做</string>
+    <string name="home_action_quick_search">快速搜索</string>
+    <string name="home_action_voice_search">语音搜索</string>
+    <string name="home_action_app_drawer">打开应用抽屉</string>
+    <string name="home_action_app_search">打开应用搜索</string>
+    <string name="home_action_overview">进入概览视图</string>
+
+
+
+    <string name="lean_glance_not_up_to_date_please_update">Lean Glance 辅助程序过时了。请及时更新以保证万事正常运转！</string>
+
+    <string name="double_tap_to_secure_lock_title">安全锁</string>
+    <string name="double_tap_to_secure_lock_summary">当使用双击锁屏的时候，禁用生物特征验证授权机制</string>
+
+    <string name="gestures_and_actions">手势和动作</string>
+
+    <string name="bottom_search_category">底部搜索栏</string>
+    <string name="top_search_category">应用搜索栏</string>
+
+    <string name="color_category">颜色</string>
+    <string name="sizes_category">尺寸</string>
+
+    <string name="visibility_category">可见度</string>
+    <string name="icons_category">图标</string>
+
+    <string name="gestures_category">手势</string>
+    <string name="actions_category">动作</string>
+
+    <string name="one_finger_down_title">一只手指向下轻扫</string>
+    <string name="one_finger_down_summary">为通知</string>
+
+    <string name="two_finger_down_title">两只手指向下滑动</string>
+    <string name="two_finger_down_summary">用于快速设定</string>
+
+    <string name="black_colors_title">黑色</string>
+    <string name="black_colors_summary">针对暗色系主题使用黑色</string>
+
+    <string name="show_caret_title">显示符号</string>
+    <string name="show_caret_summary">停靠区之上</string>
+
+    <string name="restart_lean_launcher_title">重启 Lean Launcher</string>
+    <string name="restart_lean_launcher_summary">以调试为目的</string>
+
+    <string name="generate_adaptive_icons_title">生成自适应性图标</string>
+    <string name="generate_adaptive_icons_summary">用于不支持自适应性图标的应用</string>
+
+    <string name="generate_adaptive_background_title">从传统图标提取颜色</string>
+    <string name="generate_adaptive_background_summary">用来生成自适应性图标背景</string>
+
+    <string name="allow_two_line_labels_title">允许两行标签</string>
+    <string name="allow_two_line_labels_summary">用于较长的应用或者文件夹名</string>
+
+    <string name="shortcuts_title">快捷键</string>
+    <string name="when_desktop_is_unlocked">当桌面未被锁定时</string>
+    <string name="when_desktop_is_locked">当桌面被锁定时</string>
+
+    <string name="shortcut_widgets_title">小控件</string>
+    <string name="shortcut_uninstall_title">卸载</string>
+    <string name="shortcut_edit_title">编辑</string>
+
+    <string name="search_apps_caret_title">搜索应用</string>
+    <string name="search_apps_caret_summary">当长按符号时</string>
+
+    <string name="override_app_icon">覆盖应用图标</string>
+    <string name="available_icon_packs">可用的图标包</string>
+    <string name="custom_app_filter_hint">搜索应用图标…</string>
+    <string name="icon_pack_loading">载入图标集…</string>
+    <string name="applying_icon">应用图标…</string>
+    <string name="clear_custom_icon">清除自定义图标</string>
+    <string name="custom_icon_cleared">自定义图标已清除！</string>
+    <string name="system_default">系统默认</string>
+
+    <string name="at_a_glance_summary">天气、日历事件等</string>
+    <string name="feed_summary">轻扫查看 Google Feed</string>
+    <string name="search_summary">应用及谷歌搜索</string>
+    <string name="look_and_feel_summary">主题，分隔大小</string>
+    <string name="edit_apps_summary">应用外观，图标</string>
+    <string name="gestures_and_actions_summary">轻扫，双击等</string>
+    <string name="shortcuts_summary">应用快捷方式可见性</string>
+    <string name="other_summary">通用设定</string>
+    <string name="about_summary">Lean Launcher</string>
+
+    <string name="reset_category">重置</string>
+    <string name="reset_app_names_title">重置应用名称</string>
+    <string name="reset_app_names_summary">至默认值</string>
+    <string name="reset_app_names_description">这将重置所有应用的名字至默认值。</string>
+    <string name="reset_app_visibility_title">重置应用可见性</string>
+    <string name="reset_app_visibility_summary">至默认值</string>
+    <string name="reset_app_visibility_description">这将在您的应用抽屉中显示所有的应用。</string>
+    <string name="reset_app_icons_title">重置应用图标</string>
+    <string name="reset_app_icons_summary">至系统默认</string>
+    <string name="reset_app_icons_description">这将重置应用图标至系统默认值。</string>
+
+    <string name="restarting">重启中…</string>
+
+    <string name="date_format_title">日期格式</string>
+
+    <string name="date_format_long_name">长</string>
+    <string name="date_format_normal_name">正常</string>
+    <string name="date_format_short_name">短</string>
+
+
+
+
+    <string name="show_page_indicator_title">显示页面指示</string>
+    <string name="show_page_indicator_summary">显示水平标尺</string>
+
+</resources>
